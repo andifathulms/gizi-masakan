@@ -102,14 +102,20 @@ export function DaftarMasakan({
           <ul className="mt-3 grid gap-3 sm:grid-cols-2">
             {entries.map((entry) => (
               <li key={entry.id}>
+                {/* Column layout so the numbers line up across a row of cards:
+                    the description takes the slack, and everything below the
+                    rule is pinned to the bottom of whichever card is tallest.
+                    The gap line is always rendered, empty when there is
+                    nothing to say, so its presence does not shift the row of
+                    numbers up or down by a line. */}
                 <Link
                   href={`/${locale}/masakan/${entry.id}/`}
-                  className="list-card card-hover block h-full px-4 py-4 hover:border-rim hover:bg-enamel-deep"
+                  className="list-card card-hover flex h-full flex-col px-4 py-4 hover:border-rim hover:bg-enamel-deep"
                 >
                   <span lang="id" className="font-display text-md font-medium text-rim">
                     {entry.namaId}
                   </span>
-                  <span className="mt-1 block text-sm text-ink-soft">{entry.deskripsiId}</span>
+                  <span className="mt-1 flex-1 text-sm text-ink-soft">{entry.deskripsiId}</span>
                   {/* Three nutrients at identical weight, not energy alone —
                       invariant 13. Values arrive pre-rendered. */}
                   <span className="mt-3 grid grid-cols-3 gap-2 border-t border-rim/20 pt-2 text-sm">
@@ -126,11 +132,9 @@ export function DaftarMasakan({
                   </span>
                   {/* Phrased as something the dish does, not as a defect count:
                       naming a gap is the product, not a failure. */}
-                  {entry.gapCount > 0 && (
-                    <span className="mt-1 block text-xs text-chip">
-                      {copy.cari.menyebut(entry.gapCount)}
-                    </span>
-                  )}
+                  <span className="mt-1 block min-h-[1.5em] text-xs text-chip">
+                    {entry.gapCount > 0 ? copy.cari.menyebut(entry.gapCount) : ''}
+                  </span>
                 </Link>
               </li>
             ))}
