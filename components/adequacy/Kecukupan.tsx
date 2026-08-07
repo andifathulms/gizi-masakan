@@ -84,6 +84,11 @@ export function Kecukupan({
       </div>
 
       <p className="mt-2 max-w-prose text-base text-ink-soft">{copy.adequacy.penjelasan}</p>
+      {/* The operation and its source, stated where the operation happens
+          rather than in a footnote. A percentage whose denominator is not shown
+          reads as an allowance being spent — the exact framing PRD §5 bans. */}
+      <p className="mt-2 max-w-prose text-sm text-ink-soft">{copy.adequacy.rumus}</p>
+      <p className="mt-1 max-w-prose text-xs text-ink-soft">{AKG_CITATION}</p>
 
       {[...byGroup().entries()].map(([group, nutrients]) => (
         <div key={group} className="mt-5">
@@ -114,8 +119,18 @@ export function Kecukupan({
                           style={{ width: `${Math.min(100, Math.round(adequacy.bagian * 100))}%` }}
                         />
                       </span>
-                      <span className="w-16 shrink-0 text-right font-mono text-adequate">
-                        {formatPercent(adequacy.bagian, locale)}
+                      <span className="w-28 shrink-0 text-right">
+                        <span className="font-mono text-adequate">
+                          {formatPercent(adequacy.bagian, locale)}
+                        </span>{' '}
+                        {/* The denominator, printed. It was computed all along
+                            and never rendered, so the percentage referred to a
+                            quantity the reader could not see. */}
+                        <span className="block font-mono text-xs text-ink-soft">
+                          {copy.adequacy.dari(
+                            `${formatNutrient(adequacy.akg, nutrient.id, locale)} ${adequacy.unit}`,
+                          )}
+                        </span>
                       </span>
                     </>
                   ) : (
@@ -136,7 +151,6 @@ export function Kecukupan({
         </div>
       ))}
 
-      <p className="mt-4 max-w-prose text-xs text-ink-soft">{AKG_CITATION}</p>
     </section>
   )
 }

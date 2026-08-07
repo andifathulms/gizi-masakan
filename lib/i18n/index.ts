@@ -98,6 +98,10 @@ export interface Copy {
     readonly penjelasan: string
     readonly kelompok: string
     readonly tidakDibandingkan: string
+    /** The operation, stated where it is performed. A bare percentage with an
+        unnamed denominator reads as a budget meter, which PRD §5 forbids. */
+    readonly rumus: string
+    readonly dari: (akg: string) => string
   }
   readonly trace: {
     readonly judul: string
@@ -195,6 +199,8 @@ const ID: Copy = {
       'Berapa bagian dari angka kecukupan harian yang disumbang satu porsi ini. Bukan jatah yang terpakai.',
     kelompok: 'Kelompok umur dan jenis kelamin',
     tidakDibandingkan: 'tidak dibandingkan',
+    rumus: 'Persennya = jumlah satu porsi ÷ angka kecukupan harian kelompok yang dipilih. Angka pembaginya ditulis di sebelah tiap persen, jadi bisa dicek.',
+    dari: (akg) => `dari ${akg}`,
   },
   trace: {
     judul: 'Asal angkanya',
@@ -293,6 +299,8 @@ const EN: Copy = {
       'How much of the daily figure one portion contributes. Not an allowance being spent.',
     kelompok: 'Age and sex group',
     tidakDibandingkan: 'not compared',
+    rumus: 'The percentage is one portion ÷ the daily reference figure for the selected group. The figure it divides by is printed beside each percentage, so it can be checked.',
+    dari: (akg) => `of ${akg}`,
   },
   trace: {
     judul: 'Where the number came from',
