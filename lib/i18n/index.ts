@@ -55,6 +55,9 @@ export interface Copy {
     readonly bahanHilang: string
     readonly nilaiHilang: string
     readonly faktorHilang: string
+    /** Legend for the marker on an incomplete total. Visible text, not a
+        tooltip — a title attribute never appears on a touch screen. */
+    readonly tandaBelumLengkap: string
   }
   readonly adequacy: {
     readonly judul: string
@@ -124,6 +127,7 @@ const ID: Copy = {
     bahanHilang: 'Bahan tanpa data',
     nilaiHilang: 'Nilai gizi kosong',
     faktorHilang: 'Faktor pengolahan kosong',
+    tandaBelumLengkap: '† angka ini belum lengkap — yang kurang disebut di "Yang tidak terhitung" di bawah.',
   },
   adequacy: {
     judul: 'Terhadap angka kecukupan gizi',
@@ -195,6 +199,7 @@ const EN: Copy = {
     bahanHilang: 'Ingredients with no data',
     nilaiHilang: 'Missing nutrient values',
     faktorHilang: 'Missing cooking factors',
+    tandaBelumLengkap: '† this number is incomplete — what is missing is named under "What is not counted" below.',
   },
   adequacy: {
     judul: 'Against the Indonesian reference intakes',

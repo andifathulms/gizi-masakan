@@ -71,7 +71,7 @@ export function Kecukupan({ trace, locale }: { trace: NutritionTrace; locale: Lo
                   </span>
                 </>
               ) : (
-                <span className="flex-1 text-chip" title={adequacy.reason}>
+                <span className="flex-1 text-chip">
                   {copy.adequacy.tidakDibandingkan} — {adequacy.reason}
                 </span>
               )}

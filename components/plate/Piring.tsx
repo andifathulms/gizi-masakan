@@ -85,9 +85,15 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
                     {formatNutrient(total.total * scale, id, locale)}
                   </span>{' '}
                   <span className="text-sm text-chip">{unitLabel(id)}</span>
+                  {/* A real dagger, not the combining asterisk this used to
+                      carry: U+20F0 has no base character here, so it rendered
+                      inconsistently or not at all. Its meaning was in a title
+                      attribute, which never appears on a touch screen — which
+                      meant an incomplete total looked complete on a phone.
+                      Invariant 2 requires the gap to be visible. */}
                   {!total.lengkap && (
-                    <span className="ml-1 align-middle text-xs text-chip" title={copy.gaps.ringkasTidakLengkap}>
-                      ⃰
+                    <span className="ml-1 align-middle text-sm text-chip">
+                      †<span className="sr-only"> {copy.gaps.ringkasTidakLengkap}</span>
                     </span>
                   )}
                 </dd>
@@ -95,6 +101,12 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
             )
           })}
         </dl>
+
+        {/* The legend is visible text, shown only when a dagger is actually on
+            screen. The marker has to explain itself without a hover. */}
+        {trace.totals.some((total) => !total.lengkap) && (
+          <p className="mt-3 max-w-prose text-sm text-chip">{copy.gaps.tandaBelumLengkap}</p>
+        )}
 
         <dl className="mt-5 flex flex-wrap gap-x-8 gap-y-2 border-t border-rim/20 pt-4 text-sm">
           <div className="flex gap-2">

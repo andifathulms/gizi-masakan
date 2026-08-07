@@ -80,8 +80,11 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
                       return (
                         <td key={id} className="py-2 text-right font-mono">
                           {value === undefined ? (
-                            <span className="text-chip" title={locale === 'en' ? 'no value in FDC' : 'tidak ada nilainya di FDC'}>
+                            <span className="text-chip">
                               —
+                              <span className="sr-only">
+                                {locale === 'en' ? 'no value in FDC' : 'tidak ada nilainya di FDC'}
+                              </span>
                             </span>
                           ) : (
                             formatNutrient(value, id, locale)
