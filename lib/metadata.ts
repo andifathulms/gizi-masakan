@@ -48,7 +48,7 @@ export function pageMetadata({ locale, title, description, path }: PageMetaInput
       url,
       siteName: copy.siteName,
       locale: locale === 'id' ? 'id_ID' : 'en_GB',
-      images: [{ url: brand.og, width: 1200, height: 630, alt: copy.tagline }],
+      images: [{ url: brand.og, width: 1200, height: 630, type: 'image/png', alt: copy.tagline }],
       type: 'website',
     },
     twitter: {

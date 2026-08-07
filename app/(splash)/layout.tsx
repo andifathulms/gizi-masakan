@@ -14,13 +14,19 @@ import type { Metadata } from 'next'
 import { fontVariables } from '@/lib/fonts'
 import { brand, SITE_URL } from '@/lib/brand'
 import { copyFor } from '@/lib/i18n'
+import { pageUrl } from '@/lib/metadata'
 import '../globals.css'
 
 const copy = copyFor('id')
 
 export const metadata: Metadata = {
-  title: copy.siteName,
-  description: copy.disclaimer,
+  /* The bare URL is the one people paste, so it gets the same treatment as
+     every other page rather than the layout defaults it had. The page itself
+     forwards to /id/masakan/, so that is its canonical and its description is
+     that page's — a preview should describe where the link lands. */
+  title: { absolute: `${copy.landing.judul} — ${copy.siteName}` },
+  description: copy.landing.lede,
+  alternates: { canonical: pageUrl('id/masakan') },
   /* Next injects a manifest link without the basePath, which 404s on a
      project page. Setting it here overrides that with the real path. */
   metadataBase: new URL(SITE_URL),
@@ -33,12 +39,17 @@ export const metadata: Metadata = {
     apple: [{ url: brand.appleTouch, sizes: '180x180' }],
   },
   openGraph: {
-    title: copy.siteName,
-    description: copy.tagline,
-    images: [{ url: brand.og, width: 1200, height: 630, alt: copy.tagline }],
+    title: `${copy.landing.judul} — ${copy.siteName}`,
+    description: copy.landing.lede,
+    images: [{ url: brand.og, width: 1200, height: 630, type: 'image/png', alt: copy.tagline }],
     type: 'website',
   },
-  twitter: { card: 'summary_large_image', images: [brand.og] },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${copy.landing.judul} — ${copy.siteName}`,
+    description: copy.landing.lede,
+    images: [brand.og],
+  },
 }
 
 export default function SplashLayout({ children }: { children: React.ReactNode }) {
