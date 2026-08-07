@@ -11,7 +11,8 @@
  */
 import type { NutritionTrace } from '@/lib/nutrition/trace'
 import { copyFor, type Locale } from '@/lib/i18n'
-import { formatGram, formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
+import { formatGram, formatNutrient, formatPercent, nutrientLabel, unitLabel } from '@/lib/format'
+import { massaTakTerhitung } from '@/lib/nutrition/gaps'
 
 export function JejakNutrien({
   trace,
@@ -24,6 +25,9 @@ export function JejakNutrien({
 }) {
   const copy = copyFor(locale)
   const total = trace.totals.find((entry) => entry.nutrientId === nutrientId)!
+  /* Per nutrient, so it also counts ingredients that are in the table but
+     carry no value for this one. */
+  const takTerhitung = massaTakTerhitung(trace, nutrientId)
 
   return (
     <section>
@@ -185,6 +189,15 @@ export function JejakNutrien({
             <tr className="border-t-2 border-rim/40">
               <th scope="row" colSpan={4} className="py-2 text-left font-normal">
                 {locale === 'en' ? 'Total for the whole recipe' : 'Total seluruh resep'}
+                {!total.lengkap && takTerhitung.takTerhitungG > 0 && (
+                  <span className="mt-1 block max-w-prose text-xs font-normal text-chip">
+                    {copy.gaps.massaNutrien(
+                      formatGram(takTerhitung.takTerhitungG, locale),
+                      formatGram(takTerhitung.mentahG, locale),
+                      formatPercent(takTerhitung.bagian, locale),
+                    )}
+                  </span>
+                )}
                 {!total.lengkap && (
                   <span className="block text-xs text-chip">
                     {locale === 'en'

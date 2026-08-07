@@ -118,6 +118,10 @@ export interface Copy {
     /** Legend for the marker on an incomplete total. Visible text, not a
         tooltip — a title attribute never appears on a touch screen. */
     readonly tandaBelumLengkap: string
+    /** How much of the dish the arithmetic could not reach. Strictly mass —
+        the copy must never imply a share of the nutrient. */
+    readonly massaDish: (takG: string, mentahG: string, persen: string) => string
+    readonly massaNutrien: (takG: string, mentahG: string, persen: string) => string
   }
   /** Spoken after a recomputation. Sighted readers see every bar and total
       move together; without this the same change is silent. */
@@ -255,6 +259,10 @@ const ID: Copy = {
     nilaiHilang: 'Nilai gizi kosong',
     faktorHilang: 'Faktor pengolahan kosong',
     tandaBelumLengkap: '† angka ini belum lengkap — yang kurang disebut di "Yang tidak terhitung" di bawah.',
+    massaDish: (takG, mentahG, persen) =>
+      `${takG} g dari ${mentahG} g bahan mentah — ${persen} dari beratnya — tidak menyumbang apa pun ke angka mana pun, karena datanya tidak ada. Ini ukuran berat, bukan ukuran gizinya: ${persen} berat tidak berarti ${persen} gizinya.`,
+    massaNutrien: (takG, mentahG, persen) =>
+      `Angka ini menghitung bahan seberat ${mentahG} g dikurangi ${takG} g yang tidak punya nilainya — ${persen} dari berat mentah tidak terhitung.`,
   },
   diperbarui: (nutrien, jumlah, dasar) => `Diperbarui. ${nutrien} ${dasar}: ${jumlah}.`,
   adequacy: {
@@ -392,6 +400,10 @@ const EN: Copy = {
     nilaiHilang: 'Missing nutrient values',
     faktorHilang: 'Missing cooking factors',
     tandaBelumLengkap: '† this number is incomplete — what is missing is named under "What is not counted" below.',
+    massaDish: (takG, mentahG, persen) =>
+      `${takG} g of ${mentahG} g of raw ingredients — ${persen} of the weight — contributes nothing to any number here, because there is no data for it. That is a measure of weight, not of nutrition: ${persen} of the weight does not mean ${persen} of the nutrients.`,
+    massaNutrien: (takG, mentahG, persen) =>
+      `This total counts ${mentahG} g of raw ingredients less the ${takG} g that carry no value for it — ${persen} of the raw weight is unaccounted for.`,
   },
   diperbarui: (nutrien, jumlah, dasar) => `Updated. ${nutrien} ${dasar}: ${jumlah}.`,
   adequacy: {

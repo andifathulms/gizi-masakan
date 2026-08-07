@@ -8,10 +8,10 @@
  * unadjusted nutrients. Deliberately not red: a gap is an honest absence, not
  * an error the reader caused.
  */
-import { gapSeverity, describeGap } from '@/lib/nutrition/gaps'
+import { gapSeverity, describeGap, massaTakTerhitung } from '@/lib/nutrition/gaps'
 import type { Gap, NutritionTrace } from '@/lib/nutrition/trace'
 import { copyFor, type Locale } from '@/lib/i18n'
-import { formatGram } from '@/lib/format'
+import { formatGram, formatPercent } from '@/lib/format'
 
 function heading(severity: ReturnType<typeof gapSeverity>, locale: Locale): string {
   const copy = copyFor(locale)
@@ -31,6 +31,8 @@ function heading(severity: ReturnType<typeof gapSeverity>, locale: Locale): stri
 
 export function PanelKekosongan({ trace, locale }: { trace: NutritionTrace; locale: Locale }) {
   const copy = copyFor(locale)
+
+  const takTerhitung = massaTakTerhitung(trace)
 
   const grouped = new Map<ReturnType<typeof gapSeverity>, Gap[]>()
   for (const gap of trace.gaps) {
@@ -53,17 +55,17 @@ export function PanelKekosongan({ trace, locale }: { trace: NutritionTrace; loca
         {trace.lengkap ? copy.gaps.ringkasLengkap : copy.gaps.ringkasTidakLengkap}
       </p>
 
-      {trace.bahanTanpaData.length > 0 && (
+      {/* Named is not enough: a reader cannot tell whether an absent
+          ingredient costs 2% of the dish or most of it. Strictly mass, and the
+          copy says so — 25 g of oil and 25 g of water weigh the same and are
+          nothing alike. */}
+      {takTerhitung.takTerhitungG > 0 && (
         <p className="mt-2 max-w-prose text-sm text-chip">
-          {locale === 'en'
-            ? `${formatGram(
-                trace.bahanTanpaData.reduce((sum, bahan) => sum + bahan.beratG, 0),
-                locale,
-              )} g of this dish contributes nothing to the numbers above, because there is no licensed data for it.`
-            : `${formatGram(
-                trace.bahanTanpaData.reduce((sum, bahan) => sum + bahan.beratG, 0),
-                locale,
-              )} g dari masakan ini tidak menyumbang apa pun ke angka di atas, karena datanya tidak ada.`}
+          {copy.gaps.massaDish(
+            formatGram(takTerhitung.takTerhitungG, locale),
+            formatGram(takTerhitung.mentahG, locale),
+            formatPercent(takTerhitung.bagian, locale),
+          )}
         </p>
       )}
 

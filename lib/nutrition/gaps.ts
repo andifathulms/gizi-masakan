@@ -11,7 +11,7 @@
  * There is no function in this file that fills a gap. There is no default
  * value, no nearest-neighbour fallback, no zero substitution. That is the point.
  */
-import type { Gap } from '@/lib/nutrition/trace'
+import type { Gap, NutritionTrace } from '@/lib/nutrition/trace'
 import { nutrientById, type NutrientId } from '@/lib/nutrition/nutrients'
 
 export function gapBahanTanpaData(params: {
@@ -131,4 +131,59 @@ export function gapsByNutrient(gaps: readonly Gap[]): ReadonlyMap<NutrientId, re
     else byNutrient.set(gap.nutrientId, [gap])
   }
   return byNutrient
+}
+
+/* ------------------------------------------------- how much is not counted */
+
+/**
+ * The mass a total could not account for.
+ *
+ * The gaps panel names what is missing; this says how much of the dish it is.
+ * Naming `gula-merah` as absent tells a reader nothing about whether the number
+ * beside it is 2% short or most of the drink, and that difference is the whole
+ * of "should I trust this".
+ *
+ * Strictly mass. 25 g of coconut oil and 25 g of water are the same mass and
+ * nothing alike, so this must never be read — or rendered — as a share of the
+ * nutrient. It answers "how much of what went into the pan is missing from the
+ * arithmetic", and nothing else.
+ */
+export interface MassaTakTerhitung {
+  /** Raw grams that contributed nothing. */
+  readonly takTerhitungG: number
+  /** Raw grams the recipe started from. */
+  readonly mentahG: number
+  /** takTerhitungG ÷ mentahG. Zero when the recipe has no mass at all. */
+  readonly bagian: number
+  /** Ingredient names behind it, in recipe order. */
+  readonly dari: readonly string[]
+}
+
+/**
+ * @param nutrientId when given, also counts ingredients that are in the table
+ *   but carry no value for that nutrient — they are absent from that total and
+ *   present in every other one. Omit for the dish-level figure, which counts
+ *   only ingredients with no row at all.
+ */
+export function massaTakTerhitung(
+  trace: NutritionTrace,
+  nutrientId?: NutrientId,
+): MassaTakTerhitung {
+  const tanpaData = trace.bahanTanpaData
+  const kosong =
+    nutrientId === undefined
+      ? []
+      : (trace.totals.find((total) => total.nutrientId === nutrientId)?.kosongDari ?? [])
+
+  const dariNilai = trace.bahan.filter((bahan) => kosong.includes(bahan.ingredientId))
+  const takTerhitungG =
+    tanpaData.reduce((sum, bahan) => sum + bahan.beratG, 0) +
+    dariNilai.reduce((sum, bahan) => sum + bahan.beratG, 0)
+
+  return {
+    takTerhitungG,
+    mentahG: trace.massa.mentahG,
+    bagian: trace.massa.mentahG > 0 ? takTerhitungG / trace.massa.mentahG : 0,
+    dari: [...tanpaData.map((b) => b.namaId), ...dariNilai.map((b) => b.namaId)],
+  }
 }
