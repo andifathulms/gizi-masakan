@@ -1,0 +1,74 @@
+# Build and deploy to GitHub Pages. data:validate gates the deploy, so a data
+# problem fails loudly here rather than shipping numbers that do not validate.
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      # data:validate runs here as well as inside pnpm build, so a data failure
+      # is reported as its own red step rather than buried in a build log.
+      - run: pnpm data:validate
+      - run: pnpm test:run
+
+  build:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Build static export
+        # basePath must match the repository name, or every asset 404s.
+        env:
+          GIZI_BASE_PATH: /${{ github.event.repository.name }}
+        run: pnpm build
+      - name: Confirm .nojekyll exists
+        # Without it Pages runs Jekyll, which strips every _next/ directory and
+        # breaks the site with no error anywhere.
+        run: test -f out/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
