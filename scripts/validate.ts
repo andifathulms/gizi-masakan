@@ -20,7 +20,7 @@
  *  11  no tracking primitives have crept into lib/ or app/     (invariant 11)
  *  12  shipped ingredient data stays under 200 KB              (invariant 15)
  */
-import { readdirSync, readFileSync, statSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { checkSource, manifest } from '../lib/sources/manifest'
 import { findUnmatched, loadFdcTable, unmatchedIngredients } from '../lib/sources/fdc/load'
@@ -280,6 +280,36 @@ check('every cooking-method alternative is a real transcribed USDA operation', (
       )
       seen.set(operasi.code, kelompok.id)
     }
+  }
+})
+
+/* 12b — the manifest agrees with the deploy path -------------------------- */
+
+check('the web manifest paths match the configured basePath', () => {
+  // A static file, because Next's generated manifest route injects a link tag
+  // without the basePath and that link wins over the metadata one. Static means
+  // the path is baked in, so it is checked here rather than trusted.
+  const basePath = process.env.GIZI_BASE_PATH ?? '/gizi-masakan'
+  const manifest = JSON.parse(
+    readFileSync(join(ROOT, 'public/manifest.webmanifest'), 'utf8'),
+  ) as { start_url: string; scope: string; icons: { src: string }[] }
+  assert(
+    manifest.start_url.startsWith(basePath),
+    `public/manifest.webmanifest start_url "${manifest.start_url}" does not start with basePath "${basePath}".`,
+  )
+  assert(
+    manifest.scope.startsWith(basePath),
+    `public/manifest.webmanifest scope "${manifest.scope}" does not start with basePath "${basePath}".`,
+  )
+  for (const icon of manifest.icons) {
+    assert(
+      icon.src.startsWith(basePath),
+      `public/manifest.webmanifest icon "${icon.src}" does not start with basePath "${basePath}".`,
+    )
+    assert(
+      existsSync(join(ROOT, 'public', icon.src.slice(basePath.length + 1))),
+      `public/manifest.webmanifest names icon "${icon.src}", which is not in public/.`,
+    )
   }
 })
 

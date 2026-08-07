@@ -1,0 +1,29 @@
+{
+  "name": "Gizi Masakan",
+  "short_name": "Gizi Masakan",
+  "description": "Gizi masakan Indonesia, dengan resep yang diasumsikan ditampilkan di bawahnya.",
+  "lang": "id",
+  "start_url": "/gizi-masakan/id/masakan/",
+  "scope": "/gizi-masakan/",
+  "display": "standalone",
+  "background_color": "#F2EFE6",
+  "theme_color": "#274863",
+  "icons": [
+    {
+      "src": "/gizi-masakan/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/gizi-masakan/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/gizi-masakan/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -14,6 +14,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
 import { NavUtama } from '@/components/chrome/NavUtama'
+import { MARK_ALT, brand } from '@/lib/brand'
 import { fontVariables } from '@/lib/fonts'
 import '../globals.css'
 
@@ -23,7 +24,27 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   const copy = copyFor(isLocale(params.locale) ? params.locale : 'id')
-  return { title: copy.siteName, description: copy.disclaimer }
+  return {
+    title: copy.siteName,
+    description: copy.disclaimer,
+  /* Next injects a manifest link without the basePath, which 404s on a
+     project page. Setting it here overrides that with the real path. */
+  manifest: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/manifest.webmanifest`,
+  icons: {
+    icon: [
+      { url: brand.favicon, type: 'image/svg+xml' },
+      { url: brand.icon32, sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [{ url: brand.appleTouch, sizes: '180x180' }],
+  },
+  openGraph: {
+    title: copy.siteName,
+    description: copy.tagline,
+    images: [{ url: brand.og, width: 1200, height: 630, alt: copy.tagline }],
+    type: 'website',
+  },
+  twitter: { card: 'summary_large_image', images: [brand.og] },
+  }
 }
 
 export default function LocaleLayout({

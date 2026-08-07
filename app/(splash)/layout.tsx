@@ -12,12 +12,32 @@
  */
 import type { Metadata } from 'next'
 import { fontVariables } from '@/lib/fonts'
+import { brand } from '@/lib/brand'
+import { copyFor } from '@/lib/i18n'
 import '../globals.css'
 
+const copy = copyFor('id')
+
 export const metadata: Metadata = {
-  title: 'Gizi Masakan',
-  description:
-    'Gizi masakan Indonesia, dengan resep yang diasumsikan ditampilkan dan bisa diubah. Proyek pribadi, bukan nasihat medis.',
+  title: copy.siteName,
+  description: copy.disclaimer,
+  /* Next injects a manifest link without the basePath, which 404s on a
+     project page. Setting it here overrides that with the real path. */
+  manifest: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/manifest.webmanifest`,
+  icons: {
+    icon: [
+      { url: brand.favicon, type: 'image/svg+xml' },
+      { url: brand.icon32, sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [{ url: brand.appleTouch, sizes: '180x180' }],
+  },
+  openGraph: {
+    title: copy.siteName,
+    description: copy.tagline,
+    images: [{ url: brand.og, width: 1200, height: 630, alt: copy.tagline }],
+    type: 'website',
+  },
+  twitter: { card: 'summary_large_image', images: [brand.og] },
 }
 
 export default function SplashLayout({ children }: { children: React.ReactNode }) {

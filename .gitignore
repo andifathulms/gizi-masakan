@@ -9,3 +9,7 @@ next-env.d.ts
 # Raw FDC bulk CSVs are never committed — invariant 15. The pipeline emits a
 # projected binary into data/ingredients/ instead.
 .fdc-cache/
+
+# Brand source kit. The subset the site actually serves — favicon, PWA icons,
+# apple-touch-icon, OG image, header mark — is committed under public/.
+exports/
