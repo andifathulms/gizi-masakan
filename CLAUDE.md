@@ -113,7 +113,7 @@ tests/
 
 13. **Energy is one nutrient among many.** It may appear first in reading order but must not be styled as the headline number with others subordinate.
 
-14. **Terracotta marks user-edited and estimated values; chip grey marks gaps and unadjusted nutrients; leaf green is adequacy fill only.** Colour carries the honesty distinction — see PRD §9.
+14. **Terracotta marks user-edited and estimated values; chip grey marks gaps and unadjusted nutrients; leaf green is adequacy fill only.** Colour carries the honesty distinction — see PRD §9. Because it carries meaning, every ink token clears WCAG AA 4.5:1 on both grounds; a marker some readers cannot read is not a marker. Values live as CSS variables in `app/globals.css` and reach components only through the semantic names.
 
 15. **Raw FDC CSVs are never committed.** The pipeline emits a projected binary; the CSVs stay out of the repo. Shipped ingredient data stays under 200 KB.
 
@@ -143,7 +143,9 @@ tests/
 - Recipe and dish ids stable and readable: `gado-gado`, `soto-betawi`, `nasi-uduk`. They appear in URLs.
 - Comments cite the FAO/INFOODS table or the Permenkes article they implement.
 - Tabular numerals on every gram weight, nutrient value, and percentage.
-- Tailwind utilities inline; semantic tokens in `tailwind.config.ts` — `enamel`, `rim`, `ink`, `edited`, `adequate`, `chip`. Never raw hex in components.
+- Tailwind utilities inline; semantic tokens in `tailwind.config.ts` — `enamel`, `enamel-deep`, `rim`, `rim-soft`, `ink`, `ink-soft`, `edited`, `adequate`, `chip`. Never raw hex in components, and never a one-off font size: one type scale, 16px base, declared in `app/globals.css`.
+- Two font families. `font-mono` marks a number, not a third typeface — alignment comes from `font-variant-numeric: tabular-nums` on `html`.
+- `.plate-card` is the dish view only; `.list-card` is the hairline card that links to one.
 
 ## Testing rules
 

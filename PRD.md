@@ -158,9 +158,25 @@ dish + portion
 
 The material world is **enamelware** — the cream *piring kaleng* with its dark rim, chipped at the edges, on every warung table in the country. Warm, utilitarian, unmistakably Indonesian, and it carries a data-dense layout without fighting it.
 
-**Palette.** Enamel cream `#F2EFE6` as ground. Rim blue `#2C4E6B` for structure, headings, and borders — the dark edge of the plate. Ink `#24221D` for text. **Terracotta `#B0563A` reserved for values the user has edited and for stated estimates** — the honesty colour, so an adjusted recipe is visibly the user's rather than the app's. **Leaf green `#4F7A4A` for adequacy fills.** Chip grey `#7A776E` for gaps, missing data, and unadjusted nutrients — present but visibly incomplete.
+**Palette.** Enamel cream `#F2EFE6` as ground. Rim blue for structure, headings, and borders — the dark edge of the plate. Ink for text. **Terracotta reserved for values the user has edited and for stated estimates** — the honesty colour, so an adjusted recipe is visibly the user's rather than the app's. **Leaf green for adequacy fills.** Chip grey for gaps, missing data, and unadjusted nutrients — present but visibly incomplete.
 
-**Type.** **Zilla Slab** for display and dish names — a warm slab with a menu-board register. **Figtree** for prose and controls. **Roboto Mono** with tabular figures for every gram weight, nutrient value, and percentage; these change as the user edits and must not reflow.
+Because colour is load-bearing here — chip grey *names a gap*, terracotta *names an estimate* — every ink value clears WCAG AA 4.5:1 on both grounds. The original hues were set by eye and four of them did not; they were darkened in place, keeping the enamelware character. Contrast is stated against enamel `#F2EFE6` and enamel-deep `#E7E2D4`:
+
+| Token | Hex | vs enamel | vs enamel-deep |
+|---|---|---|---|
+| `ink` | `#211F1A` | 14.32 | 12.72 |
+| `ink-soft` | `#4A4841` | 7.96 | 7.07 |
+| `rim` | `#274863` | 8.33 | 7.40 |
+| `rim-soft` | `#41627E` | 5.58 | 4.96 |
+| `edited` (terracotta) | `#8F3D22` | 6.39 | 5.68 |
+| `adequate` (leaf) | `#3A6139` | 6.19 | 5.50 |
+| `chip` (grey) | `#5E5B54` | 5.89 | 5.23 |
+
+All values live as CSS custom properties in `app/globals.css` and reach components only through the semantic names in `tailwind.config.ts`. A raw hex in a component is a bug.
+
+**Type.** Two families, no more. **Zilla Slab** for display and dish names — a warm slab with a menu-board register. **Figtree** for prose and controls, and for numerals.
+
+Gram weights, nutrient values, and percentages change as the user edits and must not reflow — but that is what `font-variant-numeric: tabular-nums` is for, and Figtree supports it. It is set once on `html`. A third face was carried for a while to get the same effect and was dropped: it cost a font download for something the body face already did. One type scale (~1.25 from a 16px base), declared with the colour tokens; body copy never goes below 16px.
 
 **Structure.** The plate sits at the top with the portion and the headline nutrients; the recipe strip runs full width beneath it, one row per ingredient, right-aligned numerals with the contribution bar extending from the gram weight. The rim motif is a real border on the plate card, not applied decoratively elsewhere.
 
