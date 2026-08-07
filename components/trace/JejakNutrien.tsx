@@ -31,6 +31,32 @@ export function JejakNutrien({
         {copy.trace.judul} — {nutrientLabel(nutrientId, locale)}
       </h2>
 
+      {/* The arithmetic, stated above the columns that perform it. Every
+          operand was already on screen; the operation joining them was not, so
+          a row read as four unrelated facts. */}
+      <p className="mt-3 font-mono text-base text-rim">{copy.trace.rumus}</p>
+      <p className="mt-1 max-w-prose text-sm text-ink-soft">{copy.trace.rumusCatatan}</p>
+
+      {/* What each column means, next to the columns rather than on the method
+          page. The yield entry exists to kill the obvious wrong reading: that
+          a dish which gains weight in the pan gains nutrients with it. */}
+      <dl className="mt-3 max-w-prose space-y-1 text-sm">
+        <div>
+          <dt className="inline font-medium">{copy.strip.berat}. </dt>
+          <dd className="inline text-ink-soft">{copy.trace.basisBerat}</dd>
+        </div>
+        <div>
+          <dt className="inline font-medium">{copy.trace.retensi}. </dt>
+          <dd className="inline text-ink-soft">
+            {copy.trace.retensiArti} {copy.trace.retensiTanpaArti}
+          </dd>
+        </div>
+        <div>
+          <dt className="inline font-medium">{copy.trace.yieldJudul}. </dt>
+          <dd className="inline text-ink-soft">{copy.trace.yieldArti}</dd>
+        </div>
+      </dl>
+
       {/* Focusable so the FDC id and retention columns can be reached without
           a mouse (WCAG 2.1.1). role + name because a focusable container with
           no role is an unlabelled tab stop; there is no native scrollable
@@ -41,7 +67,7 @@ export function JejakNutrien({
         role="region"
         aria-label={`${copy.trace.judul} — ${nutrientLabel(nutrientId, locale)}`}
       >
-        <table className="w-full min-w-[52rem] text-sm">
+        <table className="w-full min-w-[62rem] text-sm">
           <caption className="sr-only">
             {copy.trace.judul} — {nutrientLabel(nutrientId, locale)}
           </caption>
@@ -61,6 +87,15 @@ export function JejakNutrien({
               </th>
               <th scope="col" className="whitespace-nowrap px-3 py-2 text-right align-bottom font-normal">
                 {copy.trace.sumbanganTotal}
+              </th>
+              {/* Sits after the contribution, not among the operands, because
+                  it is not one of them. */}
+              <th
+                scope="col"
+                className="whitespace-nowrap border-l border-rim/20 py-2 pl-4 align-bottom font-normal"
+              >
+                {copy.trace.yieldJudul}
+                <span className="block text-xs text-chip">{copy.trace.yieldTidakDipakai}</span>
               </th>
               <th scope="col" className="whitespace-nowrap py-2 pl-4 align-bottom font-normal">
                 FDC
@@ -107,6 +142,39 @@ export function JejakNutrien({
                   {formatNutrient(contribution.total, nutrientId, locale)}{' '}
                   <span className="text-chip">{unitLabel(nutrientId)}</span>
                 </td>
+                {/* Yield comes from the ingredient trace, not the contribution,
+                    because it is not part of the contribution's arithmetic. */}
+                <td className="border-l border-rim/20 py-2 pl-4 text-xs">
+                  {(() => {
+                    const bahan = trace.bahan.find((b) => b.ingredientId === contribution.ingredientId)
+                    const state = bahan?.yieldState
+                    if (!state) return <span className="text-chip">—</span>
+                    switch (state.type) {
+                      case 'applied':
+                        return (
+                          <>
+                            <span className="font-mono text-ink">×{state.factor.toFixed(2)}</span>
+                            <span className="block text-chip">{state.labelId}</span>
+                            {bahan?.beratMatangG !== undefined && (
+                              <span className="block text-chip">
+                                {formatGram(contribution.beratG, locale)} g →{' '}
+                                {formatGram(bahan.beratMatangG, locale)} g
+                              </span>
+                            )}
+                            <span className="block text-chip">{state.citation}</span>
+                          </>
+                        )
+                      case 'mentah':
+                        return <span className="text-chip">{state.reason}</span>
+                      case 'tidak-diketahui':
+                        return <span className="text-chip">{state.reason}</span>
+                      default: {
+                        const never: never = state
+                        throw new Error(`Unhandled yield state: ${String(never)}`)
+                      }
+                    }
+                  })()}
+                </td>
                 <td className="py-2 pl-3 text-xs text-chip">
                   <span className="font-mono">{contribution.fdcId}</span>
                 </td>
@@ -129,6 +197,7 @@ export function JejakNutrien({
                 {formatNutrient(total.total, nutrientId, locale)}{' '}
                 <span className="text-chip">{unitLabel(nutrientId)}</span>
               </td>
+              <td />
               <td />
             </tr>
           </tfoot>

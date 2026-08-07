@@ -67,6 +67,10 @@ export interface Copy {
     readonly beratMentah: string
     readonly beratMatang: string
     readonly tidakDiketahui: string
+    /** Which of the two weights the numbers above belong to. Without this the
+        pair invites the conclusion that gaining weight in the pan gains
+        nutrients with it. */
+    readonly dasarBerat: string
   }
   readonly strip: {
     readonly judul: string
@@ -110,6 +114,17 @@ export interface Copy {
     readonly disesuaikan: string
     readonly tanpaPenyesuaian: string
     readonly sumbanganTotal: string
+    /** The arithmetic, stated where it is performed. Every operand was on
+        screen and the operation joining them was not, so a row read as four
+        facts rather than one calculation. */
+    readonly rumus: string
+    readonly rumusCatatan: string
+    readonly basisBerat: string
+    readonly retensiArti: string
+    readonly retensiTanpaArti: string
+    readonly yieldJudul: string
+    readonly yieldArti: string
+    readonly yieldTidakDipakai: string
   }
   readonly disclaimer: string
 }
@@ -171,6 +186,8 @@ const ID: Copy = {
     beratMentah: 'Berat mentah',
     beratMatang: 'Berat matang',
     tidakDiketahui: 'tidak diketahui',
+    dasarBerat:
+      'Angka gizi di atas dihitung dari berat mentah. Berat matang berbeda karena air masuk atau keluar waktu dimasak — itu tidak menambah atau mengurangi gizinya.',
   },
   strip: {
     judul: 'Resep yang dipakai',
@@ -209,6 +226,19 @@ const ID: Copy = {
     disesuaikan: 'disesuaikan',
     tanpaPenyesuaian: 'tanpa penyesuaian',
     sumbanganTotal: 'Sumbangan',
+    rumus: 'Sumbangan = berat ÷ 100 × nilai per 100 g × faktor retensi',
+    rumusCatatan:
+      'Tiap baris di bawah adalah rumus itu sekali jalan. Kalikan sendiri kalau mau mengecek — angkanya dibulatkan untuk ditampilkan, jadi hasilnya bisa meleset sedikit di digit terakhir.',
+    basisBerat:
+      'Berat yang dipakai adalah berat mentah, dan nilai per 100 g juga untuk bahan mentah. Keduanya harus sepasang.',
+    retensiArti:
+      'Faktor retensi = berapa bagian nutrien ini yang bertahan lewat cara masak tersebut. ×0,80 berarti sekitar 80% tersisa.',
+    retensiTanpaArti:
+      '"Tanpa penyesuaian" berarti nilainya dipakai apa adanya karena USDA tidak menerbitkan faktornya — bukan klaim bahwa 100% bertahan.',
+    yieldJudul: 'Yield',
+    yieldArti:
+      'Faktor yield mengubah berat, bukan gizi. Beras hampir tiga kali lipat beratnya karena menyerap air; kalorinya tidak ikut naik. Karena itu kolom ini tidak masuk ke perhitungan di sebelahnya.',
+    yieldTidakDipakai: 'tidak dipakai di rumus ini',
   },
   disclaimer:
     'Proyek pribadi. Nilai bahan adalah pendekatan dari basis data Amerika (USDA FoodData Central) untuk bahan Indonesia. Angka masakan adalah perkiraan dari resep yang ditampilkan. Bukan nasihat medis atau nasihat gizi.',
@@ -271,6 +301,8 @@ const EN: Copy = {
     beratMentah: 'Raw weight',
     beratMatang: 'Cooked weight',
     tidakDiketahui: 'not known',
+    dasarBerat:
+      'The nutrition figures above are calculated from the raw weight. The cooked weight differs because water enters or leaves during cooking — that neither adds nor removes nutrients.',
   },
   strip: {
     judul: 'The recipe this assumed',
@@ -309,6 +341,19 @@ const EN: Copy = {
     disesuaikan: 'adjusted',
     tanpaPenyesuaian: 'unadjusted',
     sumbanganTotal: 'Contribution',
+    rumus: 'Contribution = weight ÷ 100 × per-100 g value × retention factor',
+    rumusCatatan:
+      'Each row below is that formula run once. Multiply it through yourself if you want to check — the figures are rounded for display, so the last digit may differ slightly.',
+    basisBerat:
+      'The weight used is the raw weight, and the per-100 g value is for the raw ingredient too. The two have to be a matched pair.',
+    retensiArti:
+      'A retention factor is how much of this nutrient survives that cooking method. ×0.80 means roughly 80% remains.',
+    retensiTanpaArti:
+      '"Unadjusted" means the value is used as published because USDA does not issue a factor — not a claim that 100% survives.',
+    yieldJudul: 'Yield',
+    yieldArti:
+      'A yield factor changes weight, not nutrients. Rice nearly triples in weight because it absorbs water; its calories do not rise with it. That is why this column does not enter the calculation beside it.',
+    yieldTidakDipakai: 'not used in this formula',
   },
   disclaimer:
     'A personal project. Ingredient values are US-database approximations (USDA FoodData Central) for Indonesian ingredients. Dish numbers are estimates from the recipe shown. Not medical or dietary advice.',

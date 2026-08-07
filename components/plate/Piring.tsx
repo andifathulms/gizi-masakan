@@ -152,6 +152,10 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
             </dd>
           </div>
         </dl>
+        {/* States which of the two weights above the nutrition belongs to.
+            Rice nearly triples in the pan; without this the pair reads as if
+            the calories tripled with it. */}
+        <p className="mt-2 max-w-prose text-sm text-ink-soft">{copy.plate.dasarBerat}</p>
       </section>
 
       <StripResep
