@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+.env*.local
+
+# Raw FDC bulk CSVs are never committed — invariant 15. The pipeline emits a
+# projected binary into data/ingredients/ instead.
+.fdc-cache/
