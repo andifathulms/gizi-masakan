@@ -47,18 +47,22 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
         <section key={kategori} className="mt-8">
           <h2 className="font-display text-lg capitalize text-rim">{kategori}</h2>
           <div className="scroll-x mt-2">
-            <table className="w-full min-w-[42rem] text-sm">
+            <table className="w-full min-w-[48rem] text-sm">
               <thead>
                 <tr className="border-b border-rim/25 text-left text-ink-soft">
-                  <th scope="col" className="py-2 font-normal">
+                  <th scope="col" className="py-2 pr-4 font-normal">
                     {copy.strip.bahan}
                   </th>
                   {shown.map((id) => (
-                    <th key={id} scope="col" className="py-2 text-right font-normal">
+                    <th
+                      key={id}
+                      scope="col"
+                      className="whitespace-nowrap px-3 py-2 text-right align-bottom font-normal"
+                    >
                       {NUTRIENTS.find((n) => n.id === id)![locale === 'en' ? 'labelEn' : 'labelId']}
                     </th>
                   ))}
-                  <th scope="col" className="py-2 pl-3 font-normal">
+                  <th scope="col" className="py-2 pl-4 align-bottom font-normal">
                     FDC
                   </th>
                 </tr>
@@ -66,7 +70,7 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
               <tbody>
                 {list.map((entry) => (
                   <tr key={entry.id} className="border-b border-rim/10 align-top">
-                    <th scope="row" className="py-2 pr-3 text-left font-normal">
+                    <th scope="row" className="py-2 pr-4 text-left font-normal">
                       {entry.namaId}
                       <span className="block text-xs text-chip">{entry.fdcDescription}</span>
                       {entry.catatan && (
@@ -78,7 +82,7 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
                     {shown.map((id) => {
                       const value = entry.per100[id]
                       return (
-                        <td key={id} className="py-2 text-right font-mono">
+                        <td key={id} className="px-3 py-2 text-right font-mono">
                           {value === undefined ? (
                             <span className="text-chip">
                               —
@@ -92,7 +96,7 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
                         </td>
                       )
                     })}
-                    <td className="py-2 pl-3 font-mono text-xs text-chip">{entry.fdcId}</td>
+                    <td className="py-2 pl-4 font-mono text-xs text-chip">{entry.fdcId}</td>
                   </tr>
                 ))}
               </tbody>

@@ -32,25 +32,25 @@ export function JejakNutrien({
       </h2>
 
       <div className="scroll-x mt-3">
-        <table className="w-full min-w-[46rem] text-sm">
+        <table className="w-full min-w-[52rem] text-sm">
           <thead>
             <tr className="border-b border-rim/25 text-left text-ink-soft">
-              <th scope="col" className="py-2 font-normal">
+              <th scope="col" className="whitespace-nowrap py-2 pr-4 align-bottom font-normal">
                 {copy.strip.bahan}
               </th>
-              <th scope="col" className="py-2 text-right font-normal">
+              <th scope="col" className="whitespace-nowrap px-3 py-2 text-right align-bottom font-normal">
                 {copy.strip.berat}
               </th>
-              <th scope="col" className="py-2 text-right font-normal">
+              <th scope="col" className="whitespace-nowrap px-3 py-2 text-right align-bottom font-normal">
                 {copy.trace.per100}
               </th>
-              <th scope="col" className="py-2 font-normal">
+              <th scope="col" className="whitespace-nowrap py-2 pr-4 align-bottom font-normal">
                 {copy.trace.retensi}
               </th>
-              <th scope="col" className="py-2 text-right font-normal">
+              <th scope="col" className="whitespace-nowrap px-3 py-2 text-right align-bottom font-normal">
                 {copy.trace.sumbanganTotal}
               </th>
-              <th scope="col" className="py-2 pl-3 font-normal">
+              <th scope="col" className="whitespace-nowrap py-2 pl-4 align-bottom font-normal">
                 FDC
               </th>
             </tr>
@@ -61,10 +61,10 @@ export function JejakNutrien({
                 <th scope="row" className="py-2 pr-3 text-left font-normal">
                   {contribution.namaId}
                 </th>
-                <td className="py-2 text-right font-mono">
+                <td className="px-3 py-2 text-right font-mono">
                   {formatGram(contribution.beratG, locale)} g
                 </td>
-                <td className="py-2 text-right font-mono">
+                <td className="px-3 py-2 text-right font-mono">
                   {formatNutrient(contribution.per100, nutrientId, locale)}{' '}
                   <span className="text-chip">{unitLabel(nutrientId)}</span>
                 </td>
@@ -91,7 +91,7 @@ export function JejakNutrien({
                     </>
                   )}
                 </td>
-                <td className="py-2 text-right font-mono">
+                <td className="px-3 py-2 text-right font-mono">
                   {formatNutrient(contribution.total, nutrientId, locale)}{' '}
                   <span className="text-chip">{unitLabel(nutrientId)}</span>
                 </td>
@@ -113,7 +113,7 @@ export function JejakNutrien({
                   </span>
                 )}
               </th>
-              <td className="py-2 text-right font-mono">
+              <td className="px-3 py-2 text-right font-mono">
                 {formatNutrient(total.total, nutrientId, locale)}{' '}
                 <span className="text-chip">{unitLabel(nutrientId)}</span>
               </td>

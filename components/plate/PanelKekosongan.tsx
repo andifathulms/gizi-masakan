@@ -72,11 +72,12 @@ export function PanelKekosongan({ trace, locale }: { trace: NutritionTrace; loca
           <h3 className="text-sm font-medium text-ink">
             {heading(severity, locale)} ({gaps.length})
           </h3>
-          <ul className="mt-1 space-y-1 text-sm text-chip">
+          {/* Two columns from sm up. Each gap is a short paragraph, so capping
+              them at a prose measure inside a full-width box left most of the
+              box empty. The grid keeps the measure and fills the space. */}
+          <ul className="mt-1 grid gap-x-8 gap-y-1 text-sm text-chip sm:grid-cols-2">
             {gaps.map((gap, index) => (
-              <li key={`${gap.type}-${gap.ingredientId}-${index}`} className="max-w-prose">
-                {describeGap(gap)}
-              </li>
+              <li key={`${gap.type}-${gap.ingredientId}-${index}`}>{describeGap(gap)}</li>
             ))}
           </ul>
         </div>
