@@ -177,14 +177,12 @@ The site states plainly that it is a personal project, that ingredient values ar
 
 ## Current state
 
-**M2 shipped.** M0 through M4 are in: pipeline, engine, plate with inline recipe editing, ingredient browser, method page, AKG adequacy. 12 recipes, 70 ingredients, 94 tests, 28.3 KB of the 200 KB data budget.
+**M0 through M5 are in**: pipeline, engine, plate with inline recipe editing, ingredient browser, method page, AKG adequacy, URL state, dish search, local recipe saving. **40 recipes** across nasi, mi, berkuah, lauk, sayur, jajanan and minuman — M3's content target met. 70 ingredients, 262 tests, 28.3 KB of the 200 KB data budget.
 
 Three things are deliberately incomplete, and each is stated in the product rather than hidden:
 
-1. **Recipe gram weights are not weighed.** All marked `perkiraan`, rendered in terracotta. Changing one to `ditimbang` means replacing the number with a scale reading and dating it. This is the most valuable remaining work — see PRD §4.
+1. **Recipe gram weights are not weighed.** All 40 recipes, every row, marked `perkiraan` and rendered in terracotta. Changing one to `ditimbang` means replacing the number with a scale reading and dating it. **This is now the most valuable remaining work in the project** — the catalogue is broad and entirely unweighed, and breadth without weighing is the opposite of the trade PRD §4 asks for.
 2. **The URT table is empty.** Invariant 9 forbids unmeasured entries, so portions show in grams. `data/urt/takaran.json` carries the measuring protocol and the list of takaran to weigh.
-3. **13 Indonesian ingredients have no source.** Recorded in `data/ingredients/unmatched.json`, still present in the recipes, named as gaps in every trace. **Do not resolve any of them from TKPI.**
+3. **13 Indonesian ingredients have no source.** Recorded in `data/ingredients/unmatched.json`, still present in the recipes, named as gaps in every trace. **Do not resolve any of them from TKPI.** Two now bite hard enough to distort whole dishes: `gula-merah` leaves wedang jahe at 16 kcal a glass, and `kecap-manis` empties the sugar out of four dishes named after it. Each affected recipe says so in its own note. Curating them from FDC — brown sugar and a sweet soy sauce are both in SR Legacy — is the highest-value data work after weighing.
 
-**M5 is complete.** URL state, dish search and local recipe saving all shipped; 150 tests.
-
-Next, in order of value: weigh the URT table; weigh the existing recipes; then M3's remaining dishes toward forty. All three are kitchen-scale work, not code.
+Next, in order of value, and all of it data rather than code: weigh the URT table; weigh the forty recipes; curate `gula-merah` and `kecap-manis` from FDC so the two worst gaps close.
