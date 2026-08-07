@@ -12,7 +12,10 @@ import { Zilla_Slab, Figtree } from 'next/font/google'
 
 const display = Zilla_Slab({
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  /* 400 and 500 only. Weight 700 was preloaded on all 88 pages and used
+     nowhere: across app/ and components/, font-display co-occurs with
+     font-medium four times and with font-bold or font-semibold never. */
+  weight: ['400', '500'],
   variable: '--font-display',
   display: 'swap',
 })
