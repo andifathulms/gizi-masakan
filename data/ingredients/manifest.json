@@ -1,0 +1,99 @@
+{
+  "$comment": "Licence declarations for every ingredient source. The gate in lib/sources/manifest.ts runs before any adapter and refuses a source whose licence is absent or unresolved. PRD §3. Do not remove the tkpi entry, do not change its status.",
+  "generatedBy": "hand-authored",
+  "sources": [
+    {
+      "id": "fdc",
+      "name": "USDA FoodData Central — SR Legacy",
+      "publisher": "United States Department of Agriculture, Agricultural Research Service",
+      "release": "SR Legacy, April 2018 release (FoodData_Central_sr_legacy_food_csv_2018-04)",
+      "url": "https://fdc.nal.usda.gov/download-datasets.html",
+      "licence": {
+        "status": "resolved",
+        "kind": "public-domain",
+        "label": "US Government work — public domain",
+        "reasoning": "A work of the United States Government, 17 U.S.C. §105. FDC states its data are in the public domain and provides bulk downloads without registration. No permission required, no attribution obligation, though attribution is given anyway.",
+        "reviewedOn": "2026-08-07"
+      },
+      "status": "enabled",
+      "datasetsIncluded": ["sr_legacy_food"],
+      "datasetsExcluded": [
+        {
+          "name": "branded_food",
+          "reason": "1.9 million packaged products. Not a licence problem — out of scope per PRD §4. Barcode and branded lookup is a different product."
+        }
+      ]
+    },
+    {
+      "id": "tkpi",
+      "name": "Tabel Komposisi Pangan Indonesia (TKPI)",
+      "publisher": "Kementerian Kesehatan Republik Indonesia",
+      "release": "ISBN 978-623-301-036-8",
+      "url": "https://www.kemkes.go.id/",
+      "licence": {
+        "status": "unresolved",
+        "kind": "all-rights-reserved",
+        "label": "All rights reserved — not usable",
+        "reasoning": "Published as a book with named authors and an explicit all-rights-reserved notice. It is not a peraturan perundang-undangan, so it falls outside the copyright exemptions of UU 28/2014 Pasal 42, which cover the text of laws, regulations, state speeches and judicial decisions — not a Ministry-published reference book. Using its values would be infringement.",
+        "reviewedOn": "2026-08-07"
+      },
+      "status": "excluded",
+      "exclusion": {
+        "reason": "Licence unresolved. See licence.reasoning.",
+        "whatItWouldAdd": "Indonesian cultivars and local preparations that FDC approximates poorly: kangkung, lengkuas, kemiri, daun jeruk, terasi, gula merah, kecap manis, ikan tongkol, and Indonesian rice varieties. Accuracy for Indonesian dishes would improve substantially.",
+        "howItCouldChange": "If written permission is obtained from Kemenkes, set status to \"enabled\" and resolve the licence. lib/sources/tkpi already normalises to the same IngredientTable, so nothing downstream changes.",
+        "doNotRemove": "This entry is the record of the decision. Removing it, or adding a path around the gate, is the failure mode the gate exists to prevent."
+      }
+    }
+  ],
+  "otherSources": [
+    {
+      "id": "akg",
+      "name": "Angka Kecukupan Gizi — Permenkes RI No. 28 Tahun 2019",
+      "licence": {
+        "status": "resolved",
+        "kind": "regulation-exempt",
+        "label": "Peraturan perundang-undangan — outside copyright, UU 28/2014 Pasal 42",
+        "reasoning": "A Peraturan Menteri is a peraturan perundang-undangan and is expressly excluded from copyright protection by UU 28/2014 Pasal 42 huruf b. Transcribed with the article cited.",
+        "reviewedOn": "2026-08-07"
+      },
+      "status": "enabled"
+    },
+    {
+      "id": "faoinfoods",
+      "name": "FAO/INFOODS Guidelines for Converting Units, Denominators and Expressions (v1.0) and the FAO/INFOODS density and yield/retention compilations",
+      "licence": {
+        "status": "resolved",
+        "kind": "cite-permitted",
+        "label": "FAO publication — reproduction for non-commercial purposes permitted with attribution",
+        "reasoning": "Individual factors are used with the table and operation cited per value. Each factor entry in data/factors carries its citation.",
+        "reviewedOn": "2026-08-07"
+      },
+      "status": "enabled"
+    },
+    {
+      "id": "urt",
+      "name": "Tabel URT Gizi Masakan — own measurements",
+      "licence": {
+        "status": "resolved",
+        "kind": "own-work",
+        "label": "Own work, measured on a kitchen scale",
+        "reasoning": "Every entry is a gram weight measured by the author, recorded with the date it was weighed. Not derived from any published table.",
+        "reviewedOn": "2026-08-07"
+      },
+      "status": "enabled"
+    },
+    {
+      "id": "resep",
+      "name": "Resep Gizi Masakan — authored recipes",
+      "licence": {
+        "status": "resolved",
+        "kind": "own-work",
+        "label": "Own compositions, or cited to a source",
+        "reasoning": "Each recipe is either the author's own composition or carries a citation. None are scraped or copied from a copyrighted cookbook.",
+        "reviewedOn": "2026-08-07"
+      },
+      "status": "enabled"
+    }
+  ]
+}
