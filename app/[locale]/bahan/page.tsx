@@ -1,15 +1,11 @@
-import { notFound } from "next/navigation";
-import {
-  fdcRelease,
-  loadFdcTable,
-  unmatchedIngredients,
-} from "@/lib/sources/fdc/load";
-import { NUTRIENTS } from "@/lib/nutrition/nutrients";
-import { copyFor, isLocale, LOCALES, type Locale } from "@/lib/i18n";
-import { formatNutrient } from "@/lib/format";
+import { notFound } from 'next/navigation'
+import { fdcRelease, loadFdcTable, unmatchedIngredients } from '@/lib/sources/fdc/load'
+import { NUTRIENTS } from '@/lib/nutrition/nutrients'
+import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
+import { formatNutrient } from '@/lib/format'
 
 export function generateStaticParams() {
-  return LOCALES.map((locale) => ({ locale }));
+  return LOCALES.map((locale) => ({ locale }))
 }
 
 /**
@@ -21,28 +17,28 @@ export function generateStaticParams() {
  * only showed what it had would imply it had everything.
  */
 export default function BahanPage({ params }: { params: { locale: string } }) {
-  if (!isLocale(params.locale)) notFound();
-  const locale = params.locale as Locale;
-  const copy = copyFor(locale);
-  const table = loadFdcTable();
-  const release = fdcRelease();
-  const entries = [...table.entries.values()];
-  const unmatched = unmatchedIngredients();
+  if (!isLocale(params.locale)) notFound()
+  const locale = params.locale as Locale
+  const copy = copyFor(locale)
+  const table = loadFdcTable()
+  const release = fdcRelease()
+  const entries = [...table.entries.values()]
+  const unmatched = unmatchedIngredients()
 
-  const byKategori = new Map<string, typeof entries>();
+  const byKategori = new Map<string, typeof entries>()
   for (const entry of entries) {
-    const existing = byKategori.get(entry.kategori);
-    if (existing) existing.push(entry);
-    else byKategori.set(entry.kategori, [entry]);
+    const existing = byKategori.get(entry.kategori)
+    if (existing) existing.push(entry)
+    else byKategori.set(entry.kategori, [entry])
   }
 
-  const shown = ["208", "203", "204", "205", "303"];
+  const shown = ['208', '203', '204', '205', '303']
 
   return (
     <div>
       <h1 className="font-display text-2xl text-rim">{copy.nav.bahan}</h1>
       <p className="mt-4 max-w-prose text-base text-ink-soft">
-        {locale === "en"
+        {locale === 'en'
           ? `${entries.length} ingredients curated from ${release.release} and mapped to Indonesian kitchen names. Values are per 100 g.`
           : `${entries.length} bahan dipilih dari ${release.release} dan dipetakan ke nama dapur Indonesia. Nilai per 100 g.`}
       </p>
@@ -73,27 +69,17 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
                       scope="col"
                       className="whitespace-nowrap px-3 py-2 text-right align-bottom font-normal"
                     >
-                      {
-                        NUTRIENTS.find((n) => n.id === id)![
-                          locale === "en" ? "labelEn" : "labelId"
-                        ]
-                      }
+                      {NUTRIENTS.find((n) => n.id === id)![locale === 'en' ? 'labelEn' : 'labelId']}
                     </th>
                   ))}
-                  <th
-                    scope="col"
-                    className="py-2 pl-4 align-bottom font-normal"
-                  >
+                  <th scope="col" className="py-2 pl-4 align-bottom font-normal">
                     FDC
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {list.map((entry) => (
-                  <tr
-                    key={entry.id}
-                    className="border-b border-rim/10 align-top"
-                  >
+                  <tr key={entry.id} className="border-b border-rim/10 align-top">
                     <th scope="row" className="py-2 pr-4 text-left font-normal">
                       <span lang="id">{entry.namaId}</span>
                       <span lang="en" className="block text-xs text-chip">
@@ -106,27 +92,23 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
                       )}
                     </th>
                     {shown.map((id) => {
-                      const value = entry.per100[id];
+                      const value = entry.per100[id]
                       return (
                         <td key={id} className="px-3 py-2 text-right font-mono">
                           {value === undefined ? (
                             <span className="text-chip">
                               —
                               <span className="sr-only">
-                                {locale === "en"
-                                  ? "no value in FDC"
-                                  : "tidak ada nilainya di FDC"}
+                                {locale === 'en' ? 'no value in FDC' : 'tidak ada nilainya di FDC'}
                               </span>
                             </span>
                           ) : (
                             formatNutrient(value, id, locale)
                           )}
                         </td>
-                      );
+                      )
                     })}
-                    <td className="py-2 pl-4 font-mono text-xs text-chip">
-                      {entry.fdcId}
-                    </td>
+                    <td className="py-2 pl-4 font-mono text-xs text-chip">{entry.fdcId}</td>
                   </tr>
                 ))}
               </tbody>
@@ -137,21 +119,19 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
 
       <section className="mt-12">
         <h2 className="font-display text-lg text-rim">
-          {locale === "en"
-            ? "Ingredients with no source"
-            : "Bahan yang belum ada sumbernya"}
+          {locale === 'en' ? 'Ingredients with no source' : 'Bahan yang belum ada sumbernya'}
         </h2>
         <p className="mt-2 max-w-prose text-base text-ink-soft">
-          {locale === "en"
-            ? "These are used in the recipes and cannot be given a number. They are listed here rather than approximated with a distant FDC entry."
-            : "Bahan-bahan ini dipakai di resep dan belum bisa diberi angka. Didaftarkan di sini, bukan didekati dengan entri FDC yang jauh."}
+          {locale === 'en'
+            ? 'These are used in the recipes and cannot be given a number. They are listed here rather than approximated with a distant FDC entry.'
+            : 'Bahan-bahan ini dipakai di resep dan belum bisa diberi angka. Didaftarkan di sini, bukan didekati dengan entri FDC yang jauh.'}
         </p>
         <ul className="mt-3 space-y-2 text-sm text-chip">
           {unmatched.map((entry) => (
             <li key={entry.id} className="max-w-prose">
-              <span className="text-ink">{entry.namaId}</span> — {entry.reason}{" "}
+              <span className="text-ink">{entry.namaId}</span> — {entry.reason}{' '}
               <span className="italic">
-                {locale === "en" ? "Would come from: " : "Akan datang dari: "}
+                {locale === 'en' ? 'Would come from: ' : 'Akan datang dari: '}
                 {entry.wouldComeFrom}
               </span>
             </li>
@@ -159,5 +139,5 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
         </ul>
       </section>
     </div>
-  );
+  )
 }

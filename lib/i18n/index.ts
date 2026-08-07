@@ -81,6 +81,9 @@ export interface Copy {
         tooltip — a title attribute never appears on a touch screen. */
     readonly tandaBelumLengkap: string
   }
+  /** Spoken after a recomputation. Sighted readers see every bar and total
+      move together; without this the same change is silent. */
+  readonly diperbarui: (nutrien: string, jumlah: string, dasar: string) => string
   readonly adequacy: {
     readonly judul: string
     readonly penjelasan: string
@@ -173,6 +176,7 @@ const ID: Copy = {
     faktorHilang: 'Faktor pengolahan kosong',
     tandaBelumLengkap: '† angka ini belum lengkap — yang kurang disebut di "Yang tidak terhitung" di bawah.',
   },
+  diperbarui: (nutrien, jumlah, dasar) => `Diperbarui. ${nutrien} ${dasar}: ${jumlah}.`,
   adequacy: {
     judul: 'Terhadap angka kecukupan gizi',
     penjelasan:
@@ -267,6 +271,7 @@ const EN: Copy = {
     faktorHilang: 'Missing cooking factors',
     tandaBelumLengkap: '† this number is incomplete — what is missing is named under "What is not counted" below.',
   },
+  diperbarui: (nutrien, jumlah, dasar) => `Updated. ${nutrien} ${dasar}: ${jumlah}.`,
   adequacy: {
     judul: 'Against the Indonesian reference intakes',
     penjelasan:

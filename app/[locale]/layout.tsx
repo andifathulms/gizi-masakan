@@ -9,38 +9,34 @@
  * route group with its own root layout; route groups do not appear in the URL,
  * so no path changed.
  */
-import type { Metadata } from "next";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { copyFor, isLocale, LOCALES, type Locale } from "@/lib/i18n";
-import { NavUtama } from "@/components/chrome/NavUtama";
-import { fontVariables } from "@/lib/fonts";
-import "../globals.css";
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
+import { NavUtama } from '@/components/chrome/NavUtama'
+import { fontVariables } from '@/lib/fonts'
+import '../globals.css'
 
 export function generateStaticParams() {
-  return LOCALES.map((locale) => ({ locale }));
+  return LOCALES.map((locale) => ({ locale }))
 }
 
-export function generateMetadata({
-  params,
-}: {
-  params: { locale: string };
-}): Metadata {
-  const copy = copyFor(isLocale(params.locale) ? params.locale : "id");
-  return { title: copy.siteName, description: copy.disclaimer };
+export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+  const copy = copyFor(isLocale(params.locale) ? params.locale : 'id')
+  return { title: copy.siteName, description: copy.disclaimer }
 }
 
 export default function LocaleLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
-  params: { locale: string };
+  children: React.ReactNode
+  params: { locale: string }
 }) {
-  if (!isLocale(params.locale)) notFound();
-  const locale = params.locale as Locale;
-  const copy = copyFor(locale);
-  const other = locale === "id" ? "en" : "id";
+  if (!isLocale(params.locale)) notFound()
+  const locale = params.locale as Locale
+  const copy = copyFor(locale)
+  const other = locale === 'id' ? 'en' : 'id'
 
   return (
     <html lang={locale} className={fontVariables}>
@@ -53,9 +49,7 @@ export default function LocaleLayout({
               <span className="block font-display text-lg font-medium text-rim">
                 {copy.siteName}
               </span>
-              <span className="block text-xs text-ink-soft">
-                {copy.tagline5}
-              </span>
+              <span className="block text-xs text-ink-soft">{copy.tagline5}</span>
             </Link>
 
             <NavUtama locale={locale} />
@@ -68,7 +62,7 @@ export default function LocaleLayout({
               className="ml-auto text-sm text-ink-soft underline underline-offset-4 hover:text-rim"
             >
               <span aria-hidden="true">🌐 </span>
-              {other === "en" ? "English" : "Bahasa Indonesia"}
+              {other === 'en' ? 'English' : 'Bahasa Indonesia'}
             </Link>
           </div>
         </header>
@@ -84,5 +78,5 @@ export default function LocaleLayout({
         </footer>
       </body>
     </html>
-  );
+  )
 }
