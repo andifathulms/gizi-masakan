@@ -73,24 +73,32 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
         <p className="mt-2 max-w-prose text-base text-ink-soft">{recipe.deskripsiId}</p>
         <p className="mt-3 max-w-prose text-base text-edited">{copy.plate.estimasi}</p>
 
-        <div className="mt-5 flex gap-1 text-sm" role="group">
-          <button
-            type="button"
-            onClick={() => setView({ perPorsiView: true })}
-            aria-pressed={perPorsiView}
-            className={`rounded-l border border-rim/40 px-3 py-1 ${perPorsiView ? 'bg-rim text-enamel' : 'text-rim'}`}
-          >
-            {copy.plate.perPorsi}
-          </button>
-          <button
-            type="button"
-            onClick={() => setView({ perPorsiView: false })}
-            aria-pressed={!perPorsiView}
-            className={`rounded-r border border-rim/40 px-3 py-1 ${!perPorsiView ? 'bg-rim text-enamel' : 'text-rim'}`}
-          >
-            {copy.plate.seluruhResep}
-          </button>
-        </div>
+        {/* A fieldset with a legend, not a div with role="group": these are
+            two mutually exclusive options, which is what radios are, and the
+            legend gives the group the accessible name the bare role never had.
+            The radios are visually the same segmented control. */}
+        <fieldset className="mt-5">
+          <legend className="sr-only">{copy.plate.dasarPerhitungan}</legend>
+          <div className="flex gap-1 text-sm">
+            {[true, false].map((perPorsi) => (
+              <label
+                key={String(perPorsi)}
+                className={`cursor-pointer border border-rim/40 px-3 py-1 ${
+                  perPorsi ? 'rounded-l' : 'rounded-r'
+                } ${perPorsiView === perPorsi ? 'bg-rim text-enamel' : 'text-rim'}`}
+              >
+                <input
+                  type="radio"
+                  name="dasar-perhitungan"
+                  className="sr-only"
+                  checked={perPorsiView === perPorsi}
+                  onChange={() => setView({ perPorsiView: perPorsi })}
+                />
+                {perPorsi ? copy.plate.perPorsi : copy.plate.seluruhResep}
+              </label>
+            ))}
+          </div>
+        </fieldset>
 
         {/* Headline nutrients. Energy is first in reading order and is styled
             exactly like the others — invariant 13 forbids making it dominant. */}

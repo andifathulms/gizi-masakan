@@ -46,12 +46,21 @@ export interface Copy {
     readonly kosong: string
     readonly muat: string
     readonly hapus: string
+    /** Suffixes that complete the accessible name. Every saved version renders
+        a Use and a Delete button; named by the bare verb alone they are
+        indistinguishable to a screen reader, which hears the same two words
+        repeated once per version. Visible verb + this = the full name, so the
+        visible text still begins it (WCAG 2.5.3 Label in Name). */
+    readonly muatNama: (nama: string) => string
+    readonly hapusNama: (nama: string) => string
     readonly gagal: string
     readonly perluUbah: string
   }
   readonly plate: {
     readonly perPorsi: string
     readonly seluruhResep: string
+    /** Names the per-portion / whole-recipe choice as a group. */
+    readonly dasarPerhitungan: string
     readonly porsi: string
     readonly estimasi: string
     readonly ubahTakaran: string
@@ -143,12 +152,15 @@ const ID: Copy = {
     kosong: 'Belum ada versi tersimpan untuk masakan ini.',
     muat: 'Pakai',
     hapus: 'Hapus',
+    muatNama: (nama) => `takaran dari versi ${nama}`,
+    hapusNama: (nama) => `versi ${nama}`,
     gagal: 'Peramban ini menolak menyimpan. Kalau Anda memakai mode penyamaran, penyimpanan lokal biasanya dimatikan.',
     perluUbah: 'Ubah dulu salah satu takaran di atas, baru ada yang bisa disimpan.',
   },
   plate: {
     perPorsi: 'Per porsi',
     seluruhResep: 'Seluruh resep',
+    dasarPerhitungan: 'Angka dihitung untuk',
     porsi: 'porsi',
     estimasi: 'Angka ini dari resep di bawah. Ubah takarannya kalau resep Anda berbeda.',
     ubahTakaran: 'Ubah takaran',
@@ -238,12 +250,15 @@ const EN: Copy = {
     kosong: 'No saved versions for this dish yet.',
     muat: 'Use',
     hapus: 'Delete',
+    muatNama: (nama) => `the weights from version ${nama}`,
+    hapusNama: (nama) => `version ${nama}`,
     gagal: 'This browser refused to save. Local storage is usually switched off in private browsing.',
     perluUbah: 'Change one of the weights above first, then there is something to save.',
   },
   plate: {
     perPorsi: 'Per portion',
     seluruhResep: 'Whole recipe',
+    dasarPerhitungan: 'Show numbers for',
     porsi: 'portions',
     estimasi: 'These numbers come from the recipe below. Change the weights if yours differs.',
     ubahTakaran: 'Edit weights',

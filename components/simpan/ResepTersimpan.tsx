@@ -80,18 +80,30 @@ export function ResepTersimpan({
             className="w-64 rounded border border-rim/40 bg-enamel px-2 py-1 text-base placeholder:text-ink-soft"
           />
         </label>
+        {/* aria-disabled, not disabled: a disabled button is removed from the
+            tab order, so a keyboard user tabbed straight past it and never
+            found out it existed, let alone why it was off. This one stays
+            focusable and points at the sentence that explains it —
+            WCAG 3.3.2. */}
         <button
           type="button"
           onClick={onSimpan}
-          disabled={!bisaSimpan}
-          className="rounded border border-rim/40 px-3 py-1 text-sm text-rim disabled:cursor-not-allowed disabled:text-ink-soft disabled:opacity-60"
+          aria-disabled={!bisaSimpan}
+          aria-describedby={adaPerubahan ? undefined : 'simpan-syarat'}
+          className={`rounded border border-rim/40 px-3 py-1 text-sm ${
+            bisaSimpan ? 'text-rim' : 'cursor-not-allowed text-ink-soft opacity-60'
+          }`}
         >
           {copy.simpan.tombol}
         </button>
       </div>
 
       {/* Says why the button is unavailable rather than leaving it inert. */}
-      {!adaPerubahan && <p className="mt-2 text-sm text-ink-soft">{copy.simpan.perluUbah}</p>}
+      {!adaPerubahan && (
+        <p id="simpan-syarat" className="mt-2 text-sm text-ink-soft">
+          {copy.simpan.perluUbah}
+        </p>
+      )}
       {gagal && <p className="mt-2 max-w-prose text-sm text-edited">{copy.simpan.gagal}</p>}
 
       {ready && (
@@ -112,6 +124,7 @@ export function ResepTersimpan({
                 className="text-rim underline underline-offset-4"
               >
                 {copy.simpan.muat}
+                <span className="sr-only"> {copy.simpan.muatNama(entry.nama)}</span>
               </button>
               <button
                 type="button"
@@ -122,6 +135,7 @@ export function ResepTersimpan({
                 className="text-ink-soft underline underline-offset-4 hover:text-rim"
               >
                 {copy.simpan.hapus}
+                <span className="sr-only"> {copy.simpan.hapusNama(entry.nama)}</span>
               </button>
             </li>
           ))}

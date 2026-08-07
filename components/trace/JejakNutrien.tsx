@@ -42,6 +42,9 @@ export function JejakNutrien({
         aria-label={`${copy.trace.judul} — ${nutrientLabel(nutrientId, locale)}`}
       >
         <table className="w-full min-w-[52rem] text-sm">
+          <caption className="sr-only">
+            {copy.trace.judul} — {nutrientLabel(nutrientId, locale)}
+          </caption>
           <thead>
             <tr className="border-b border-rim/25 text-left text-ink-soft">
               <th scope="col" className="whitespace-nowrap py-2 pr-4 align-bottom font-normal">

@@ -58,6 +58,12 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
             aria-label={`${copy.nav.bahan} — ${kategori}`}
           >
             <table className="w-full min-w-[48rem] text-sm">
+              {/* One table per category, so each needs its own name — a screen
+                  reader listing tables otherwise sees several unnamed ones.
+                  The h2 above is not programmatically the table's name. */}
+              <caption className="sr-only">
+                {copy.nav.bahan} — {kategori}
+              </caption>
               <thead>
                 <tr className="border-b border-rim/25 text-left text-ink-soft">
                   <th scope="col" className="py-2 pr-4 font-normal">
