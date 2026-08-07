@@ -1,0 +1,71 @@
+{
+  "id": "ayam-bakar-kecap",
+  "namaId": "Ayam bakar kecap",
+  "nameEn": "Grilled chicken with sweet soy",
+  "deskripsiId": "Ayam diungkep dengan bumbu lalu dibakar sambil diolesi kecap. Angka gulanya kurang, karena kecap manis belum punya sumber.",
+  "kategori": "lauk",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "ayam-paha-kulit",
+      "beratG": 600,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Diungkep lalu dibakar",
+        "labelEn": "Braised then grilled",
+        "yieldRef": {
+          "kind": "usda",
+          "code": "5094"
+        },
+        "retentionCode": "0801"
+      }
+    },
+    {
+      "ingredientId": "kecap-manis",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "catatan": "Kecap manis belum punya sumber. Untuk masakan yang namanya saja kecap, ini kekosongan yang besar: gula dan natriumnya sama sekali tidak terhitung."
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 12,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 25,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "jahe",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "ketumbar",
+      "beratG": 3,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "gula-merah",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Gula merah belum punya sumber."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 200,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Ayam diungkep dulu sampai empuk, baru dibakar. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

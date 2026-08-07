@@ -1,0 +1,95 @@
+{
+  "id": "rendang-daging",
+  "namaId": "Rendang daging",
+  "nameEn": "Slow-cooked beef in coconut milk",
+  "deskripsiId": "Daging dimasak berjam-jam dalam santan sampai kering dan berminyak. Rendang basah dan rendang kering angkanya jauh berbeda — ini yang agak kering.",
+  "kategori": "lauk",
+  "porsi": 6,
+  "bahan": [
+    {
+      "ingredientId": "daging-sapi-sengkel",
+      "beratG": 800,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Dimasak lama dalam santan",
+        "labelEn": "Slow braised in coconut milk",
+        "yieldRef": {
+          "kind": "usda",
+          "code": "x-beef-retail-cuts-all-boneless-braised"
+        },
+        "retentionCode": "0652"
+      }
+    },
+    {
+      "ingredientId": "santan-kental",
+      "beratG": 800,
+      "provenance": "perkiraan",
+      "catatan": "Santan menyusut habis dan minyaknya tinggal di masakan, jadi seluruhnya dihitung."
+    },
+    {
+      "ingredientId": "kelapa-parut",
+      "beratG": 50,
+      "provenance": "perkiraan",
+      "catatan": "Kelapa parut disangrai jadi kerisik. Faktor untuk sangrai kelapa belum ada, jadi nilainya dipakai apa adanya dan ditandai tanpa penyesuaian."
+    },
+    {
+      "ingredientId": "cabai-merah",
+      "beratG": 100,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 80,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 25,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "jahe",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kunyit-bubuk",
+      "beratG": 3,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "lengkuas",
+      "beratG": 25,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu halus yang belum punya sumber. Sumbangan gizinya kecil dibanding bahan utamanya, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "serai",
+      "beratG": 15,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu halus yang belum punya sumber. Sumbangan gizinya kecil dibanding bahan utamanya, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "kemiri",
+      "beratG": 15,
+      "provenance": "perkiraan",
+      "catatan": "Kemiri belum punya sumber, dan ini bahan berlemak."
+    },
+    {
+      "ingredientId": "daun-jeruk",
+      "beratG": 3,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu halus yang belum punya sumber. Sumbangan gizinya kecil dibanding bahan utamanya, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Rendang daging yang dimasak sampai agak kering, bukan kalio. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

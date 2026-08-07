@@ -1,0 +1,107 @@
+{
+  "id": "urap-sayur",
+  "namaId": "Urap sayur",
+  "nameEn": "Vegetables with seasoned grated coconut",
+  "deskripsiId": "Sayur rebus dicampur kelapa parut berbumbu. Kelapanya yang membawa lemaknya, bukan minyak goreng.",
+  "kategori": "sayur",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "kol",
+      "beratG": 120,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus sebentar",
+        "labelEn": "Blanched",
+        "retentionCode": "3005"
+      }
+    },
+    {
+      "ingredientId": "kacang-panjang",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Boiled",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "kacang-panjang-direbus"
+        },
+        "retentionCode": "3005"
+      }
+    },
+    {
+      "ingredientId": "taoge",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus sebentar",
+        "labelEn": "Blanched",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "taoge-direbus"
+        },
+        "retentionCode": "3005"
+      }
+    },
+    {
+      "ingredientId": "bayam",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus sebentar",
+        "labelEn": "Blanched",
+        "retentionCode": "3005"
+      }
+    },
+    {
+      "ingredientId": "kelapa-parut",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "catatan": "Kelapa parut dikukus bersama bumbu. Faktor untuk mengukus kelapa parut belum ada, jadi ditandai tanpa penyesuaian."
+    },
+    {
+      "ingredientId": "cabai-rawit",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "gula-merah",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Gula merah belum punya sumber."
+    },
+    {
+      "ingredientId": "daun-jeruk",
+      "beratG": 2,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu yang belum punya sumber. Sumbangan gizinya kecil, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "terasi",
+      "beratG": 3,
+      "provenance": "perkiraan",
+      "catatan": "Terasi belum punya sumber. Jumlahnya kecil tapi natriumnya tinggi, jadi angka natrium urap ini kurang."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Urap sayur dengan kelapa parut bumbu kencur diganti bawang, karena kencur belum ada di tabel. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

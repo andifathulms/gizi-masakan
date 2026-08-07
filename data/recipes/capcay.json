@@ -1,0 +1,110 @@
+{
+  "id": "capcay",
+  "namaId": "Capcay",
+  "nameEn": "Stir-fried mixed vegetables",
+  "deskripsiId": "Sayur campur ditumis cepat dengan udang. Sayurnya banyak, minyaknya sedikit — pindahkan minyaknya dan lihat angkanya bergerak.",
+  "kategori": "sayur",
+  "porsi": 3,
+  "bahan": [
+    {
+      "ingredientId": "kol",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Stir fried",
+        "retentionCode": "3015"
+      }
+    },
+    {
+      "ingredientId": "wortel",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Stir fried",
+        "retentionCode": "3465"
+      }
+    },
+    {
+      "ingredientId": "sawi-hijau",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Stir fried",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "sawi-direbus"
+        },
+        "retentionCode": "3015"
+      }
+    },
+    {
+      "ingredientId": "pakcoy",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Stir fried",
+        "retentionCode": "3015"
+      }
+    },
+    {
+      "ingredientId": "udang",
+      "beratG": 120,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Stir fried",
+        "retentionCode": "2755"
+      }
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 12,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-bombay",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Sauteed",
+        "retentionCode": "3460"
+      }
+    },
+    {
+      "ingredientId": "kecap-asin",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "lada-hitam",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 3,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 20,
+      "provenance": "perkiraan",
+      "catatan": "Minyak yang benar-benar terserap belum ditimbang. Angka di sini adalah minyak yang dituang ke wajan, jadi lemaknya kemungkinan lebih tinggi daripada yang sebenarnya termakan."
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 100,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Capcay kuah sedikit dengan udang, tanpa pengental tepung. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "es-jeruk-nipis",
+  "namaId": "Es jeruk nipis",
+  "nameEn": "Iced lime juice",
+  "deskripsiId": "Air jeruk nipis, gula, air, es. Ada di sini justru karena sederhana: hampir seluruh energinya adalah gula, dan gulanya bisa Anda ubah.",
+  "kategori": "minuman",
+  "porsi": 1,
+  "bahan": [
+    {
+      "ingredientId": "jeruk-nipis",
+      "beratG": 30,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "gula-pasir",
+      "beratG": 25,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 200,
+      "provenance": "perkiraan",
+      "catatan": "Termasuk es yang mencair."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Es jeruk nipis satu gelas dengan takaran gula sedang. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "telur-balado",
+  "namaId": "Telur balado",
+  "nameEn": "Boiled eggs in chilli sauce",
+  "deskripsiId": "Telur rebus digoreng sebentar lalu dibalut sambal merah. Jumlah cabainya yang paling sering berbeda antar rumah.",
+  "kategori": "lauk",
+  "porsi": 3,
+  "bahan": [
+    {
+      "ingredientId": "telur-ayam",
+      "beratG": 165,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus lalu digoreng",
+        "labelEn": "Hard cooked then fried",
+        "retentionCode": "0105"
+      }
+    },
+    {
+      "ingredientId": "cabai-merah",
+      "beratG": 80,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 40,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "tomat",
+      "beratG": 60,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "gula-merah",
+      "beratG": 8,
+      "provenance": "perkiraan",
+      "catatan": "Gula merah belum punya sumber."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 3,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 30,
+      "provenance": "perkiraan",
+      "catatan": "Minyak yang benar-benar terserap belum ditimbang. Angka di sini adalah minyak yang dituang ke wajan, jadi lemaknya kemungkinan lebih tinggi daripada yang sebenarnya termakan."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Telur balado sambal merah, tiga butir telur. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

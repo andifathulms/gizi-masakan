@@ -1,0 +1,57 @@
+{
+  "id": "nasi-kuning",
+  "namaId": "Nasi kuning",
+  "nameEn": "Turmeric coconut rice",
+  "deskripsiId": "Beras ditanak dengan santan dan kunyit sampai kuning dan wangi. Kekentalan santannya yang paling menentukan angkanya.",
+  "kategori": "nasi",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "beras-putih",
+      "beratG": 300,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditanak dengan santan",
+        "labelEn": "Cooked in coconut milk",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "beras-ditanak"
+        },
+        "retentionCode": "0432"
+      }
+    },
+    {
+      "ingredientId": "santan-encer",
+      "beratG": 400,
+      "provenance": "perkiraan",
+      "catatan": "Santan ikut ditanak dan habis terserap, jadi seluruhnya dihitung."
+    },
+    {
+      "ingredientId": "kunyit-bubuk",
+      "beratG": 4,
+      "provenance": "perkiraan",
+      "catatan": "Memakai kunyit bubuk karena kunyit segar belum ada di tabel. Yang dipakai di dapur biasanya kunyit segar diparut."
+    },
+    {
+      "ingredientId": "serai",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Serai belum punya sumber. Sumbangan gizinya kecil, tapi tetap disebut daripada dihilangkan."
+    },
+    {
+      "ingredientId": "daun-salam",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Nasi kuning tanpa lauk, hanya nasinya. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

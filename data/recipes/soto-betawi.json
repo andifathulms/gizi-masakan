@@ -1,0 +1,118 @@
+{
+  "id": "soto-betawi",
+  "namaId": "Soto Betawi",
+  "nameEn": "Jakarta beef soup with coconut milk",
+  "deskripsiId": "Soto bersantan dengan daging sapi, kentang, dan tomat. Ada yang pakai susu, ada yang pakai santan — ini yang santan.",
+  "kategori": "berkuah",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "daging-sapi-sengkel",
+      "beratG": 500,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus lama",
+        "labelEn": "Simmered",
+        "yieldRef": {
+          "kind": "usda",
+          "code": "x-beef-retail-cuts-all-boneless-braised"
+        },
+        "retentionCode": "0704"
+      }
+    },
+    {
+      "ingredientId": "santan-kental",
+      "beratG": 400,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 800,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kentang",
+      "beratG": 200,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Digoreng",
+        "labelEn": "Fried",
+        "retentionCode": "3315"
+      }
+    },
+    {
+      "ingredientId": "tomat",
+      "beratG": 100,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "daun-bawang",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 40,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 12,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "ketumbar",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "pala-bubuk",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kayu-manis",
+      "beratG": 2,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "cengkeh",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "lengkuas",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu halus yang belum punya sumber. Sumbangan gizinya kecil dibanding bahan utamanya, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "serai",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu halus yang belum punya sumber. Sumbangan gizinya kecil dibanding bahan utamanya, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 6,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-goreng",
+      "beratG": 8,
+      "provenance": "perkiraan",
+      "catatan": "Bawang goreng belum punya sumber."
+    },
+    {
+      "ingredientId": "krupuk-udang",
+      "beratG": 15,
+      "provenance": "perkiraan",
+      "catatan": "Kerupuk udang belum punya sumber — minyak serapannya cukup banyak dan tidak terhitung."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Soto Betawi versi santan, dengan kentang goreng dan emping diganti kerupuk. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

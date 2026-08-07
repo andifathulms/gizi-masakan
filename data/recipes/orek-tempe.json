@@ -1,0 +1,69 @@
+{
+  "id": "orek-tempe",
+  "namaId": "Orek tempe",
+  "nameEn": "Sweet stir-fried tempeh",
+  "deskripsiId": "Tempe diiris korek api, digoreng, lalu dimasak dengan kecap sampai agak kering.",
+  "kategori": "lauk",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "tempe",
+      "beratG": 250,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Digoreng lalu ditumis",
+        "labelEn": "Fried then stir fried",
+        "retentionCode": "0505"
+      },
+      "catatan": "FDC tidak punya entri tempe goreng, dan serapan minyaknya belum ditimbang — angka lemaknya kurang."
+    },
+    {
+      "ingredientId": "kecap-manis",
+      "beratG": 40,
+      "provenance": "perkiraan",
+      "catatan": "Kecap manis belum punya sumber. Untuk orek yang manisnya dari kecap, ini kekosongan yang terasa."
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 30,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "cabai-rawit",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "daun-salam",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "gula-merah",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Gula merah belum punya sumber."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 2,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 30,
+      "provenance": "perkiraan",
+      "catatan": "Minyak yang benar-benar terserap belum ditimbang. Angka di sini adalah minyak yang dituang ke wajan, jadi lemaknya kemungkinan lebih tinggi daripada yang sebenarnya termakan."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Orek tempe kering manis pedas, tanpa teri. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

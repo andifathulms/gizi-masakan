@@ -1,0 +1,84 @@
+{
+  "id": "karedok",
+  "namaId": "Karedok",
+  "nameEn": "Raw vegetables with peanut sauce",
+  "deskripsiId": "Sayur mentah dengan bumbu kacang. Bedanya dengan gado-gado: tidak ada yang direbus, jadi tidak ada faktor retensi yang perlu dipakai sama sekali.",
+  "kategori": "sayur",
+  "porsi": 2,
+  "bahan": [
+    {
+      "ingredientId": "timun",
+      "beratG": 120,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "taoge",
+      "beratG": 80,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kacang-panjang",
+      "beratG": 80,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kol",
+      "beratG": 80,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "terong",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "catatan": "Terong bulat mentah, seperti aslinya. Memakai entri terong ungu karena terong bulat belum ada di tabel."
+    },
+    {
+      "ingredientId": "kacang-tanah-sangrai",
+      "beratG": 80,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "cabai-rawit",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 6,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "gula-merah",
+      "beratG": 20,
+      "provenance": "perkiraan",
+      "catatan": "Gula merah belum punya sumber."
+    },
+    {
+      "ingredientId": "asam-jawa",
+      "beratG": 5,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "terasi",
+      "beratG": 3,
+      "provenance": "perkiraan",
+      "catatan": "Terasi belum punya sumber."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 3,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "catatan": "Air untuk mengencerkan bumbu kacang."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Karedok Sunda, seluruh sayurnya mentah. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

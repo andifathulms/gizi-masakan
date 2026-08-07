@@ -1,0 +1,58 @@
+{
+  "id": "pisang-goreng",
+  "namaId": "Pisang goreng",
+  "nameEn": "Fried banana fritters",
+  "deskripsiId": "Pisang dibalut adonan tepung lalu digoreng. Berapa banyak minyak yang benar-benar terserap adalah tebakan sampai ada yang menimbangnya.",
+  "kategori": "jajanan",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "pisang",
+      "beratG": 400,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Digoreng",
+        "labelEn": "Fried",
+        "retentionCode": "0153"
+      }
+    },
+    {
+      "ingredientId": "tepung-terigu",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "catatan": "Adonan tepung yang digoreng belum punya faktor retensi yang cocok, jadi nilainya dipakai apa adanya dan ditandai tanpa penyesuaian."
+    },
+    {
+      "ingredientId": "tepung-beras",
+      "beratG": 30,
+      "provenance": "perkiraan",
+      "catatan": "Adonan tepung yang digoreng belum punya faktor retensi yang cocok, jadi nilainya dipakai apa adanya dan ditandai tanpa penyesuaian."
+    },
+    {
+      "ingredientId": "gula-pasir",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 2,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 120,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 80,
+      "provenance": "perkiraan",
+      "catatan": "Minyak yang benar-benar terserap belum ditimbang. Angka di sini adalah minyak yang dituang ke wajan, jadi lemaknya kemungkinan lebih tinggi daripada yang sebenarnya termakan."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Pisang goreng adonan tepung sederhana, tanpa telur. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

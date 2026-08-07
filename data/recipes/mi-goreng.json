@@ -1,0 +1,95 @@
+{
+  "id": "mi-goreng",
+  "namaId": "Mi goreng",
+  "nameEn": "Fried noodles",
+  "deskripsiId": "Mi telur direbus lalu digoreng dengan sayur, telur, dan kecap. Bukan mi instan — mi telur kering yang direbus sendiri.",
+  "kategori": "mi",
+  "porsi": 2,
+  "bahan": [
+    {
+      "ingredientId": "mi-telur-kering",
+      "beratG": 120,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus lalu digoreng",
+        "labelEn": "Boiled then stir fried",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "mi-telur-direbus"
+        },
+        "retentionCode": "0381"
+      }
+    },
+    {
+      "ingredientId": "kol",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Stir fried",
+        "retentionCode": "3015"
+      }
+    },
+    {
+      "ingredientId": "sawi-hijau",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Stir fried",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "sawi-direbus"
+        },
+        "retentionCode": "3015"
+      }
+    },
+    {
+      "ingredientId": "telur-ayam",
+      "beratG": 55,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Diorak-arik",
+        "labelEn": "Scrambled",
+        "retentionCode": "0103"
+      }
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 8,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Sauteed",
+        "retentionCode": "3460"
+      }
+    },
+    {
+      "ingredientId": "cabai-rawit",
+      "beratG": 5,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kecap-manis",
+      "beratG": 25,
+      "provenance": "perkiraan",
+      "catatan": "Kecap manis belum punya sumber, jadi gula dan natriumnya tidak terhitung."
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 15,
+      "provenance": "perkiraan",
+      "catatan": "Minyak yang benar-benar terserap belum ditimbang. Angka di sini adalah minyak yang dituang ke wajan, jadi lemaknya kemungkinan lebih tinggi daripada yang sebenarnya termakan."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 2,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Mi goreng rumahan dengan mi telur kering, bukan mi instan. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

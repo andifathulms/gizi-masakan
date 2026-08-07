@@ -1,0 +1,113 @@
+{
+  "id": "sayur-sop",
+  "namaId": "Sayur sop",
+  "nameEn": "Clear vegetable soup",
+  "deskripsiId": "Kuah bening dengan wortel, kentang, dan kol. Sayur yang paling ringan di daftar ini.",
+  "kategori": "sayur",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "wortel",
+      "beratG": 150,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Boiled",
+        "retentionCode": "3456"
+      }
+    },
+    {
+      "ingredientId": "kentang",
+      "beratG": 200,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Boiled",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "kentang-direbus"
+        },
+        "retentionCode": "3309"
+      }
+    },
+    {
+      "ingredientId": "kol",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Boiled",
+        "retentionCode": "3006"
+      }
+    },
+    {
+      "ingredientId": "buncis",
+      "beratG": 80,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Boiled",
+        "retentionCode": "3776"
+      }
+    },
+    {
+      "ingredientId": "ayam-dada-tanpa-kulit",
+      "beratG": 150,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Simmered",
+        "yieldRef": {
+          "kind": "usda",
+          "code": "5060"
+        },
+        "retentionCode": "0856"
+      }
+    },
+    {
+      "ingredientId": "daun-bawang",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "seledri",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-bombay",
+      "beratG": 50,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "lada-hitam",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "pala-bubuk",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 5,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 1200,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Sayur sop bening dengan kaldu ayam, tanpa makaroni. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

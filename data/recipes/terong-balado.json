@@ -1,0 +1,63 @@
+{
+  "id": "terong-balado",
+  "namaId": "Terong balado",
+  "nameEn": "Aubergine in chilli sauce",
+  "deskripsiId": "Terong digoreng lalu dibalut sambal merah. Terong menyerap minyak banyak — itu yang paling menentukan angkanya.",
+  "kategori": "sayur",
+  "porsi": 3,
+  "bahan": [
+    {
+      "ingredientId": "terong",
+      "beratG": 400,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Digoreng",
+        "labelEn": "Fried",
+        "retentionCode": "3780"
+      },
+      "catatan": "Terong menyerap minyak dalam jumlah besar dan serapannya belum ditimbang. Minyak di bawah adalah yang dituang, bukan yang terserap — angka lemaknya kemungkinan lebih tinggi daripada kenyataannya."
+    },
+    {
+      "ingredientId": "cabai-merah",
+      "beratG": 80,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 50,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "tomat",
+      "beratG": 80,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "gula-merah",
+      "beratG": 8,
+      "provenance": "perkiraan",
+      "catatan": "Gula merah belum punya sumber."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "catatan": "Minyak yang benar-benar terserap belum ditimbang. Angka di sini adalah minyak yang dituang ke wajan, jadi lemaknya kemungkinan lebih tinggi daripada yang sebenarnya termakan."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Terong balado sambal merah, terong ungu panjang. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

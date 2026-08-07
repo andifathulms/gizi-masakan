@@ -1,0 +1,56 @@
+{
+  "id": "kolak-pisang",
+  "namaId": "Kolak pisang",
+  "nameEn": "Banana in coconut milk and palm sugar",
+  "deskripsiId": "Pisang direbus dalam santan dan gula merah. Angka gulanya kurang, karena gula merah belum punya sumber.",
+  "kategori": "jajanan",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "pisang",
+      "beratG": 400,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus dalam santan",
+        "labelEn": "Stewed in coconut milk",
+        "retentionCode": "0155"
+      }
+    },
+    {
+      "ingredientId": "ubi-jalar",
+      "beratG": 150,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus dalam santan",
+        "labelEn": "Stewed in coconut milk",
+        "retentionCode": "3709"
+      }
+    },
+    {
+      "ingredientId": "santan-encer",
+      "beratG": 600,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "gula-merah",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "catatan": "Gula merah belum punya sumber, dan untuk kolak itu berarti hampir seluruh gula tambahannya tidak terhitung. Ini kekosongan terbesar di resep ini."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 2,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 200,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Kolak pisang dengan ubi, tanpa kolang-kaling dan daun pandan. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

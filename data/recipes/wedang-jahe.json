@@ -1,0 +1,42 @@
+{
+  "id": "wedang-jahe",
+  "namaId": "Wedang jahe",
+  "nameEn": "Hot ginger drink",
+  "deskripsiId": "Jahe digeprek dan direbus dengan gula merah. Angkanya hampir seluruhnya gula, dan gula merahnya belum punya sumber.",
+  "kategori": "minuman",
+  "porsi": 2,
+  "bahan": [
+    {
+      "ingredientId": "jahe",
+      "beratG": 40,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Simmered",
+        "retentionCode": "3456"
+      }
+    },
+    {
+      "ingredientId": "gula-merah",
+      "beratG": 50,
+      "provenance": "perkiraan",
+      "catatan": "Gula merah belum punya sumber. Untuk minuman yang isinya jahe dan gula, artinya sebagian besar energinya tidak terhitung — angka di sini jauh lebih rendah daripada kenyataannya."
+    },
+    {
+      "ingredientId": "serai",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu yang belum punya sumber. Sumbangan gizinya kecil, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 500,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Wedang jahe gula merah, direbus dengan serai. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

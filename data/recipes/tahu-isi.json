@@ -1,0 +1,83 @@
+{
+  "id": "tahu-isi",
+  "namaId": "Tahu isi",
+  "nameEn": "Stuffed fried tofu",
+  "deskripsiId": "Tahu goreng dibelah, diisi tumis sayur, dibalut tepung, digoreng lagi. Dua kali goreng, dan itu terlihat di angka lemaknya.",
+  "kategori": "jajanan",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "tahu-goreng",
+      "beratG": 300,
+      "provenance": "perkiraan",
+      "catatan": "Memakai entri FDC tahu yang sudah digoreng, jadi minyak dari penggorengan pertama sudah termasuk."
+    },
+    {
+      "ingredientId": "kol",
+      "beratG": 80,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Stir fried",
+        "retentionCode": "3015"
+      }
+    },
+    {
+      "ingredientId": "wortel",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Stir fried",
+        "retentionCode": "3465"
+      }
+    },
+    {
+      "ingredientId": "taoge",
+      "beratG": 50,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Stir fried",
+        "retentionCode": "3785"
+      }
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "tepung-terigu",
+      "beratG": 80,
+      "provenance": "perkiraan",
+      "catatan": "Adonan tepung yang digoreng belum punya faktor retensi yang cocok, jadi nilainya dipakai apa adanya dan ditandai tanpa penyesuaian."
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 100,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 3,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "lada-hitam",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 70,
+      "provenance": "perkiraan",
+      "catatan": "Minyak untuk penggorengan kedua. Minyak yang benar-benar terserap belum ditimbang. Angka di sini adalah minyak yang dituang ke wajan, jadi lemaknya kemungkinan lebih tinggi daripada yang sebenarnya termakan."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Tahu isi sayur, dibalut tepung dan digoreng ulang. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

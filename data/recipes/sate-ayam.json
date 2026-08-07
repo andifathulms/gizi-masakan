@@ -1,0 +1,77 @@
+{
+  "id": "sate-ayam",
+  "namaId": "Sate ayam",
+  "nameEn": "Chicken satay with peanut sauce",
+  "deskripsiId": "Ayam ditusuk, dibakar, disiram bumbu kacang. Bumbu kacangnya yang membawa sebagian besar energi, bukan ayamnya.",
+  "kategori": "lauk",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "ayam-dada-tanpa-kulit",
+      "beratG": 500,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Dibakar",
+        "labelEn": "Grilled",
+        "yieldRef": {
+          "kind": "usda",
+          "code": "5060"
+        },
+        "retentionCode": "0801"
+      }
+    },
+    {
+      "ingredientId": "kacang-tanah-sangrai",
+      "beratG": 120,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "cabai-rawit",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kecap-manis",
+      "beratG": 40,
+      "provenance": "perkiraan",
+      "catatan": "Kecap manis belum punya sumber."
+    },
+    {
+      "ingredientId": "gula-merah",
+      "beratG": 15,
+      "provenance": "perkiraan",
+      "catatan": "Gula merah belum punya sumber."
+    },
+    {
+      "ingredientId": "asam-jawa",
+      "beratG": 5,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 150,
+      "provenance": "perkiraan",
+      "catatan": "Air untuk mengencerkan bumbu kacang."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Sate ayam dengan bumbu kacang, tanpa lontong. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

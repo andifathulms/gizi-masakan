@@ -1,0 +1,66 @@
+{
+  "id": "udang-balado",
+  "namaId": "Udang balado",
+  "nameEn": "Prawns in chilli sauce",
+  "deskripsiId": "Udang ditumis dengan sambal merah dan tomat. Cepat, dan angkanya sangat bergantung pada berapa banyak minyaknya.",
+  "kategori": "lauk",
+  "porsi": 3,
+  "bahan": [
+    {
+      "ingredientId": "udang",
+      "beratG": 300,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Stir fried",
+        "retentionCode": "2755"
+      }
+    },
+    {
+      "ingredientId": "cabai-merah",
+      "beratG": 70,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 40,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "tomat",
+      "beratG": 80,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "jeruk-nipis",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "gula-pasir",
+      "beratG": 5,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 3,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 25,
+      "provenance": "perkiraan",
+      "catatan": "Minyak yang benar-benar terserap belum ditimbang. Angka di sini adalah minyak yang dituang ke wajan, jadi lemaknya kemungkinan lebih tinggi daripada yang sebenarnya termakan."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Udang balado dengan tomat, diberi perasan jeruk nipis di akhir. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

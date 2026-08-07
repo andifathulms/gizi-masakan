@@ -1,0 +1,94 @@
+{
+  "id": "opor-ayam",
+  "namaId": "Opor ayam",
+  "nameEn": "Chicken in coconut milk",
+  "deskripsiId": "Ayam dimasak perlahan dalam santan dengan bumbu putih. Kekentalan santannya adalah selisih terbesar antara satu opor dan opor lain.",
+  "kategori": "lauk",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "ayam-utuh-kulit",
+      "beratG": 700,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus dalam santan",
+        "labelEn": "Simmered in coconut milk",
+        "yieldRef": {
+          "kind": "usda",
+          "code": "5010"
+        },
+        "retentionCode": "0856"
+      }
+    },
+    {
+      "ingredientId": "santan-kental",
+      "beratG": 400,
+      "provenance": "perkiraan",
+      "catatan": "Kuahnya ikut dimakan, jadi seluruh santannya dihitung."
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 300,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 50,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "ketumbar",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "jinten",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kemiri",
+      "beratG": 20,
+      "provenance": "perkiraan",
+      "catatan": "Kemiri belum punya sumber. Ini bahan berlemak tinggi, jadi angka lemak opor ini kurang lumayan banyak."
+    },
+    {
+      "ingredientId": "lengkuas",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu halus yang belum punya sumber. Sumbangan gizinya kecil dibanding bahan utamanya, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "serai",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu halus yang belum punya sumber. Sumbangan gizinya kecil dibanding bahan utamanya, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "daun-salam",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 6,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 20,
+      "provenance": "perkiraan",
+      "catatan": "Minyak untuk menumis bumbu. Minyak yang benar-benar terserap belum ditimbang. Angka di sini adalah minyak yang dituang ke wajan, jadi lemaknya kemungkinan lebih tinggi daripada yang sebenarnya termakan."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Opor ayam putih tanpa kunyit, gaya Jawa Tengah. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

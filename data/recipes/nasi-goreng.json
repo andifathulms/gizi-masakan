@@ -1,0 +1,87 @@
+{
+  "id": "nasi-goreng",
+  "namaId": "Nasi goreng",
+  "nameEn": "Fried rice",
+  "deskripsiId": "Nasi sisa digoreng dengan bawang, telur, dan kecap manis. Hampir tiap rumah punya takaran kecapnya sendiri — ubah kecapnya dan angkanya ikut pindah.",
+  "kategori": "nasi",
+  "porsi": 2,
+  "bahan": [
+    {
+      "ingredientId": "nasi-putih",
+      "beratG": 400,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Digoreng",
+        "labelEn": "Stir fried",
+        "retentionCode": "0433"
+      }
+    },
+    {
+      "ingredientId": "telur-ayam",
+      "beratG": 55,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Diorak-arik",
+        "labelEn": "Scrambled",
+        "retentionCode": "0103"
+      }
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 20,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Sauteed",
+        "retentionCode": "3460"
+      }
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 8,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Sauteed",
+        "retentionCode": "3460"
+      }
+    },
+    {
+      "ingredientId": "cabai-rawit",
+      "beratG": 6,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "daun-bawang",
+      "beratG": 15,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditumis",
+        "labelEn": "Stir fried",
+        "retentionCode": "3015"
+      }
+    },
+    {
+      "ingredientId": "kecap-manis",
+      "beratG": 20,
+      "provenance": "perkiraan",
+      "catatan": "Kecap manis belum punya sumber yang bisa dipakai, jadi gula dan natriumnya tidak ikut terhitung. Ini bagian yang paling terasa hilang dari nasi goreng."
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 15,
+      "provenance": "perkiraan",
+      "catatan": "Minyak yang benar-benar terserap belum ditimbang. Angka di sini adalah minyak yang dituang ke wajan, jadi lemaknya kemungkinan lebih tinggi daripada yang sebenarnya termakan."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 2,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Nasi goreng rumahan yang sederhana: bawang, telur, kecap. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

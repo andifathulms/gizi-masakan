@@ -1,0 +1,84 @@
+{
+  "id": "bubur-ayam",
+  "namaId": "Bubur ayam",
+  "nameEn": "Rice porridge with chicken",
+  "deskripsiId": "Beras dimasak dengan air banyak sampai pecah, disuwiri ayam. Perbandingan beras dan airnya menentukan hampir segalanya.",
+  "kategori": "berkuah",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "beras-putih",
+      "beratG": 150,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Dimasak jadi bubur",
+        "labelEn": "Cooked to porridge",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "beras-ditanak"
+        },
+        "retentionCode": "0432"
+      },
+      "catatan": "Faktor yield yang dipakai adalah nasi ditanak. Bubur menyerap air jauh lebih banyak, jadi berat matangnya di sini kurang dari kenyataannya — ini pendekatan, bukan hasil timbangan."
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 1200,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "ayam-dada-tanpa-kulit",
+      "beratG": 200,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus lalu disuwir",
+        "labelEn": "Simmered then shredded",
+        "yieldRef": {
+          "kind": "usda",
+          "code": "5060"
+        },
+        "retentionCode": "0856"
+      }
+    },
+    {
+      "ingredientId": "daun-bawang",
+      "beratG": 20,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditabur mentah",
+        "labelEn": "Raw garnish"
+      }
+    },
+    {
+      "ingredientId": "seledri",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 6,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kecap-asin",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-goreng",
+      "beratG": 8,
+      "provenance": "perkiraan",
+      "catatan": "Bawang goreng belum punya sumber — minyak yang terserap waktu menggoreng jadi tidak terhitung."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Bubur ayam sederhana tanpa kacang kedelai dan cakwe. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

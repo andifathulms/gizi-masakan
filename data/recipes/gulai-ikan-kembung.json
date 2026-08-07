@@ -1,0 +1,89 @@
+{
+  "id": "gulai-ikan-kembung",
+  "namaId": "Gulai ikan kembung",
+  "nameEn": "Mackerel in spiced coconut gravy",
+  "deskripsiId": "Ikan kembung dimasak dalam kuah santan berbumbu kuning. Kuahnya ikut dimakan, jadi seluruh santannya dihitung.",
+  "kategori": "berkuah",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "ikan-kembung",
+      "beratG": 500,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus dalam kuah santan",
+        "labelEn": "Simmered in coconut gravy",
+        "retentionCode": "2552"
+      },
+      "catatan": "USDA tidak menerbitkan faktor yield untuk ikan, jadi berat matangnya dibiarkan tidak diketahui."
+    },
+    {
+      "ingredientId": "santan-kental",
+      "beratG": 400,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 200,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "cabai-merah",
+      "beratG": 60,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 50,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kunyit-bubuk",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "jahe",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "asam-jawa",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "lengkuas",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu halus yang belum punya sumber. Sumbangan gizinya kecil dibanding bahan utamanya, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "serai",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu halus yang belum punya sumber. Sumbangan gizinya kecil dibanding bahan utamanya, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "daun-jeruk",
+      "beratG": 2,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu halus yang belum punya sumber. Sumbangan gizinya kecil dibanding bahan utamanya, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 6,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Gulai ikan kuah kuning dengan asam jawa. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

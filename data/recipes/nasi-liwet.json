@@ -1,0 +1,66 @@
+{
+  "id": "nasi-liwet",
+  "namaId": "Nasi liwet",
+  "nameEn": "Rice cooked with coconut milk and anchovy",
+  "deskripsiId": "Beras ditanak bersama santan, teri, dan daun salam dalam satu kastrol. Asinnya datang dari terinya, bukan dari garam.",
+  "kategori": "nasi",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "beras-putih",
+      "beratG": 300,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditanak dengan santan",
+        "labelEn": "Cooked in coconut milk",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "beras-ditanak"
+        },
+        "retentionCode": "0432"
+      }
+    },
+    {
+      "ingredientId": "santan-encer",
+      "beratG": 450,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "teri-basah",
+      "beratG": 40,
+      "provenance": "perkiraan",
+      "catatan": "Memakai entri teri segar. Teri yang biasa dipakai untuk liwet adalah teri asin kering, yang natriumnya jauh lebih tinggi — angka natrium di sini kurang."
+    },
+    {
+      "ingredientId": "daun-salam",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "serai",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Serai belum punya sumber."
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 3,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Nasi liwet gaya Sunda, ditanak dalam satu wadah. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

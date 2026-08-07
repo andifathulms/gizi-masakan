@@ -1,0 +1,89 @@
+{
+  "id": "sayur-lodeh",
+  "namaId": "Sayur lodeh",
+  "nameEn": "Vegetables in coconut milk",
+  "deskripsiId": "Sayur campur dalam kuah santan encer. Santannya yang membawa hampir seluruh lemaknya.",
+  "kategori": "sayur",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "labu-siam",
+      "beratG": 200,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus dalam santan",
+        "labelEn": "Simmered in coconut milk",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "labu-siam-direbus"
+        },
+        "retentionCode": "3776"
+      }
+    },
+    {
+      "ingredientId": "kacang-panjang",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus dalam santan",
+        "labelEn": "Simmered in coconut milk",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "kacang-panjang-direbus"
+        },
+        "retentionCode": "3006"
+      }
+    },
+    {
+      "ingredientId": "terong",
+      "beratG": 150,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus dalam santan",
+        "labelEn": "Simmered in coconut milk",
+        "retentionCode": "3776"
+      }
+    },
+    {
+      "ingredientId": "santan-encer",
+      "beratG": 600,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "cabai-merah",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 30,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "lengkuas",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu yang belum punya sumber. Sumbangan gizinya kecil, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "daun-salam",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 5,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Sayur lodeh santan encer dengan labu siam dan terong. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

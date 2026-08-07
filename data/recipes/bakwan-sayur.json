@@ -1,0 +1,87 @@
+{
+  "id": "bakwan-sayur",
+  "namaId": "Bakwan sayur",
+  "nameEn": "Vegetable fritters",
+  "deskripsiId": "Kol, wortel, dan taoge diikat adonan tepung lalu digoreng. Sayur yang banyak tidak membuatnya jadi makanan sayur.",
+  "kategori": "jajanan",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "tepung-terigu",
+      "beratG": 150,
+      "provenance": "perkiraan",
+      "catatan": "Adonan tepung yang digoreng belum punya faktor retensi yang cocok, jadi nilainya dipakai apa adanya dan ditandai tanpa penyesuaian."
+    },
+    {
+      "ingredientId": "kol",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Digoreng dalam adonan",
+        "labelEn": "Fried in batter",
+        "retentionCode": "3780"
+      }
+    },
+    {
+      "ingredientId": "wortel",
+      "beratG": 80,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Digoreng dalam adonan",
+        "labelEn": "Fried in batter",
+        "retentionCode": "3465"
+      }
+    },
+    {
+      "ingredientId": "taoge",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Digoreng dalam adonan",
+        "labelEn": "Fried in batter",
+        "retentionCode": "3780"
+      }
+    },
+    {
+      "ingredientId": "daun-bawang",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "telur-ayam",
+      "beratG": 55,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 150,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "lada-hitam",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "catatan": "Minyak yang benar-benar terserap belum ditimbang. Angka di sini adalah minyak yang dituang ke wajan, jadi lemaknya kemungkinan lebih tinggi daripada yang sebenarnya termakan."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Bakwan sayur goreng, adonan tepung terigu dengan telur. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

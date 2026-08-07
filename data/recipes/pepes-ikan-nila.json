@@ -1,0 +1,89 @@
+{
+  "id": "pepes-ikan-nila",
+  "namaId": "Pepes ikan nila",
+  "nameEn": "Tilapia steamed in banana leaf",
+  "deskripsiId": "Ikan dibungkus daun pisang dengan bumbu, lalu dikukus. Tidak ada minyak sama sekali — bandingkan dengan ikan yang digoreng.",
+  "kategori": "lauk",
+  "porsi": 3,
+  "bahan": [
+    {
+      "ingredientId": "ikan-nila",
+      "beratG": 400,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Dikukus dalam bungkus daun",
+        "labelEn": "Steamed in leaf parcel",
+        "retentionCode": "2301"
+      },
+      "catatan": "Memakai faktor ikan berlemak rendah dipanggang tanpa tetesan, karena tidak ada faktor khusus untuk dikukus dalam bungkus. Ini pendekatan."
+    },
+    {
+      "ingredientId": "cabai-merah",
+      "beratG": 40,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "cabai-rawit",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 40,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "tomat",
+      "beratG": 80,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kunyit-bubuk",
+      "beratG": 3,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "jahe",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kemiri",
+      "beratG": 12,
+      "provenance": "perkiraan",
+      "catatan": "Kemiri belum punya sumber."
+    },
+    {
+      "ingredientId": "daun-salam",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "daun-jeruk",
+      "beratG": 2,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu halus yang belum punya sumber. Sumbangan gizinya kecil dibanding bahan utamanya, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "serai",
+      "beratG": 8,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu halus yang belum punya sumber. Sumbangan gizinya kecil dibanding bahan utamanya, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Pepes ikan bumbu kuning pedas, dikukus bukan dibakar. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

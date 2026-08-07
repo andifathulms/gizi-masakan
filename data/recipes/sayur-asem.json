@@ -1,0 +1,106 @@
+{
+  "id": "sayur-asem",
+  "namaId": "Sayur asem",
+  "nameEn": "Tamarind vegetable soup",
+  "deskripsiId": "Kuah bening asam dengan sayur campur. Nyaris tanpa minyak — bandingkan dengan sayur lodeh yang bersantan.",
+  "kategori": "sayur",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "labu-siam",
+      "beratG": 200,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Boiled",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "labu-siam-direbus"
+        },
+        "retentionCode": "3776"
+      }
+    },
+    {
+      "ingredientId": "kacang-panjang",
+      "beratG": 100,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Boiled",
+        "yieldRef": {
+          "kind": "derived",
+          "id": "kacang-panjang-direbus"
+        },
+        "retentionCode": "3006"
+      }
+    },
+    {
+      "ingredientId": "kacang-tanah",
+      "beratG": 50,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Boiled",
+        "retentionCode": "0522"
+      }
+    },
+    {
+      "ingredientId": "asam-jawa",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "cabai-merah",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 30,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "lengkuas",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Bumbu yang belum punya sumber. Sumbangan gizinya kecil, tapi tetap disebut daripada dihilangkan diam-diam."
+    },
+    {
+      "ingredientId": "daun-salam",
+      "beratG": 1,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "gula-merah",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Gula merah belum punya sumber."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 5,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 1000,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "melinjo",
+      "beratG": 40,
+      "provenance": "perkiraan",
+      "catatan": "Melinjo belum punya sumber. Ini bahan yang cukup padat energi, jadi angkanya kurang."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Sayur asem Jakarta tanpa jagung, karena jagung belum ada di tabel bahan. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}
