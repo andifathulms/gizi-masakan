@@ -16,6 +16,7 @@ import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
 import { NavUtama } from '@/components/chrome/NavUtama'
 import { MARK_ALT, brand, SITE_URL } from '@/lib/brand'
 import { Lambang } from '@/components/chrome/Lambang'
+import { MakerSignature } from '@/components/chrome/MakerSignature'
 import { fontVariables } from '@/lib/fonts'
 import '../globals.css'
 
@@ -100,12 +101,17 @@ export default function LocaleLayout({
 
         <main className="mx-auto max-w-4xl px-gutter py-block">{children}</main>
 
+        {/* One seam. The disclaimer and the maker's mark share the footer's
+          existing rule rather than each getting their own: the first is a
+          legal and data notice, the second is personal credit, and they are
+          kept apart by position, not by another divider. */}
         <footer className="mt-section border-t border-rim/25">
-          {/* ink-soft, not chip: this is the standing disclaimer, not a gap.
-            Chip grey is reserved for missing data — PRD §9. */}
-          <p className="mx-auto max-w-4xl px-gutter py-block text-sm text-ink-soft">
-            {copy.disclaimer}
-          </p>
+          <div className="mx-auto flex max-w-4xl flex-col gap-5 px-gutter py-block sm:flex-row sm:items-end sm:justify-between">
+            {/* ink-soft, not chip: this is the standing disclaimer, not a gap.
+              Chip grey is reserved for missing data — PRD §9. */}
+            <p className="max-w-prose text-sm text-ink-soft">{copy.disclaimer}</p>
+            <MakerSignature />
+          </div>
         </footer>
       </body>
     </html>
