@@ -76,7 +76,7 @@ export interface Copy {
 const ID: Copy = {
   siteName: 'Gizi Masakan',
   tagline: 'Gizi masakan Indonesia, dengan resep yang diasumsikan ditampilkan di bawahnya.',
-  tagline5: 'Gizi masakan Indonesia, dengan resepnya',
+  tagline5: 'Gizi masakan Indonesia',
   nav: { masakan: 'Masakan', bahan: 'Bahan', metode: 'Metode' },
   landing: {
     judul: 'Gizi masakan Indonesia, dengan resepnya',
@@ -147,7 +147,7 @@ const ID: Copy = {
 const EN: Copy = {
   siteName: 'Gizi Masakan',
   tagline: 'Nutrition for Indonesian dishes, with the recipe it assumed shown underneath.',
-  tagline5: 'Indonesian dish nutrition, with the recipe',
+  tagline5: 'Indonesian dish nutrition',
   nav: { masakan: 'Dishes', bahan: 'Ingredients', metode: 'Method' },
   landing: {
     judul: 'Nutrition for Indonesian dishes, with the recipe shown',
