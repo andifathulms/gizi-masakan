@@ -13,6 +13,8 @@
     "test:gaps": "vitest run tests/gaps",
     "fdc:fetch": "tsx scripts/fdc-pipeline.ts fetch",
     "fdc:build": "tsx scripts/fdc-pipeline.ts build",
+    "factors:fetch": "tsx scripts/factors-pipeline.ts fetch",
+    "factors:build": "tsx scripts/factors-pipeline.ts build",
     "data:validate": "tsx scripts/validate.ts",
     "typecheck": "tsc --noEmit",
     "lint": "next lint"
