@@ -42,13 +42,13 @@ export function PanelKekosongan({ trace, locale }: { trace: NutritionTrace; loca
 
   return (
     <section>
-      <h2 className="font-display text-xl text-rim">{copy.gaps.judul}</h2>
-      <p className="mt-2 max-w-prose text-sm leading-relaxed">
+      <h2 className="font-display text-lg text-rim">{copy.gaps.judul}</h2>
+      <p className="mt-2 max-w-prose text-base">
         {trace.lengkap ? copy.gaps.ringkasLengkap : copy.gaps.ringkasTidakLengkap}
       </p>
 
       {trace.bahanTanpaData.length > 0 && (
-        <p className="mt-2 max-w-prose text-sm leading-relaxed text-chip">
+        <p className="mt-2 max-w-prose text-sm text-chip">
           {locale === 'en'
             ? `${formatGram(
                 trace.bahanTanpaData.reduce((sum, bahan) => sum + bahan.beratG, 0),
@@ -66,7 +66,7 @@ export function PanelKekosongan({ trace, locale }: { trace: NutritionTrace; loca
           <h3 className="text-sm font-medium text-chip">
             {heading(severity, locale)} ({gaps.length})
           </h3>
-          <ul className="mt-1 space-y-1 text-sm leading-relaxed text-chip">
+          <ul className="mt-1 space-y-1 text-sm text-chip">
             {gaps.map((gap, index) => (
               <li key={`${gap.type}-${gap.ingredientId}-${index}`} className="max-w-prose">
                 {describeGap(gap)}

@@ -41,15 +41,15 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
     <div className="flex flex-col gap-8">
       <section className="plate-card px-5 py-5 sm:px-7 sm:py-6">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h1 className="font-display text-3xl text-rim">{trace.namaId}</h1>
+          <h1 className="font-display text-2xl text-rim">{trace.namaId}</h1>
           <span className="text-sm text-chip">
             {recipe.porsi} {copy.plate.porsi}
           </span>
         </div>
-        <p className="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
+        <p className="mt-2 max-w-prose text-base text-ink-soft">
           {recipe.deskripsiId}
         </p>
-        <p className="mt-3 max-w-prose text-sm leading-relaxed text-edited">
+        <p className="mt-3 max-w-prose text-base text-edited">
           {copy.plate.estimasi}
         </p>
 
@@ -133,7 +133,7 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
 
       <JejakNutrien trace={trace} locale={locale} nutrientId={nutrientId} />
 
-      <section className="text-sm leading-relaxed text-chip">
+      <section className="text-sm text-chip">
         <h2 className="font-display text-lg text-rim">
           {locale === 'en' ? 'Where this recipe comes from' : 'Asal resep ini'}
         </h2>

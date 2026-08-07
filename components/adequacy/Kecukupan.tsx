@@ -26,9 +26,9 @@ export function Kecukupan({ trace, locale }: { trace: NutritionTrace; locale: Lo
   return (
     <section>
       <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <h2 className="font-display text-xl text-rim">{copy.adequacy.judul}</h2>
+        <h2 className="font-display text-lg text-rim">{copy.adequacy.judul}</h2>
         <label className="flex items-center gap-2 text-sm">
-          <span className="text-chip">{copy.adequacy.kelompok}</span>
+          <span className="text-ink-soft">{copy.adequacy.kelompok}</span>
           <select
             value={kelompokId}
             onChange={(event) => setKelompokId(event.target.value)}
@@ -43,7 +43,7 @@ export function Kecukupan({ trace, locale }: { trace: NutritionTrace; locale: Lo
         </label>
       </div>
 
-      <p className="mt-2 max-w-prose text-sm leading-relaxed">{copy.adequacy.penjelasan}</p>
+      <p className="mt-2 max-w-prose text-base text-ink-soft">{copy.adequacy.penjelasan}</p>
 
       <ul className="mt-4 space-y-2">
         {NUTRIENTS.map((nutrient) => {
@@ -86,7 +86,7 @@ export function Kecukupan({ trace, locale }: { trace: NutritionTrace; locale: Lo
         })}
       </ul>
 
-      <p className="mt-4 max-w-prose text-xs leading-relaxed text-chip">{AKG_CITATION}</p>
+      <p className="mt-4 max-w-prose text-xs text-ink-soft">{AKG_CITATION}</p>
     </section>
   )
 }

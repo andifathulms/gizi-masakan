@@ -27,14 +27,14 @@ export function JejakNutrien({
 
   return (
     <section>
-      <h2 className="font-display text-xl text-rim">
+      <h2 className="font-display text-lg text-rim">
         {copy.trace.judul} — {nutrientLabel(nutrientId, locale)}
       </h2>
 
       <div className="mt-3 overflow-x-auto">
         <table className="w-full min-w-[46rem] text-sm">
           <thead>
-            <tr className="border-b border-rim/25 text-left text-chip">
+            <tr className="border-b border-rim/25 text-left text-ink-soft">
               <th scope="col" className="py-2 font-normal">
                 {copy.strip.bahan}
               </th>

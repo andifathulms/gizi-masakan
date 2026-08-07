@@ -54,10 +54,10 @@ export function StripResep({
   return (
     <section>
       <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <h2 className="font-display text-xl text-rim">{copy.strip.judul}</h2>
+        <h2 className="font-display text-lg text-rim">{copy.strip.judul}</h2>
         <div className="flex items-center gap-3 text-sm">
           <label className="flex items-center gap-2">
-            <span className="text-chip">{copy.strip.pilihNutrien}</span>
+            <span className="text-ink-soft">{copy.strip.pilihNutrien}</span>
             <select
               value={nutrientId}
               onChange={(event) => onNutrientChange(event.target.value)}
@@ -83,7 +83,7 @@ export function StripResep({
           {copy.strip.judul} — {copy.strip.sumbangan}: {nutrientLabel(nutrientId, locale)}
         </caption>
         <thead>
-          <tr className="border-b border-rim/25 text-left text-chip">
+          <tr className="border-b border-rim/25 text-left text-ink-soft">
             <th scope="col" className="py-2 font-normal">
               {copy.strip.bahan}
             </th>
@@ -173,7 +173,7 @@ export function StripResep({
         </tbody>
       </table>
 
-      <p className="mt-3 text-sm text-chip">
+      <p className="mt-3 text-sm text-ink-soft">
         {locale === 'en'
           ? 'Weights in terracotta are estimates or your edits, not measurements.'
           : 'Berat berwarna terakota adalah perkiraan atau hasil suntingan Anda, bukan hasil timbangan.'}{' '}

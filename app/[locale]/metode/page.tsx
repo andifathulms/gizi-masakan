@@ -15,8 +15,8 @@ export function generateStaticParams() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mt-10">
-      <h2 className="font-display text-xl text-rim">{title}</h2>
-      <div className="mt-2 max-w-prose space-y-3 text-sm leading-relaxed">{children}</div>
+      <h2 className="font-display text-lg text-rim">{title}</h2>
+      <div className="mt-3 max-w-prose space-y-3 text-base">{children}</div>
     </section>
   )
 }
@@ -39,8 +39,8 @@ export default function MetodePage({ params }: { params: { locale: string } }) {
 
   return (
     <div>
-      <h1 className="font-display text-3xl text-rim">{copy.nav.metode}</h1>
-      <p className="mt-2 max-w-prose leading-relaxed">
+      <h1 className="font-display text-2xl text-rim">{copy.nav.metode}</h1>
+      <p className="mt-4 max-w-prose text-md text-ink-soft">
         {en
           ? 'Every number on this site comes from somewhere. This page says where, and says what is missing.'
           : 'Setiap angka di situs ini datang dari suatu tempat. Halaman ini menyebut dari mana, dan menyebut apa yang belum ada.'}

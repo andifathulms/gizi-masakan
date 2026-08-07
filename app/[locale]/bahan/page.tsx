@@ -36,8 +36,8 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
 
   return (
     <div>
-      <h1 className="font-display text-3xl text-rim">{copy.nav.bahan}</h1>
-      <p className="mt-2 max-w-prose text-sm leading-relaxed">
+      <h1 className="font-display text-2xl text-rim">{copy.nav.bahan}</h1>
+      <p className="mt-4 max-w-prose text-base text-ink-soft">
         {locale === 'en'
           ? `${entries.length} ingredients curated from ${release.release} and mapped to Indonesian kitchen names. Values are per 100 g.`
           : `${entries.length} bahan dipilih dari ${release.release} dan dipetakan ke nama dapur Indonesia. Nilai per 100 g.`}
@@ -45,11 +45,11 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
 
       {[...byKategori.entries()].map(([kategori, list]) => (
         <section key={kategori} className="mt-8">
-          <h2 className="font-display text-xl capitalize text-rim">{kategori}</h2>
+          <h2 className="font-display text-lg capitalize text-rim">{kategori}</h2>
           <div className="mt-2 overflow-x-auto">
             <table className="w-full min-w-[42rem] text-sm">
               <thead>
-                <tr className="border-b border-rim/25 text-left text-chip">
+                <tr className="border-b border-rim/25 text-left text-ink-soft">
                   <th scope="col" className="py-2 font-normal">
                     {copy.strip.bahan}
                   </th>
@@ -70,7 +70,7 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
                       {entry.namaId}
                       <span className="block text-xs text-chip">{entry.fdcDescription}</span>
                       {entry.catatan && (
-                        <span className="mt-1 block max-w-prose text-xs leading-relaxed text-edited">
+                        <span className="mt-1 block max-w-prose text-xs text-edited">
                           {entry.catatan}
                         </span>
                       )}
@@ -99,15 +99,15 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
       ))}
 
       <section className="mt-12">
-        <h2 className="font-display text-xl text-rim">
+        <h2 className="font-display text-lg text-rim">
           {locale === 'en' ? 'Ingredients with no source' : 'Bahan yang belum ada sumbernya'}
         </h2>
-        <p className="mt-2 max-w-prose text-sm leading-relaxed">
+        <p className="mt-2 max-w-prose text-base text-ink-soft">
           {locale === 'en'
             ? 'These are used in the recipes and cannot be given a number. They are listed here rather than approximated with a distant FDC entry.'
             : 'Bahan-bahan ini dipakai di resep dan belum bisa diberi angka. Didaftarkan di sini, bukan didekati dengan entri FDC yang jauh.'}
         </p>
-        <ul className="mt-3 space-y-2 text-sm leading-relaxed text-chip">
+        <ul className="mt-3 space-y-2 text-sm text-chip">
           {unmatched.map((entry) => (
             <li key={entry.id} className="max-w-prose">
               <span className="text-ink">{entry.namaId}</span> — {entry.reason}{' '}
