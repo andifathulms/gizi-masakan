@@ -41,8 +41,26 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
   const edited = Object.keys(beratOverrideG).length > 0
   const scale = perPorsiView ? 1 / trace.porsi : 1
 
+  /* Editing a weight, switching nutrient, or switching per-portion rewrites
+     every total, bar and adequacy fill at once. A sighted reader sees that
+     happen; without this it is silent. WCAG 4.1.3 Status Messages.
+     One region, reporting the selected nutrient — announcing all eight totals
+     on every keystroke would be noise, not information. */
+  const selected = trace.totals.find((entry) => entry.nutrientId === nutrientId)!
+  const pengumuman = copy.diperbarui(
+    nutrientLabel(nutrientId, locale),
+    `${formatNutrient(selected.total * scale, nutrientId, locale)} ${unitLabel(nutrientId)}`,
+    perPorsiView ? copy.plate.perPorsi.toLowerCase() : copy.plate.seluruhResep.toLowerCase(),
+  )
+
   return (
     <div className="flex flex-col gap-block">
+      {/* Present from first render, because a live region created at the same
+          moment as its content is not announced. Its initial content is
+          therefore silent, and every later change speaks. */}
+      <p aria-live="polite" className="sr-only">
+        {pengumuman}
+      </p>
       <section className="plate-card px-5 py-5 sm:px-7 sm:py-6">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h1 lang="id" className="font-display text-2xl text-rim">
