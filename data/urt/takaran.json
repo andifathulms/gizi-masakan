@@ -1,0 +1,38 @@
+{
+  "$comment": "GENUINELY EMPTY, AND THAT IS THE HONEST STATE. Invariant 9: URT weights are measured, not estimated — if it was not weighed, it does not go in this table. Nothing here has been weighed yet, so there are no entries. Do not populate this file from a published table, from another app, or from a guess: the whole value of this table is that every gram in it came off a kitchen scale.",
+  "citation": "Own measurements — Tabel URT Gizi Masakan",
+  "licence": "own-work",
+  "entries": [],
+  "caraMengukur": {
+    "alat": "Timbangan dapur digital dengan pembacaan 1 g.",
+    "prosedur": [
+      "Timbang wadah kosong, lalu tare ke nol.",
+      "Isi wadah dengan takaran rumah tangga yang dimaksud, seperti biasanya diisi di dapur — bukan diratakan kalau memang biasanya menggunung.",
+      "Catat beratnya. Ulangi tiga kali dengan isian baru, ambil rata-ratanya.",
+      "Catat tanggalnya, dan catat juga wadah yang dipakai — satu centong berbeda antar rumah."
+    ],
+    "bentukEntri": {
+      "id": "centong-nasi",
+      "labelId": "1 centong nasi",
+      "labelEn": "1 rice scoop",
+      "ingredientId": "nasi-putih",
+      "gramG": 0,
+      "diukurPada": "yyyy-mm-dd",
+      "jumlahUlangan": 3,
+      "alat": "Timbangan dapur digital 1 g",
+      "catatan": "Wadah dan cara mengisi yang dipakai."
+    }
+  },
+  "targetPengukuran": [
+    "1 centong nasi",
+    "1 potong sedang ayam",
+    "1 potong sedang tempe",
+    "1 potong sedang tahu",
+    "1 mangkuk soto",
+    "1 sendok makan minyak",
+    "1 sendok makan santan kental",
+    "1 buah telur ayam ukuran sedang",
+    "1 genggam taoge",
+    "1 ikat kangkung"
+  ]
+}
