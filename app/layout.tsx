@@ -3,7 +3,7 @@
  * any runtime network request, and a font CDN is a network request.
  */
 import type { Metadata } from 'next'
-import { Zilla_Slab, Figtree, Roboto_Mono } from 'next/font/google'
+import { Zilla_Slab, Figtree } from 'next/font/google'
 import './globals.css'
 
 const display = Zilla_Slab({
@@ -19,12 +19,6 @@ const sans = Figtree({
   display: 'swap',
 })
 
-const mono = Roboto_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-})
-
 export const metadata: Metadata = {
   title: 'Gizi Masakan',
   description:
@@ -33,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+    <html lang="id" className={`${display.variable} ${sans.variable}`}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   )

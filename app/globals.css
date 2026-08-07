@@ -2,6 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * Design tokens. Every colour, size and rhythm value on the site is declared
+ * here once and consumed through tailwind.config.ts — components never carry a
+ * raw hex or a one-off pixel size.
+ *
+ * Colours are stored as space-separated RGB channels so Tailwind's opacity
+ * modifiers (border-rim/25, bg-rim/10) keep working against a variable.
+ */
+:root {
+  /* Surfaces */
+  --enamel: 242 239 230; /* #F2EFE6 */
+  --enamel-deep: 231 226 212; /* #E7E2D4 */
+
+  /* Ink. Contrast against enamel / enamel-deep, in that order.
+     Every one of these clears WCAG AA 4.5:1 on both surfaces — the palette
+     carries meaning here (invariant 14), so it has to be readable to carry it. */
+  --ink: 33 31 26; /* #211F1A — 14.32 / 12.72 */
+  --ink-soft: 74 72 65; /* #4A4841 —  7.96 /  7.07 */
+  --rim: 39 72 99; /* #274863 —  8.33 /  7.40 */
+  --rim-soft: 65 98 126; /* #41627E —  5.58 /  4.96 */
+
+  /* The honesty palette — PRD §9.
+     edited   terracotta  user-edited values and stated estimates
+     chip     grey        gaps, missing data, unadjusted nutrients
+     adequate leaf green  adequacy fills, nothing else */
+  --edited: 143 61 34; /* #8F3D22 —  6.39 /  5.68 */
+  --adequate: 58 97 57; /* #3A6139 —  6.19 /  5.50 */
+  --chip: 94 91 84; /* #5E5B54 —  5.89 /  5.23 */
+
+  /* Type scale. One ramp, ~1.25, base 16px. Body copy never goes below base;
+     sm is for dense tabular data and xs for true metadata. */
+  --text-xs: 0.8125rem; /* 13px */
+  --text-sm: 0.9375rem; /* 15px */
+  --text-base: 1rem; /* 16px */
+  --text-md: 1.125rem; /* 18px */
+  --text-lg: 1.375rem; /* 22px */
+  --text-xl: 1.75rem; /* 28px */
+  --text-2xl: 2.125rem; /* 34px */
+  --text-3xl: 2.625rem; /* 42px */
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+
+  /* Spacing scale. Section rhythm comes from these, not from ad-hoc margins. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+}
+
 @layer base {
   html {
     /* Tabular numerals everywhere by default — every gram weight, nutrient
@@ -11,6 +66,8 @@
 
   body {
     @apply bg-enamel text-ink;
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
   }
 
   /* The one orchestrated moment: editing a weight moves every bar, total and
@@ -19,6 +76,12 @@
     .move-together {
       transition: width 220ms cubic-bezier(0.2, 0.7, 0.3, 1);
     }
+  }
+
+  /* Focus is visible on every interactive thing, in rim, off the element. */
+  :where(a, button, input, select):focus-visible {
+    outline: 2px solid rgb(var(--rim));
+    outline-offset: 2px;
   }
 }
 
