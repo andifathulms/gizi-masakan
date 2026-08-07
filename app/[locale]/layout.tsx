@@ -15,6 +15,7 @@ import { notFound } from 'next/navigation'
 import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
 import { NavUtama } from '@/components/chrome/NavUtama'
 import { MARK_ALT, brand, SITE_URL } from '@/lib/brand'
+import { Lambang } from '@/components/chrome/Lambang'
 import { fontVariables } from '@/lib/fonts'
 import '../globals.css'
 
@@ -29,24 +30,24 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
        appended once here rather than in five places. */
     title: { default: copy.siteName, template: `%s — ${copy.siteName}` },
     description: copy.tagline,
-  /* Next injects a manifest link without the basePath, which 404s on a
+    /* Next injects a manifest link without the basePath, which 404s on a
      project page. Setting it here overrides that with the real path. */
-  metadataBase: new URL(SITE_URL),
-  manifest: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/manifest.webmanifest`,
-  icons: {
-    icon: [
-      { url: brand.favicon, type: 'image/svg+xml' },
-      { url: brand.icon32, sizes: '32x32', type: 'image/png' },
-    ],
-    apple: [{ url: brand.appleTouch, sizes: '180x180' }],
-  },
-  openGraph: {
-    title: copy.siteName,
-    description: copy.tagline,
-    images: [{ url: brand.og, width: 1200, height: 630, alt: copy.tagline }],
-    type: 'website',
-  },
-  twitter: { card: 'summary_large_image', images: [brand.og] },
+    metadataBase: new URL(SITE_URL),
+    manifest: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/manifest.webmanifest`,
+    icons: {
+      icon: [
+        { url: brand.favicon, type: 'image/svg+xml' },
+        { url: brand.icon32, sizes: '32x32', type: 'image/png' },
+      ],
+      apple: [{ url: brand.appleTouch, sizes: '180x180' }],
+    },
+    openGraph: {
+      title: copy.siteName,
+      description: copy.tagline,
+      images: [{ url: brand.og, width: 1200, height: 630, alt: copy.tagline }],
+      type: 'website',
+    },
+    twitter: { card: 'summary_large_image', images: [brand.og] },
   }
 }
 
@@ -73,19 +74,7 @@ export default function LocaleLayout({
               href={`/${locale}/masakan/`}
               className="mr-2 flex items-center gap-2 leading-tight"
             >
-              {/* The mark is the project's thesis as a glyph: a solid rule for
-                the figure, a dashed one beneath it for the assumption. It gets
-                a real description rather than being hidden, because that is
-                what it says. Plain <img>: next/image has no place in a static
-                export of a 437-byte SVG. */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={brand.mark}
-                alt={MARK_ALT[locale]}
-                width={36}
-                height={36}
-                className="h-9 w-9 shrink-0 rounded-[8px]"
-              />
+              <Lambang label={MARK_ALT[locale]} className="h-9 w-9 shrink-0 rounded-[8px]" />
               <span>
                 <span className="block font-display text-lg font-medium text-rim">
                   {copy.siteName}
