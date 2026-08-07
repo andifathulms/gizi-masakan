@@ -1,10 +1,10 @@
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { RECIPES, recipesByKategori } from '@/lib/resep'
+import { RECIPES } from '@/lib/resep'
 import { compute } from '@/lib/nutrition/compute'
 import { findUnmatched, loadFdcTable } from '@/lib/sources/fdc/load'
 import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
 import { formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
+import { DaftarMasakan, type KartuMasakan } from '@/components/masakan/DaftarMasakan'
 
 /**
  * What each card shows. Energi, protein and zat besi at equal weight — energy
@@ -22,7 +22,29 @@ export default function MasakanPage({ params }: { params: { locale: string } }) 
   const locale = params.locale as Locale
   const copy = copyFor(locale)
   const table = loadFdcTable()
-  const byKategori = recipesByKategori()
+
+  /* Cards are projected to strings here, at build time, so the client
+     component that filters them does no nutrition work — invariant 17. */
+  const kartu: KartuMasakan[] = RECIPES.map((recipe) => {
+    const trace = compute({ recipe, table, unmatched: { get: findUnmatched } })
+    return {
+      id: recipe.id,
+      namaId: recipe.namaId,
+      nameEn: recipe.nameEn,
+      deskripsiId: recipe.deskripsiId,
+      kategori: recipe.kategori,
+      nutrients: KARTU_NUTRIENT_IDS.map((id) => {
+        const total = trace.totals.find((entry) => entry.nutrientId === id)!
+        return {
+          id,
+          label: nutrientLabel(id, locale),
+          value: formatNutrient(total.total / recipe.porsi, id, locale),
+          unit: unitLabel(id),
+        }
+      }),
+      gapCount: trace.lengkap ? 0 : trace.gaps.length,
+    }
+  })
 
   /* The colour that carries each claim, so the strip doubles as the legend for
      the palette the reader is about to meet on a dish page — PRD §9. */
@@ -46,7 +68,7 @@ export default function MasakanPage({ params }: { params: { locale: string } }) 
       </ul>
 
       <h2 className="mt-section font-display text-xl text-rim">
-        {RECIPES.length} {copy.nav.masakan.toLowerCase()}
+        {copy.nav.masakan}
       </h2>
       <p className="mt-1 max-w-prose text-sm text-ink-soft">
         {locale === 'en'
@@ -54,64 +76,7 @@ export default function MasakanPage({ params }: { params: { locale: string } }) 
           : 'Tiap halaman menampilkan resep yang dipakai, dan menyebut apa yang tidak bisa dihitung.'}
       </p>
 
-      {[...byKategori.entries()].map(([kategori, recipes]) => (
-        <section key={kategori} className="mt-block">
-          <h3 className="font-display text-lg capitalize text-rim">{kategori}</h3>
-          <ul className="mt-3 grid gap-3 sm:grid-cols-2">
-            {recipes.map((recipe) => {
-              const trace = compute({ recipe, table, unmatched: { get: findUnmatched } })
-              return (
-                <li key={recipe.id}>
-                  <Link
-                    href={`/${locale}/masakan/${recipe.id}/`}
-                    className="list-card block h-full px-4 py-4 transition-colors hover:border-rim hover:bg-enamel-deep"
-                  >
-                    <span className="font-display text-md font-medium text-rim">
-                      {recipe.namaId}
-                    </span>
-                    <span className="mt-1 block text-sm text-ink-soft">{recipe.deskripsiId}</span>
-                    {/* Three nutrients at identical weight, not energy alone.
-                        Invariant 13 and PRD §5 say energy is one nutrient among
-                        many; when it is the only number on a card it becomes
-                        the headline by omission, which is the calorie-first
-                        framing §5 exists to prevent. Protein and zat besi are
-                        the two the stunting-and-deficiency framing cares about
-                        most, and both are already in the trace. */}
-                    <span className="mt-3 grid grid-cols-3 gap-2 border-t border-rim/20 pt-2 text-sm">
-                      {KARTU_NUTRIENT_IDS.map((id) => {
-                        const total = trace.totals.find((entry) => entry.nutrientId === id)!
-                        return (
-                          <span key={id} className="block">
-                            <span className="block text-xs text-ink-soft">
-                              {nutrientLabel(id, locale)}
-                            </span>
-                            <span className="font-mono">
-                              {formatNutrient(total.total / recipe.porsi, id, locale)}
-                            </span>{' '}
-                            <span className="text-xs text-ink-soft">{unitLabel(id)}</span>
-                          </span>
-                        )
-                      })}
-                    </span>
-                    <span className="mt-2 block text-xs text-ink-soft">
-                      {copy.plate.perPorsi.toLowerCase()}
-                    </span>
-                    {/* Phrased as something the dish does, not as a defect
-                        count: naming a gap is the product, not a failure. */}
-                    {!trace.lengkap && (
-                      <span className="mt-1 block text-xs text-chip">
-                        {locale === 'en'
-                          ? `names ${trace.gaps.length} things it cannot count`
-                          : `menyebut ${trace.gaps.length} hal yang tidak bisa dihitung`}
-                      </span>
-                    )}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-      ))}
+      <DaftarMasakan kartu={kartu} locale={locale} />
     </div>
   )
 }

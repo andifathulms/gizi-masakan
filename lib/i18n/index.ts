@@ -27,6 +27,15 @@ export interface Copy {
     readonly lede: string
     readonly poin: readonly { readonly judul: string; readonly isi: string }[]
   }
+  /** Dish search. Functions because they carry counts. */
+  readonly cari: {
+    readonly label: string
+    readonly placeholder: string
+    readonly semua: (total: number) => string
+    readonly hasil: (found: number, total: number) => string
+    readonly kosong: (query: string) => string
+    readonly menyebut: (count: number) => string
+  }
   readonly plate: {
     readonly perPorsi: string
     readonly seluruhResep: string
@@ -99,6 +108,15 @@ const ID: Copy = {
       },
     ],
   },
+  cari: {
+    label: 'Cari masakan',
+    placeholder: 'Cari masakan, bahan, atau kategori…',
+    semua: (total) => `${total} masakan`,
+    hasil: (found, total) => `${found} dari ${total} masakan`,
+    kosong: (query) =>
+      `Tidak ada masakan yang cocok dengan "${query}". Yang ada di sini baru sebagian kecil dari masakan Indonesia — kalau belum ketemu, kemungkinan besar memang belum ditulis.`,
+    menyebut: (count) => `menyebut ${count} hal yang tidak bisa dihitung`,
+  },
   plate: {
     perPorsi: 'Per porsi',
     seluruhResep: 'Seluruh resep',
@@ -170,6 +188,15 @@ const EN: Copy = {
         isi: 'No daily totals, no calorie budget, no streaks. The question is "am I getting enough", never "have I gone over".',
       },
     ],
+  },
+  cari: {
+    label: 'Search dishes',
+    placeholder: 'Search a dish, an ingredient, or a category…',
+    semua: (total) => `${total} dishes`,
+    hasil: (found, total) => `${found} of ${total} dishes`,
+    kosong: (query) =>
+      `Nothing matches "${query}". What is here is a small fraction of Indonesian cooking — if you cannot find it, it most likely has not been written yet.`,
+    menyebut: (count) => `names ${count} things it cannot count`,
   },
   plate: {
     perPorsi: 'Per portion',
