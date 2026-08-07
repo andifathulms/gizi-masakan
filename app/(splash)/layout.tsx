@@ -12,7 +12,7 @@
  */
 import type { Metadata } from 'next'
 import { fontVariables } from '@/lib/fonts'
-import { brand } from '@/lib/brand'
+import { brand, SITE_URL } from '@/lib/brand'
 import { copyFor } from '@/lib/i18n'
 import '../globals.css'
 
@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   description: copy.disclaimer,
   /* Next injects a manifest link without the basePath, which 404s on a
      project page. Setting it here overrides that with the real path. */
+  metadataBase: new URL(SITE_URL),
   manifest: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/manifest.webmanifest`,
   icons: {
     icon: [

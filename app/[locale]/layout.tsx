@@ -14,7 +14,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
 import { NavUtama } from '@/components/chrome/NavUtama'
-import { MARK_ALT, brand } from '@/lib/brand'
+import { MARK_ALT, brand, SITE_URL } from '@/lib/brand'
 import { fontVariables } from '@/lib/fonts'
 import '../globals.css'
 
@@ -29,6 +29,7 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
     description: copy.disclaimer,
   /* Next injects a manifest link without the basePath, which 404s on a
      project page. Setting it here overrides that with the real path. */
+  metadataBase: new URL(SITE_URL),
   manifest: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/manifest.webmanifest`,
   icons: {
     icon: [
@@ -66,11 +67,29 @@ export default function LocaleLayout({
           <div className="mx-auto flex max-w-4xl flex-wrap items-center gap-x-6 gap-y-3 px-gutter py-4">
             {/* The wordmark carries the one-line proposition, so the site says
               what it is even on a page whose own heading does not. */}
-            <Link href={`/${locale}/masakan/`} className="mr-2 leading-tight">
-              <span className="block font-display text-lg font-medium text-rim">
-                {copy.siteName}
+            <Link
+              href={`/${locale}/masakan/`}
+              className="mr-2 flex items-center gap-2 leading-tight"
+            >
+              {/* The mark is the project's thesis as a glyph: a solid rule for
+                the figure, a dashed one beneath it for the assumption. It gets
+                a real description rather than being hidden, because that is
+                what it says. Plain <img>: next/image has no place in a static
+                export of a 437-byte SVG. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={brand.mark}
+                alt={MARK_ALT[locale]}
+                width={36}
+                height={36}
+                className="h-9 w-9 shrink-0 rounded-[8px]"
+              />
+              <span>
+                <span className="block font-display text-lg font-medium text-rim">
+                  {copy.siteName}
+                </span>
+                <span className="block text-xs text-ink-soft">{copy.tagline5}</span>
               </span>
-              <span className="block text-xs text-ink-soft">{copy.tagline5}</span>
             </Link>
 
             <NavUtama locale={locale} />

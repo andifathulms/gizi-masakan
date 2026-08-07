@@ -17,6 +17,13 @@
  */
 const base = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
+/**
+ * Absolute origin for social previews. og:image has to be an absolute URL —
+ * without a metadataBase Next resolves it against localhost, so every shared
+ * link pointed at a machine that is not the site.
+ */
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://andifathulms.github.io'
+
 export const brand = {
   /** Tab icon. Ink ground, so it holds up against a light or dark browser chrome. */
   favicon: `${base}/favicon.svg`,
