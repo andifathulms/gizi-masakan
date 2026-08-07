@@ -33,9 +33,11 @@ import type {
   Gap,
   NutrientTotal,
   NutritionTrace,
+  Pengolahan,
   Recipe,
   RecipeBahan,
 } from '@/lib/nutrition/trace'
+import { bolehGantiKe } from '@/lib/nutrition/pengolahan'
 import { lookupIngredient, per100Value, type IngredientTable } from '@/lib/sources/normalise'
 
 /** Ingredients known to have no public-domain source, keyed by id. */
@@ -52,6 +54,43 @@ export interface ComputeInput {
    * authored weight for that ingredient and nothing else.
    */
   readonly beratOverrideG?: Readonly<Record<string, number>>
+  /**
+   * Cooking methods the user has chosen instead of the authored one, keyed by
+   * ingredient id and given as a USDA retention code.
+   *
+   * A code is honoured only when it belongs to the same food group as the
+   * authored code — `bolehGantiKe` decides, so a code arriving from a query
+   * string cannot apply chicken factors to spinach. A rejected code is ignored
+   * and the authored method stands.
+   *
+   * Choosing a different method invalidates the recipe's yield factor, which
+   * was published for the authored method. The cooked weight then becomes
+   * unknown and is named as a gap rather than carried over as though it still
+   * applied — invariant 3's rule, one level up.
+   */
+  readonly pengolahanOverride?: Readonly<Record<string, string>>
+}
+
+/**
+ * The cooking method actually used for an ingredient, and whether it is the one
+ * the recipe authored. Returns the authored pengolahan untouched when there is
+ * no valid override, so the default path is byte-identical to before.
+ */
+function pengolahanFor(
+  bahan: RecipeBahan,
+  overrides: Readonly<Record<string, string>> | undefined,
+): { pengolahan: Pengolahan | undefined; diganti: boolean } {
+  const authored = bahan.pengolahan
+  const wanted = overrides?.[bahan.ingredientId]
+  if (!authored?.retentionCode || wanted === undefined) return { pengolahan: authored, diganti: false }
+  if (wanted === authored.retentionCode) return { pengolahan: authored, diganti: false }
+  if (!bolehGantiKe(authored.retentionCode, wanted)) return { pengolahan: authored, diganti: false }
+  return {
+    // The yield reference is dropped, not replaced: it was published for the
+    // authored method and says nothing about this one.
+    pengolahan: { ...authored, retentionCode: wanted, yieldRef: undefined },
+    diganti: true,
+  }
 }
 
 function beratFor(bahan: RecipeBahan, overrides: Readonly<Record<string, number>> | undefined): number {
@@ -82,6 +121,7 @@ export function compute(input: ComputeInput): NutritionTrace {
 
   for (const bahan of recipe.bahan) {
     const beratG = beratFor(bahan, input.beratOverrideG)
+    const { pengolahan, diganti: pengolahanDiganti } = pengolahanFor(bahan, input.pengolahanOverride)
     mentahG += beratG
 
     const entry = lookupIngredient(table, bahan.ingredientId)
@@ -99,7 +139,7 @@ export function compute(input: ComputeInput): NutritionTrace {
       continue
     }
 
-    const yieldState = resolveYield(bahan.pengolahan)
+    const yieldState = resolveYield(pengolahan)
     const matang = beratMatangG(beratG, yieldState)
     if (matang === undefined) {
       matangTidakDiketahuiDari.push(bahan.ingredientId)
@@ -107,19 +147,19 @@ export function compute(input: ComputeInput): NutritionTrace {
         gapFaktorYieldKosong({
           ingredientId: bahan.ingredientId,
           namaId: entry.namaId,
-          pengolahanLabel: bahan.pengolahan?.labelId ?? 'diolah',
+          pengolahanLabel: pengolahan?.labelId ?? 'diolah',
         }),
       )
     } else {
       matangG += matang
     }
 
-    if (bahan.pengolahan && !bahan.pengolahan.retentionCode) {
+    if (pengolahan && !pengolahan.retentionCode) {
       gaps.push(
         gapFaktorRetensiKosong({
           ingredientId: bahan.ingredientId,
           namaId: entry.namaId,
-          pengolahanLabel: bahan.pengolahan.labelId,
+          pengolahanLabel: pengolahan.labelId,
         }),
       )
     }
@@ -134,7 +174,9 @@ export function compute(input: ComputeInput): NutritionTrace {
       provenance: bahan.provenance,
       beratMatangG: matang,
       yieldState,
-      pengolahanLabel: bahan.pengolahan?.labelId,
+      pengolahanLabel: pengolahan?.labelId,
+      retentionCode: pengolahan?.retentionCode,
+      pengolahanDiganti,
       catatan: bahan.catatan ?? entry.catatan,
     })
 
@@ -152,7 +194,7 @@ export function compute(input: ComputeInput): NutritionTrace {
         )
         continue
       }
-      const retention = resolveRetention(bahan.pengolahan, nutrient.id)
+      const retention = resolveRetention(pengolahan, nutrient.id)
       const total = (per100 / 100) * beratG * retentionMultiplier(retention)
       contributionsByNutrient.get(nutrient.id)?.push({
         ingredientId: entry.id,

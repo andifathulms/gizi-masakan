@@ -31,14 +31,15 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
   /* One piece of state for the whole plate, mirrored in the query string so a
      view survives a refresh and can be sent to someone else. */
   const [view, setView] = usePlateState(recipe.bahan.map((bahan) => bahan.ingredientId))
-  const { nutrientId, perPorsiView, kelompokId, beratOverrideG } = view
+  const { nutrientId, perPorsiView, kelompokId, beratOverrideG, pengolahanOverride } = view
 
   const trace = useMemo(
-    () => compute({ recipe, table, unmatched, beratOverrideG }),
-    [recipe, beratOverrideG],
+    () => compute({ recipe, table, unmatched, beratOverrideG, pengolahanOverride }),
+    [recipe, beratOverrideG, pengolahanOverride],
   )
 
-  const edited = Object.keys(beratOverrideG).length > 0
+  const edited =
+    Object.keys(beratOverrideG).length > 0 || Object.keys(pengolahanOverride).length > 0
   const scale = perPorsiView ? 1 / trace.porsi : 1
 
   /* Editing a weight, switching nutrient, or switching per-portion rewrites
@@ -170,7 +171,11 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
             beratOverrideG: { ...beratOverrideG, [ingredientId]: beratG },
           })
         }
-        onReset={() => setView({ beratOverrideG: {} })}
+        pengolahanOverride={pengolahanOverride}
+        onPengolahanChange={(ingredientId, retentionCode) =>
+          setView({ pengolahanOverride: { ...pengolahanOverride, [ingredientId]: retentionCode } })
+        }
+        onReset={() => setView({ beratOverrideG: {}, pengolahanOverride: {} })}
       />
 
       <ResepTersimpan

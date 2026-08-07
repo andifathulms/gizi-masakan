@@ -110,6 +110,30 @@ describe('serialisePlateState', () => {
   })
 })
 
+describe('cooking method', () => {
+  it('reads a method that exists in the alternatives table', () => {
+    expect(parsePlateState('?m=tempe:0501').pengolahanOverride).toEqual({ tempe: '0501' })
+  })
+
+  it('drops a code that is in no food group, rather than passing it through', () => {
+    expect(parsePlateState('?m=tempe:9999').pengolahanOverride).toEqual({})
+    expect(parsePlateState('?m=tempe:').pengolahanOverride).toEqual({})
+  })
+
+  it('drops an ingredient id that could not have come from a recipe', () => {
+    expect(parsePlateState('?m=<script>:0501').pengolahanOverride).toEqual({})
+  })
+
+  it('round-trips and sorts', () => {
+    const state: PlateState = {
+      ...PLATE_DEFAULT,
+      pengolahanOverride: { tempe: '0501', ayam: '0856' },
+    }
+    expect(serialisePlateState(state)).toBe('m=ayam:0856,tempe:0501')
+    expect(parsePlateState(serialisePlateState(state))).toEqual(state)
+  })
+})
+
 describe('round trip', () => {
   const cases: PlateState[] = [
     PLATE_DEFAULT,
@@ -122,6 +146,7 @@ describe('round trip', () => {
       perPorsiView: false,
       kelompokId: OTHER_KELOMPOK.id,
       beratOverrideG: { santan: 100 },
+      pengolahanOverride: {},
     },
   ]
 
@@ -135,6 +160,7 @@ describe('round trip', () => {
       perPorsiView: false,
       kelompokId: OTHER_KELOMPOK.id,
       beratOverrideG: { tempe: 75, santan: 100 },
+      pengolahanOverride: {},
     }
     const first = serialisePlateState(state)
     for (let i = 0; i < 5; i += 1) expect(serialisePlateState(state)).toBe(first)

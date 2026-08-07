@@ -96,6 +96,11 @@ export interface Copy {
     readonly diedit: string
     readonly perkiraan: string
     readonly ditimbang: string
+    /** The cooking-method choice — the assumption the reader could not touch. */
+    readonly caraMasak: string
+    readonly caraMasakAsli: string
+    readonly caraMasakDiganti: string
+    readonly caraMasakPenjelasan: string
   }
   readonly gaps: {
     readonly judul: string
@@ -224,6 +229,11 @@ const ID: Copy = {
     diedit: 'diubah',
     perkiraan: 'perkiraan, belum ditimbang',
     ditimbang: 'ditimbang',
+    caraMasak: 'Cara masak',
+    caraMasakAsli: 'seperti di resep',
+    caraMasakDiganti: 'diganti — berat matang jadi tidak diketahui',
+    caraMasakPenjelasan:
+      'Cara masak menentukan faktor retensi, jadi mengubahnya mengubah angka gizinya. Pilihannya adalah operasi USDA untuk kelompok bahan yang sama; faktor yield resep ini hanya berlaku untuk cara masak aslinya, jadi kalau diganti berat matangnya jadi tidak diketahui dan disebut sebagai kekosongan.',
   },
   gaps: {
     judul: 'Yang tidak terhitung',
@@ -350,6 +360,11 @@ const EN: Copy = {
     diedit: 'edited',
     perkiraan: 'estimate, not weighed',
     ditimbang: 'weighed',
+    caraMasak: 'Cooking method',
+    caraMasakAsli: 'as the recipe has it',
+    caraMasakDiganti: 'changed — cooked weight now unknown',
+    caraMasakPenjelasan:
+      'The cooking method selects the retention factor, so changing it changes the nutrition. The choices are USDA operations for the same food group; this recipe\u2019s yield factor was published for the original method, so changing it leaves the cooked weight unknown and named as a gap.',
   },
   gaps: {
     judul: 'What is not counted',

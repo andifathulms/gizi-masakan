@@ -176,6 +176,10 @@ export interface BahanTrace {
   readonly beratMatangG: number | undefined
   readonly yieldState: YieldState
   readonly pengolahanLabel: string | undefined
+  /** The USDA retention code actually used, authored or chosen by the reader. */
+  readonly retentionCode: string | undefined
+  /** True when the reader picked a method other than the one the recipe authored. */
+  readonly pengolahanDiganti: boolean
   readonly catatan: string | undefined
 }
 

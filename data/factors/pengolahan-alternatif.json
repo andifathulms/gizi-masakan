@@ -1,0 +1,419 @@
+{
+  "$comment": "Cooking methods offered as alternatives to the one a recipe authored, so a reader can ask \"what if this were boiled instead of fried\" and get an answer rather than a paragraph. PRD §6.1 makes the recipe editable because the assumption is the largest source of variance; the method is the second largest after the grams, and until now it was the one assumption the reader could not touch.",
+  "basis": "Every operation below is a real row in the USDA retention table, cited and transcribed in data/factors/retention.json. What is authored here is only the grouping: which operations are a sensible choice for the same ingredient. That grouping follows the food groups the USDA table itself uses in its descriptions — EGGS, CHICKEN, VEG,GREENS and so on — and no operation appears in more than one group. It is a judgement about which questions are worth asking, not a nutritional claim: the numbers all come from USDA.",
+  "catatan": "Memilih cara masak yang berbeda dari yang ditulis resep membuat faktor yield resep itu tidak berlaku lagi, jadi berat matangnya jadi tidak diketahui dan disebut sebagai kekosongan. Itu jujur: faktor yield-nya untuk cara masak yang tadi, bukan yang baru.",
+  "recordedOn": "2026-08-07",
+  "kelompok": [
+    {
+      "id": "telur",
+      "labelId": "Telur",
+      "labelEn": "Eggs",
+      "operasi": [
+        {
+          "code": "0101",
+          "description": "EGGS,BAKED"
+        },
+        {
+          "code": "0103",
+          "description": "EGGS,FRIED,SCRAMBLED"
+        },
+        {
+          "code": "0105",
+          "description": "EGGS,HARD COOKED"
+        },
+        {
+          "code": "0107",
+          "description": "EGGS,POACHED"
+        }
+      ]
+    },
+    {
+      "id": "buah",
+      "labelId": "Buah segar",
+      "labelEn": "Fresh fruit",
+      "operasi": [
+        {
+          "code": "0151",
+          "description": "FRUITS,FRESH(NOT CITRUS),BAKED"
+        },
+        {
+          "code": "0152",
+          "description": "FRUITS,FRESH(NOT CITRUS),BROILED"
+        },
+        {
+          "code": "0153",
+          "description": "FRUITS,FRESH(NOT CITRUS),SAUTEED"
+        },
+        {
+          "code": "0155",
+          "description": "FRUITS,FRESH(NOT CITRUS),STEWED"
+        }
+      ]
+    },
+    {
+      "id": "mi",
+      "labelId": "Mi dan pasta",
+      "labelEn": "Noodles and pasta",
+      "operasi": [
+        {
+          "code": "0380",
+          "description": "PASTA,BAKED"
+        },
+        {
+          "code": "0381",
+          "description": "PASTA,BOILED,DRAINED"
+        },
+        {
+          "code": "0384",
+          "description": "PASTA,BOILED,NOT DRAINED"
+        }
+      ]
+    },
+    {
+      "id": "nasi",
+      "labelId": "Beras",
+      "labelEn": "Rice",
+      "operasi": [
+        {
+          "code": "0431",
+          "description": "RICE,WHITE/BROWN,COOKED,DRAINED"
+        },
+        {
+          "code": "0432",
+          "description": "RICE,WHITE/BROWN,COOKED,WATER USED"
+        },
+        {
+          "code": "0433",
+          "description": "RICE,WHITE/BROWN,SAUTEED+SIMMERED"
+        }
+      ]
+    },
+    {
+      "id": "kacang-cepat",
+      "labelId": "Kacang, masak 15–20 menit",
+      "labelEn": "Legumes, 15–20 min",
+      "operasi": [
+        {
+          "code": "0501",
+          "description": "LEGUMES,CKD 15/20MIN,BOILED,DRAINED"
+        },
+        {
+          "code": "0502",
+          "description": "LEGUMES,CKD 15/20MIN,BLD,WATER USED"
+        },
+        {
+          "code": "0505",
+          "description": "LEGUMES,CKD 15/20MIN,BLD,DRND,FRIED"
+        },
+        {
+          "code": "0506",
+          "description": "LEGUMES,CKD 15/20MIN,BOILED+FRIED"
+        }
+      ]
+    },
+    {
+      "id": "kacang-lama",
+      "labelId": "Kacang, masak 45–75 menit",
+      "labelEn": "Legumes, 45–75 min",
+      "operasi": [
+        {
+          "code": "0521",
+          "description": "LEGUMES,CKD 45/75MIN,BOILED,DRND"
+        },
+        {
+          "code": "0522",
+          "description": "LEGUMES,CKD 45/75MIN,BLD,WATER USED"
+        },
+        {
+          "code": "0525",
+          "description": "LEGUMES,CKD 45/75MIN,BLD,DRND,FRIED"
+        },
+        {
+          "code": "0526",
+          "description": "LEGUMES,CKD 45/75MIN,BOILED+FRIED"
+        }
+      ]
+    },
+    {
+      "id": "sapi-iris",
+      "labelId": "Daging sapi, diiris",
+      "labelEn": "Beef, sliced",
+      "operasi": [
+        {
+          "code": "0701",
+          "description": "BEEF,SLICES,BRWN,SIMMER,WO/DRIPPING"
+        },
+        {
+          "code": "0702",
+          "description": "BEEF,SLICES,BRWN,SIMMER,W/DRIPPINGS"
+        },
+        {
+          "code": "0703",
+          "description": "BEEF,SLICES,SIMMERED,WO/DRIPPINGS"
+        },
+        {
+          "code": "0704",
+          "description": "BEEF,SLICES,SIMMERED,W/DRIPPINGS"
+        }
+      ]
+    },
+    {
+      "id": "sapi-blok",
+      "labelId": "Daging sapi, potongan besar",
+      "labelEn": "Beef, roasting cut",
+      "operasi": [
+        {
+          "code": "0651",
+          "description": "BEEF,ROAST,BRAISED,WO/DRIPPINGS"
+        },
+        {
+          "code": "0652",
+          "description": "BEEF,ROAST,BRAISED,W/DRIPPINGS"
+        },
+        {
+          "code": "0653",
+          "description": "BEEF,ROAST,SIMMERED,WO/DRIPPINGS"
+        },
+        {
+          "code": "0654",
+          "description": "BEEF,ROAST,SIMMERED,W/DRIP"
+        }
+      ]
+    },
+    {
+      "id": "ayam",
+      "labelId": "Ayam",
+      "labelEn": "Chicken",
+      "operasi": [
+        {
+          "code": "0801",
+          "description": "CHICKEN,BROILED"
+        },
+        {
+          "code": "0803",
+          "description": "CHICKEN,FRIED,WO/COATING"
+        },
+        {
+          "code": "0805",
+          "description": "CHICKEN,ROASTED"
+        },
+        {
+          "code": "0855",
+          "description": "CHICKEN,SIMMERED,WO/DRIPPINGS"
+        },
+        {
+          "code": "0856",
+          "description": "CHICKEN,SIMMERED,W/DRIPPINGS"
+        }
+      ]
+    },
+    {
+      "id": "ikan-kurus",
+      "labelId": "Ikan berlemak rendah",
+      "labelEn": "Fish, under 5% fat",
+      "operasi": [
+        {
+          "code": "2301",
+          "description": "FINFISH,<5%FAT,BAKED,WO/DRIPPINGS"
+        },
+        {
+          "code": "2305",
+          "description": "FINFISH,<5%FAT,BROILED,WO/DRIPPINGS"
+        },
+        {
+          "code": "2309",
+          "description": "FINFISH,<5%FAT,FRIED,WO/COATING"
+        },
+        {
+          "code": "2401",
+          "description": "FINFISH,<5%FAT,SIMMERED,WO/DRIPPING"
+        }
+      ]
+    },
+    {
+      "id": "ikan-berlemak",
+      "labelId": "Ikan berlemak",
+      "labelEn": "Fish, over 5% fat",
+      "operasi": [
+        {
+          "code": "2451",
+          "description": "FINFISH,>5%FAT,BAKED,WO/DRIPPINGS"
+        },
+        {
+          "code": "2455",
+          "description": "FINFISH,>5%FAT,BROILED,WO/DRIPPNG"
+        },
+        {
+          "code": "2459",
+          "description": "FINFISH,>5%FAT,FRIED,WO/COATING"
+        },
+        {
+          "code": "2551",
+          "description": "FINFISH,>5%FAT,SIMMERED,WO/DRIP"
+        },
+        {
+          "code": "2552",
+          "description": "FINFISH,>5%FAT,SIMMERED,W/DRIP"
+        }
+      ]
+    },
+    {
+      "id": "udang",
+      "labelId": "Udang dan kerang",
+      "labelEn": "Shellfish",
+      "operasi": [
+        {
+          "code": "2753",
+          "description": "SHELLFISH,WO/SHELL,BROILED"
+        },
+        {
+          "code": "2755",
+          "description": "SHELLFISH,WO/SHELL,FRIED,WO/COATING"
+        },
+        {
+          "code": "2761",
+          "description": "SHELLFISH,WO/SHELL,SIMMERED,WO/DRIP"
+        },
+        {
+          "code": "2770",
+          "description": "SHELLFISH,WO/SHELL,STEAMED"
+        }
+      ]
+    },
+    {
+      "id": "sayur-daun",
+      "labelId": "Sayur daun",
+      "labelEn": "Leafy vegetables",
+      "operasi": [
+        {
+          "code": "3004",
+          "description": "VEG,GREENS,BOILD,LITTLE WATER DRAIN"
+        },
+        {
+          "code": "3005",
+          "description": "VEG,GREENS,BOILED,WATER COVER DRAIN"
+        },
+        {
+          "code": "3006",
+          "description": "VEG,GREENS,BOILED,WATER USED"
+        },
+        {
+          "code": "3015",
+          "description": "VEG,GREENS,STIR FRY"
+        }
+      ]
+    },
+    {
+      "id": "kentang",
+      "labelId": "Kentang",
+      "labelEn": "Potatoes",
+      "operasi": [
+        {
+          "code": "3307",
+          "description": "POTATOES,BOILED IN SKIN"
+        },
+        {
+          "code": "3308",
+          "description": "POTATOES,BOILED(PARED)DRAIN"
+        },
+        {
+          "code": "3309",
+          "description": "POTATOES,BOILED(PARED) WATER USED"
+        },
+        {
+          "code": "3315",
+          "description": "POTATOES,FRIED"
+        },
+        {
+          "code": "3316",
+          "description": "POTATOES,MASHED"
+        }
+      ]
+    },
+    {
+      "id": "ubi",
+      "labelId": "Ubi jalar",
+      "labelEn": "Sweet potatoes",
+      "operasi": [
+        {
+          "code": "3707",
+          "description": "SWEETPOTATOES,BOILED IN SKIN"
+        },
+        {
+          "code": "3708",
+          "description": "SWEETPOTATOES,BOILED (PARED)DRAINED"
+        },
+        {
+          "code": "3709",
+          "description": "SWEETPOTATOES,BLD(PARED)WATER USED"
+        },
+        {
+          "code": "3710",
+          "description": "SWEETPOTATOES,FRIED"
+        }
+      ]
+    },
+    {
+      "id": "sayur-akar",
+      "labelId": "Sayur umbi dan akar",
+      "labelEn": "Root vegetables",
+      "operasi": [
+        {
+          "code": "3454",
+          "description": "VEG,ROOTS,ETC,BLD,DRAIND,LITTLE WTR"
+        },
+        {
+          "code": "3455",
+          "description": "VEG,ROOTS,ETC,BLD,DRAIND,WTR COVER"
+        },
+        {
+          "code": "3456",
+          "description": "VEG,ROOTS,ETC,BOILED,WATER USED"
+        },
+        {
+          "code": "3460",
+          "description": "VEG,ROOTS,ETC,SAUTEED"
+        },
+        {
+          "code": "3464",
+          "description": "VEG,ROOTS,ETC,STEAMED"
+        },
+        {
+          "code": "3465",
+          "description": "VEG,ROOTS,ETC,STIR FRY"
+        }
+      ]
+    },
+    {
+      "id": "sayur-lain",
+      "labelId": "Sayur lain",
+      "labelEn": "Other vegetables",
+      "operasi": [
+        {
+          "code": "3774",
+          "description": "VEG,OTHER,BLD,LITTLE WATER,DRAINED"
+        },
+        {
+          "code": "3775",
+          "description": "VEG,OTHER,BLD,WATER COVER,DRAINED"
+        },
+        {
+          "code": "3776",
+          "description": "VEG,OTHER,BLD,WATER USED"
+        },
+        {
+          "code": "3780",
+          "description": "VEG,OTHER,FRIED"
+        },
+        {
+          "code": "3784",
+          "description": "VEG,OTHER,STEAMED"
+        },
+        {
+          "code": "3785",
+          "description": "VEG,OTHER,STIR FRY"
+        }
+      ]
+    }
+  ]
+}

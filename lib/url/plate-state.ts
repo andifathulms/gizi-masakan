@@ -2,7 +2,8 @@
  * The plate's view state, encoded in the query string.
  *
  * Everything the reader can change on a dish page — the nutrient the bars rank
- * by, per-portion or whole-recipe, the AKG group, and any edited gram weight —
+ * by, per-portion or whole-recipe, the AKG group, any edited gram weight, and
+ * any cooking method chosen over the authored one —
  * lives here so it survives a refresh and can be sent to someone else. PRD §6.1
  * turns on "change the santan to 100 g and watch it move"; a result that cannot
  * be reloaded or shared is only half of that.
@@ -17,11 +18,13 @@
  *   &v=resep                      whole recipe; absent means per portion
  *   &g=perempuan-19-29            AKG age and sex group
  *   &b=santan:100,tempe:75        edited gram weights
+ *   &m=tempe:0501                 cooking methods chosen over the authored one
  *
  * A parameter is written only when it differs from the default, so an untouched
  * plate has a clean URL and a shared one carries exactly what was changed.
  */
 import { isKnownNutrient } from '@/lib/nutrition/nutrients'
+import { kelompokUntukKode } from '@/lib/nutrition/pengolahan'
 import { findKelompok, KELOMPOK_AWAL } from '@/lib/akg'
 
 export interface PlateState {
@@ -29,6 +32,8 @@ export interface PlateState {
   readonly perPorsiView: boolean
   readonly kelompokId: string
   readonly beratOverrideG: Readonly<Record<string, number>>
+  /** Cooking methods chosen instead of the authored one, as USDA codes. */
+  readonly pengolahanOverride: Readonly<Record<string, string>>
 }
 
 export const PLATE_DEFAULT: PlateState = {
@@ -36,6 +41,7 @@ export const PLATE_DEFAULT: PlateState = {
   perPorsiView: true,
   kelompokId: KELOMPOK_AWAL,
   beratOverrideG: {},
+  pengolahanOverride: {},
 }
 
 const PARAM = {
@@ -43,6 +49,7 @@ const PARAM = {
   view: 'v',
   kelompok: 'g',
   berat: 'b',
+  metode: 'm',
 } as const
 
 /** Ingredient ids are kebab-case; anything else did not come from a recipe. */
@@ -77,6 +84,27 @@ function parseBerat(raw: string | null): Record<string, number> {
 }
 
 /**
+ * Cooking-method codes are only accepted when they are a real transcribed USDA
+ * operation that belongs to some food group. compute checks again, against the
+ * ingredient's own authored method, before honouring one — this is the cheap
+ * first pass, not the security boundary.
+ */
+function parseMetode(raw: string | null): Record<string, string> {
+  if (!raw) return {}
+  const result: Record<string, string> = {}
+  for (const pair of raw.split(',')) {
+    const separator = pair.indexOf(':')
+    if (separator < 1) continue
+    const ingredientId = pair.slice(0, separator)
+    const code = pair.slice(separator + 1)
+    if (!INGREDIENT_ID.test(ingredientId)) continue
+    if (!kelompokUntukKode(code)) continue
+    result[ingredientId] = code
+  }
+  return result
+}
+
+/**
  * Read state out of a query string. Every value is validated against the same
  * catalogues the UI renders from — an unknown nutrient id or AKG group falls
  * back to the default rather than being passed through, so a malformed or
@@ -95,6 +123,7 @@ export function parsePlateState(search: string): PlateState {
     kelompokId:
       kelompokId && findKelompok(kelompokId) ? kelompokId : PLATE_DEFAULT.kelompokId,
     beratOverrideG: parseBerat(params.get(PARAM.berat)),
+    pengolahanOverride: parseMetode(params.get(PARAM.metode)),
   }
 }
 
@@ -122,6 +151,14 @@ export function serialisePlateState(state: PlateState): string {
     params.set(
       PARAM.berat,
       ingredientIds.map((id) => `${id}:${state.beratOverrideG[id]}`).join(','),
+    )
+  }
+
+  const metodeIds = Object.keys(state.pengolahanOverride).sort()
+  if (metodeIds.length > 0) {
+    params.set(
+      PARAM.metode,
+      metodeIds.map((id) => `${id}:${state.pengolahanOverride[id]}`).join(','),
     )
   }
 

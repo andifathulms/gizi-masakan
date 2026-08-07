@@ -12,6 +12,7 @@
  */
 import { useRef } from 'react'
 import { NUTRIENTS } from '@/lib/nutrition/nutrients'
+import { alternatifUntuk } from '@/lib/nutrition/pengolahan'
 import type { NutritionTrace, Recipe } from '@/lib/nutrition/trace'
 import { copyFor, type Locale } from '@/lib/i18n'
 import { formatGram, formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
@@ -24,6 +25,8 @@ interface Props {
   onNutrientChange: (nutrientId: string) => void
   beratOverrideG: Record<string, number>
   onBeratChange: (ingredientId: string, beratG: number) => void
+  pengolahanOverride: Record<string, string>
+  onPengolahanChange: (ingredientId: string, retentionCode: string) => void
   onReset: () => void
 }
 
@@ -35,6 +38,8 @@ export function StripResep({
   onNutrientChange,
   beratOverrideG,
   onBeratChange,
+  pengolahanOverride,
+  onPengolahanChange,
   onReset,
 }: Props) {
   const copy = copyFor(locale)
@@ -44,7 +49,8 @@ export function StripResep({
   const judulRef = useRef<HTMLHeadingElement>(null)
   const total = trace.totals.find((entry) => entry.nutrientId === nutrientId)!
   const largest = total.contributions.reduce((max, c) => Math.max(max, c.total), 0)
-  const edited = Object.keys(beratOverrideG).length > 0
+  const edited =
+    Object.keys(beratOverrideG).length > 0 || Object.keys(pengolahanOverride).length > 0
 
   // Rows in recipe order — the order you would cook in, not a ranking. The bar
   // lengths carry the ranking.
@@ -117,7 +123,46 @@ export function StripResep({
                   <span lang="id" className={missing ? 'text-chip' : undefined}>
                     {known?.namaId ?? missing?.namaId ?? bahan.ingredientId}
                   </span>
-                  {known?.pengolahanLabel && (
+                  {known?.pengolahanLabel && !known.retentionCode && (
+                    <span className="block text-xs text-chip">{known.pengolahanLabel}</span>
+                  )}
+                  {/* The second-largest assumption after the grams, and until
+                      now the one the reader could not touch. Only rendered
+                      where USDA publishes more than one operation for this
+                      kind of ingredient. */}
+                  {known?.retentionCode && alternatifUntuk(known.retentionCode).length > 1 && (
+                    <label className="mt-1 block">
+                      <span className="sr-only">
+                        {known.namaId} — {copy.strip.caraMasak}
+                      </span>
+                      {/* The option text is the literal USDA operation name,
+                          in English and in the source's own capitalisation, so
+                          it can be found in the retention table. That is the
+                          citation; lang marks it for a screen reader. */}
+                      <select
+                        lang="en"
+                        value={known.retentionCode}
+                        onChange={(event) =>
+                          onPengolahanChange(bahan.ingredientId, event.target.value)
+                        }
+                        className={`max-w-full rounded border border-rim/30 bg-enamel px-1 py-0.5 text-xs ${
+                          known.pengolahanDiganti ? 'text-edited' : 'text-ink-soft'
+                        }`}
+                      >
+                        {alternatifUntuk(known.retentionCode).map((operasi) => (
+                          <option key={operasi.code} value={operasi.code}>
+                            {operasi.description}
+                          </option>
+                        ))}
+                      </select>
+                      <span className="block text-xs text-chip">
+                        {known.pengolahanDiganti
+                          ? copy.strip.caraMasakDiganti
+                          : `${known.pengolahanLabel} — ${copy.strip.caraMasakAsli}`}
+                      </span>
+                    </label>
+                  )}
+                  {known?.retentionCode && alternatifUntuk(known.retentionCode).length <= 1 && (
                     <span className="block text-xs text-chip">{known.pengolahanLabel}</span>
                   )}
                   {missing && (
@@ -191,7 +236,11 @@ export function StripResep({
         </tbody>
       </table>
 
-      <p className="mt-3 text-sm text-ink-soft">
+      {/* Said next to the control, because the consequence of using it —
+          losing the cooked weight — is not obvious. */}
+      <p className="mt-3 max-w-prose text-sm text-ink-soft">{copy.strip.caraMasakPenjelasan}</p>
+
+      <p className="mt-2 text-sm text-ink-soft">
         {locale === 'en'
           ? 'Weights in terracotta are estimates or your edits, not measurements.'
           : 'Berat berwarna terakota adalah perkiraan atau hasil suntingan Anda, bukan hasil timbangan.'}{' '}

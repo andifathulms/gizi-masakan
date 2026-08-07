@@ -25,6 +25,11 @@ import { join } from 'node:path'
 import { checkSource, manifest } from '../lib/sources/manifest'
 import { findUnmatched, loadFdcTable, unmatchedIngredients } from '../lib/sources/fdc/load'
 import { RECIPES } from '../lib/resep'
+import {
+  kelompokUntukKode,
+  kodeRetensiAda,
+  PENGOLAHAN_KELOMPOK,
+} from '../lib/nutrition/pengolahan'
 import { factors } from '../lib/nutrition/factors'
 import { TAKARAN, urtStatus } from '../lib/portion'
 import { AKG_CITATION, AKG_KELOMPOK } from '../lib/akg'
@@ -242,6 +247,39 @@ check('AKG values carry their citation, and no body weight', () => {
       !serialised.toLowerCase().includes(banned.toLowerCase()),
       `The AKG table carries "${banned}". Weight and BMI do not belong in the model (invariant 12).`,
     )
+  }
+})
+
+/* 6b — every authored cooking method can be reasoned about ---------------- */
+
+check('every retention code a recipe authors belongs to a cooking-method group', () => {
+  for (const recipe of RECIPES) {
+    for (const bahan of recipe.bahan) {
+      const code = bahan.pengolahan?.retentionCode
+      if (!code) continue
+      assert(
+        kelompokUntukKode(code) !== undefined,
+        `Recipe "${recipe.id}" uses retention code "${code}" for "${bahan.ingredientId}", which is in no group in data/factors/pengolahan-alternatif.json. Add it to the right group, or the reader is offered no alternative for a method that has one.`,
+      )
+    }
+  }
+})
+
+check('every cooking-method alternative is a real transcribed USDA operation', () => {
+  const seen = new Map<string, string>()
+  for (const kelompok of PENGOLAHAN_KELOMPOK) {
+    for (const operasi of kelompok.operasi) {
+      assert(
+        kodeRetensiAda(operasi.code),
+        `Group "${kelompok.id}" offers retention code "${operasi.code}", which is not in data/factors/retention.json.`,
+      )
+      const already = seen.get(operasi.code)
+      assert(
+        already === undefined,
+        `Retention code "${operasi.code}" is in both "${already}" and "${kelompok.id}". A code must belong to one food group only, or swapping it means two different things.`,
+      )
+      seen.set(operasi.code, kelompok.id)
+    }
   }
 })
 
