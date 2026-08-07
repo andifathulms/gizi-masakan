@@ -6,6 +6,7 @@ import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
 import { formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
 import { DaftarMasakan, type KartuMasakan } from '@/components/masakan/DaftarMasakan'
 import { ContohBerjalan } from '@/components/masakan/ContohBerjalan'
+import { dataContoh } from '@/lib/contoh-build'
 import { pageMetadata } from '@/lib/metadata'
 
 /**
@@ -60,6 +61,10 @@ export default function MasakanPage({ params }: { params: { locale: string } }) 
     }
   })
 
+  /* Eleven slider outcomes, computed here during the export rather than in the
+     browser — see lib/contoh.ts. */
+  const contoh = dataContoh(locale)
+
   /* The colour that carries each claim, so the strip doubles as the legend for
      the palette the reader is about to meet on a dish page — PRD §9. */
   const poinWarna = ['border-edited', 'border-chip', 'border-adequate']
@@ -84,7 +89,7 @@ export default function MasakanPage({ params }: { params: { locale: string } }) 
       {/* The proposition, performed. It sits above the dish list because it is
           what the list is for — a reader who scrolls no further has still seen
           one number derived end to end. */}
-      <ContohBerjalan locale={locale} />
+      {contoh && <ContohBerjalan locale={locale} data={contoh} />}
 
       <h2 className="mt-section font-display text-xl text-rim">
         {copy.nav.masakan}
