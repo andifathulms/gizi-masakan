@@ -64,7 +64,7 @@ export default function MasakanPage({ params }: { params: { locale: string } }) 
                 <li key={recipe.id}>
                   <Link
                     href={`/${locale}/masakan/${recipe.id}/`}
-                    className="plate-card block h-full px-4 py-4 transition-colors hover:bg-enamel-deep"
+                    className="list-card block h-full px-4 py-4 transition-colors hover:border-rim hover:bg-enamel-deep"
                   >
                     <span className="font-display text-md font-medium text-rim">
                       {recipe.namaId}

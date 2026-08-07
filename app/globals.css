@@ -113,9 +113,17 @@
     background-attachment: local, local, scroll, scroll;
   }
 
-  /* The rim motif is a real border on the plate card, used nowhere else. */
+  /* The rim motif is a real border on the plate card, used nowhere else —
+     PRD §9, "not applied decoratively elsewhere". It belongs to the dish view
+     and to nothing that merely links to one. */
   .plate-card {
     @apply rounded-plate border-2 border-rim bg-enamel;
     box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.5);
+  }
+
+  /* An index card is a link to a plate, not a plate. Single hairline rule, no
+     rim, no inset highlight — so the 2px rim still means "this is the dish". */
+  .list-card {
+    @apply rounded-plate border border-rim/30 bg-enamel;
   }
 }
