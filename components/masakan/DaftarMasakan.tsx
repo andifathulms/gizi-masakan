@@ -69,14 +69,14 @@ export function DaftarMasakan({
   return (
     <div>
       <div className="mt-4 flex flex-wrap items-baseline gap-x-4 gap-y-2">
-        <label className="flex flex-1 items-center gap-2">
+        <label className="w-full max-w-sm">
           <span className="sr-only">{copy.cari.label}</span>
           <input
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={copy.cari.placeholder}
-            className="w-full max-w-sm rounded border border-rim/40 bg-enamel px-3 py-2 text-base placeholder:text-ink-soft"
+            className="w-full rounded border border-rim/40 bg-enamel px-3 py-2 text-base placeholder:text-ink-soft"
           />
         </label>
         <p aria-live="polite" className="text-sm text-ink-soft">

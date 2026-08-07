@@ -107,9 +107,11 @@
     outline-offset: 2px;
   }
 
-  /* The segmented control hides its radios and styles the labels, so the
-     indicator has to follow the checked input out to its label. */
-  label:has(> input:focus-visible) {
+  /* Only where the input itself is visually hidden and the label is the
+     control — the segmented per-portion switch. Applying this to every label
+     that wraps an input drew a second, wider ring around the search box, which
+     already has its own visible border and its own indicator. */
+  .pilihan:has(> input:focus-visible) {
     outline: 2px solid rgb(var(--rim));
     outline-offset: 2px;
   }

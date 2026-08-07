@@ -84,7 +84,7 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
             {[true, false].map((perPorsi) => (
               <label
                 key={String(perPorsi)}
-                className={`cursor-pointer border border-rim/40 px-3 py-1 ${
+                className={`pilihan cursor-pointer border border-rim/40 px-3 py-1 ${
                   perPorsi ? 'rounded-l' : 'rounded-r'
                 } ${perPorsiView === perPorsi ? 'bg-rim text-enamel' : 'text-rim'}`}
               >
