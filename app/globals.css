@@ -86,6 +86,33 @@
 }
 
 @layer components {
+  /**
+   * A horizontally scrollable table that shows it has more to the side.
+   *
+   * The trace and ingredient tables are wider than a phone, and content past
+   * the edge was cut with no cue — including the FDC id and retention columns,
+   * which are the traceability claim. The classic background-attachment
+   * technique: two enamel covers pinned to the content (local) hide two ink
+   * shadows pinned to the viewport (scroll), so a shadow only shows on the side
+   * that has more. No JavaScript, no scroll listener.
+   */
+  .scroll-x {
+    overflow-x: auto;
+    background:
+      linear-gradient(to right, rgb(var(--enamel)) 30%, rgb(var(--enamel) / 0)) left center,
+      linear-gradient(to left, rgb(var(--enamel)) 30%, rgb(var(--enamel) / 0)) right center,
+      radial-gradient(farthest-side at 0 50%, rgb(var(--ink) / 0.2), rgb(var(--ink) / 0)) left center,
+      radial-gradient(farthest-side at 100% 50%, rgb(var(--ink) / 0.2), rgb(var(--ink) / 0)) right
+        center;
+    background-repeat: no-repeat;
+    background-size:
+      40px 100%,
+      40px 100%,
+      14px 100%,
+      14px 100%;
+    background-attachment: local, local, scroll, scroll;
+  }
+
   /* The rim motif is a real border on the plate card, used nowhere else. */
   .plate-card {
     @apply rounded-plate border-2 border-rim bg-enamel;

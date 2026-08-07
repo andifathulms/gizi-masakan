@@ -46,7 +46,7 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
       {[...byKategori.entries()].map(([kategori, list]) => (
         <section key={kategori} className="mt-8">
           <h2 className="font-display text-lg capitalize text-rim">{kategori}</h2>
-          <div className="mt-2 overflow-x-auto">
+          <div className="scroll-x mt-2">
             <table className="w-full min-w-[42rem] text-sm">
               <thead>
                 <tr className="border-b border-rim/25 text-left text-ink-soft">

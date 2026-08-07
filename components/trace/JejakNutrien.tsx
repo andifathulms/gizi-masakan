@@ -31,7 +31,7 @@ export function JejakNutrien({
         {copy.trace.judul} — {nutrientLabel(nutrientId, locale)}
       </h2>
 
-      <div className="mt-3 overflow-x-auto">
+      <div className="scroll-x mt-3">
         <table className="w-full min-w-[46rem] text-sm">
           <thead>
             <tr className="border-b border-rim/25 text-left text-ink-soft">
