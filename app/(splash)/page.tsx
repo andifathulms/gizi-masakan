@@ -17,7 +17,7 @@ export default function RootPage() {
   return (
     <main className="mx-auto flex min-h-screen max-w-prose flex-col justify-center gap-3 px-gutter">
       <meta httpEquiv="refresh" content={`0; url=${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}${HOME}`} />
-      <p className="font-display text-lg font-medium text-rim">{copy.siteName}</p>
+      <h1 className="font-display text-lg font-medium text-rim">{copy.siteName}</h1>
       <p className="text-md text-ink-soft">{copy.tagline5}</p>
       <Link href={HOME} className="text-rim underline underline-offset-4">
         Buka daftar masakan →
