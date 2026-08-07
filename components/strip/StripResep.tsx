@@ -95,146 +95,160 @@ export function StripResep({
         </div>
       </div>
 
-      <table className="mt-4 w-full text-sm">
-        <caption className="sr-only">
-          {copy.strip.judul} — {copy.strip.sumbangan}: {nutrientLabel(nutrientId, locale)}
-        </caption>
-        <thead>
-          <tr className="border-b border-rim/25 text-left text-ink-soft">
-            <th scope="col" className="py-2 font-normal">
-              {copy.strip.bahan}
-            </th>
-            <th scope="col" className="w-28 py-2 text-right font-normal">
-              {copy.strip.berat}
-            </th>
-            <th scope="col" className="py-2 pl-4 font-normal">
-              {copy.strip.sumbangan} — {nutrientLabel(nutrientId, locale)}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map(({ bahan, contribution, known, missing, beratG }) => {
-            const isEdited = beratOverrideG[bahan.ingredientId] !== undefined
-            const isEstimate = bahan.provenance === 'perkiraan'
-            const share = largest > 0 && contribution ? contribution.total / largest : 0
-            return (
-              <tr key={bahan.ingredientId} className="border-b border-rim/10 align-top">
-                <th scope="row" className="py-2 pr-3 text-left font-normal">
-                  <span lang="id" className={missing ? 'text-chip' : undefined}>
-                    {known?.namaId ?? missing?.namaId ?? bahan.ingredientId}
-                  </span>
-                  {known?.pengolahanLabel && !known.retentionCode && (
-                    <span className="block text-xs text-chip">{known.pengolahanLabel}</span>
-                  )}
-                  {/* The second-largest assumption after the grams, and until
+      {/* The same scroll region the trace and ingredient tables got. The strip
+          was left out of that pass because it fitted then; the cooking-method
+          selector added afterwards carries long USDA operation names and made
+          it wider than a phone, so the page scrolled sideways instead of the
+          table. Focusable and named for the same reason as the others: a
+          scroll container that cannot be reached by keyboard hides its own
+          content (WCAG 2.1.1), and there is no native element for it. */}
+      <div
+        className="scroll-x mt-4"
+        tabIndex={0}
+        role="region"
+        aria-label={`${copy.strip.judul} — ${nutrientLabel(nutrientId, locale)}`}
+      >
+        <table className="w-full min-w-[34rem] text-sm">
+          <caption className="sr-only">
+            {copy.strip.judul} — {copy.strip.sumbangan}: {nutrientLabel(nutrientId, locale)}
+          </caption>
+          <thead>
+            <tr className="border-b border-rim/25 text-left text-ink-soft">
+              <th scope="col" className="py-2 font-normal">
+                {copy.strip.bahan}
+              </th>
+              <th scope="col" className="w-28 py-2 text-right font-normal">
+                {copy.strip.berat}
+              </th>
+              <th scope="col" className="py-2 pl-4 font-normal">
+                {copy.strip.sumbangan} — {nutrientLabel(nutrientId, locale)}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(({ bahan, contribution, known, missing, beratG }) => {
+              const isEdited = beratOverrideG[bahan.ingredientId] !== undefined
+              const isEstimate = bahan.provenance === 'perkiraan'
+              const share = largest > 0 && contribution ? contribution.total / largest : 0
+              return (
+                <tr key={bahan.ingredientId} className="border-b border-rim/10 align-top">
+                  <th scope="row" className="py-2 pr-3 text-left font-normal">
+                    <span lang="id" className={missing ? 'text-chip' : undefined}>
+                      {known?.namaId ?? missing?.namaId ?? bahan.ingredientId}
+                    </span>
+                    {known?.pengolahanLabel && !known.retentionCode && (
+                      <span className="block text-xs text-chip">{known.pengolahanLabel}</span>
+                    )}
+                    {/* The second-largest assumption after the grams, and until
                       now the one the reader could not touch. Only rendered
                       where USDA publishes more than one operation for this
                       kind of ingredient. */}
-                  {known?.retentionCode && alternatifUntuk(known.retentionCode).length > 1 && (
-                    <label className="mt-1 block">
-                      <span className="sr-only">
-                        {known.namaId} — {copy.strip.caraMasak}
-                      </span>
-                      {/* The option text is the literal USDA operation name,
+                    {known?.retentionCode && alternatifUntuk(known.retentionCode).length > 1 && (
+                      <label className="mt-1 block">
+                        <span className="sr-only">
+                          {known.namaId} — {copy.strip.caraMasak}
+                        </span>
+                        {/* The option text is the literal USDA operation name,
                           in English and in the source's own capitalisation, so
                           it can be found in the retention table. That is the
                           citation; lang marks it for a screen reader. */}
-                      <select
-                        lang="en"
-                        value={known.retentionCode}
-                        onChange={(event) =>
-                          onPengolahanChange(bahan.ingredientId, event.target.value)
-                        }
-                        className={`max-w-full rounded border border-rim/30 bg-enamel px-1 py-0.5 text-xs ${
-                          known.pengolahanDiganti ? 'text-edited' : 'text-ink-soft'
-                        }`}
-                      >
-                        {alternatifUntuk(known.retentionCode).map((operasi) => (
-                          <option key={operasi.code} value={operasi.code}>
-                            {operasi.description}
-                          </option>
-                        ))}
-                      </select>
+                        <select
+                          lang="en"
+                          value={known.retentionCode}
+                          onChange={(event) =>
+                            onPengolahanChange(bahan.ingredientId, event.target.value)
+                          }
+                          className={`w-full max-w-[14rem] rounded border border-rim/30 bg-enamel px-1 py-0.5 text-xs ${
+                            known.pengolahanDiganti ? 'text-edited' : 'text-ink-soft'
+                          }`}
+                        >
+                          {alternatifUntuk(known.retentionCode).map((operasi) => (
+                            <option key={operasi.code} value={operasi.code}>
+                              {operasi.description}
+                            </option>
+                          ))}
+                        </select>
+                        <span className="block text-xs text-chip">
+                          {known.pengolahanDiganti
+                            ? copy.strip.caraMasakDiganti
+                            : `${known.pengolahanLabel} — ${copy.strip.caraMasakAsli}`}
+                        </span>
+                      </label>
+                    )}
+                    {known?.retentionCode && alternatifUntuk(known.retentionCode).length <= 1 && (
+                      <span className="block text-xs text-chip">{known.pengolahanLabel}</span>
+                    )}
+                    {missing && (
                       <span className="block text-xs text-chip">
-                        {known.pengolahanDiganti
-                          ? copy.strip.caraMasakDiganti
-                          : `${known.pengolahanLabel} — ${copy.strip.caraMasakAsli}`}
+                        {locale === 'en'
+                          ? 'no data — not counted'
+                          : 'tidak ada datanya — tidak dihitung'}
                       </span>
+                    )}
+                  </th>
+
+                  <td className="py-2 text-right">
+                    <label className="inline-flex items-baseline gap-1">
+                      <span className="sr-only">
+                        {known?.namaId ?? bahan.ingredientId} — {copy.strip.berat}
+                      </span>
+                      <input
+                        type="number"
+                        min={0}
+                        step={1}
+                        value={beratG}
+                        onChange={(event) => {
+                          const next = Number(event.target.value)
+                          if (Number.isFinite(next) && next >= 0)
+                            onBeratChange(bahan.ingredientId, next)
+                        }}
+                        className={`w-16 rounded border border-rim/30 bg-enamel px-1 py-0.5 text-right font-mono ${
+                          isEdited || isEstimate ? 'text-edited' : ''
+                        }`}
+                      />
+                      <span className="text-chip">g</span>
                     </label>
-                  )}
-                  {known?.retentionCode && alternatifUntuk(known.retentionCode).length <= 1 && (
-                    <span className="block text-xs text-chip">{known.pengolahanLabel}</span>
-                  )}
-                  {missing && (
                     <span className="block text-xs text-chip">
-                      {locale === 'en'
-                        ? 'no data — not counted'
-                        : 'tidak ada datanya — tidak dihitung'}
+                      {isEdited
+                        ? copy.strip.diedit
+                        : isEstimate
+                          ? copy.strip.perkiraan
+                          : copy.strip.ditimbang}
                     </span>
-                  )}
-                </th>
+                  </td>
 
-                <td className="py-2 text-right">
-                  <label className="inline-flex items-baseline gap-1">
-                    <span className="sr-only">
-                      {known?.namaId ?? bahan.ingredientId} — {copy.strip.berat}
-                    </span>
-                    <input
-                      type="number"
-                      min={0}
-                      step={1}
-                      value={beratG}
-                      onChange={(event) => {
-                        const next = Number(event.target.value)
-                        if (Number.isFinite(next) && next >= 0)
-                          onBeratChange(bahan.ingredientId, next)
-                      }}
-                      className={`w-16 rounded border border-rim/30 bg-enamel px-1 py-0.5 text-right font-mono ${
-                        isEdited || isEstimate ? 'text-edited' : ''
-                      }`}
-                    />
-                    <span className="text-chip">g</span>
-                  </label>
-                  <span className="block text-xs text-chip">
-                    {isEdited
-                      ? copy.strip.diedit
-                      : isEstimate
-                        ? copy.strip.perkiraan
-                        : copy.strip.ditimbang}
-                  </span>
-                </td>
-
-                <td className="py-2 pl-4">
-                  {contribution ? (
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 min-w-bar-sliver flex-1 bg-rim/10">
-                        <div
-                          className="move-together h-2 bg-rim/70"
-                          style={{ width: `${Math.round(share * 100)}%` }}
-                        />
+                  <td className="py-2 pl-4">
+                    {contribution ? (
+                      <div className="flex items-center gap-2">
+                        <div className="h-2 min-w-bar-sliver flex-1 bg-rim/10">
+                          <div
+                            className="move-together h-2 bg-rim/70"
+                            style={{ width: `${Math.round(share * 100)}%` }}
+                          />
+                        </div>
+                        <span className="w-24 shrink-0 text-right font-mono">
+                          {formatNutrient(contribution.total, nutrientId, locale)}{' '}
+                          <span className="text-chip">{unitLabel(nutrientId)}</span>
+                        </span>
                       </div>
-                      <span className="w-24 shrink-0 text-right font-mono">
-                        {formatNutrient(contribution.total, nutrientId, locale)}{' '}
-                        <span className="text-chip">{unitLabel(nutrientId)}</span>
+                    ) : (
+                      <span className="text-chip">
+                        {missing
+                          ? locale === 'en'
+                            ? 'no value — this dish is understated by whatever it contributes'
+                            : 'tidak ada nilainya — angka masakan ini kurang sebanyak sumbangannya'
+                          : locale === 'en'
+                            ? 'no value for this nutrient'
+                            : 'tidak ada nilai untuk nutrien ini'}
                       </span>
-                    </div>
-                  ) : (
-                    <span className="text-chip">
-                      {missing
-                        ? locale === 'en'
-                          ? 'no value — this dish is understated by whatever it contributes'
-                          : 'tidak ada nilainya — angka masakan ini kurang sebanyak sumbangannya'
-                        : locale === 'en'
-                          ? 'no value for this nutrient'
-                          : 'tidak ada nilai untuk nutrien ini'}
-                    </span>
-                  )}
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+                    )}
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
 
       {/* Said next to the control, because the consequence of using it —
           losing the cooked weight — is not obvious. */}
