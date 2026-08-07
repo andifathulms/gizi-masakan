@@ -8,6 +8,7 @@
  * everything shown comes from `compute`, which is pure and lives in
  * lib/nutrition. This component's job is to hold the edits and render a trace.
  */
+import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { compute } from '@/lib/nutrition/compute'
 import { findUnmatched, loadFdcTable } from '@/lib/sources/fdc/load'
@@ -158,6 +159,15 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
           {locale === 'en'
             ? `Ingredient values from ${trace.ingredientRelease}.`
             : `Nilai bahan dari ${trace.ingredientRelease}.`}
+        </p>
+        {/* PRD §6.7: the method disclosure is "linked from the plate, not
+            buried". It was reachable only from the nav. */}
+        <p className="mt-3 max-w-prose">
+          <Link href={`/${locale}/metode/`} className="text-rim underline underline-offset-4">
+            {locale === 'en'
+              ? 'How these numbers are made, and what is missing from them →'
+              : 'Bagaimana angka ini dibuat, dan apa yang belum ada di dalamnya →'}
+          </Link>
         </p>
       </section>
     </div>
