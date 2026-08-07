@@ -25,8 +25,10 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
   const copy = copyFor(isLocale(params.locale) ? params.locale : 'id')
   return {
-    title: copy.siteName,
-    description: copy.disclaimer,
+    /* A template, so a page declares only its own heading and the site name is
+       appended once here rather than in five places. */
+    title: { default: copy.siteName, template: `%s — ${copy.siteName}` },
+    description: copy.tagline,
   /* Next injects a manifest link without the basePath, which 404s on a
      project page. Setting it here overrides that with the real path. */
   metadataBase: new URL(SITE_URL),

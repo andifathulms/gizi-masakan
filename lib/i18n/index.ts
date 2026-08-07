@@ -20,6 +20,12 @@ export interface Copy {
       every page, not only on the one whose heading happens to explain it. */
   readonly tagline5: string
   readonly nav: { masakan: string; bahan: string; metode: string }
+  /** Page ledes. One source, rendered on the page and used as its meta
+      description — a description that drifts from the page is worse than none. */
+  readonly lede: {
+    readonly bahan: (jumlah: number, rilis: string) => string
+    readonly metode: string
+  }
   /** The dish index doubles as the landing page — it is what the root
       redirects to — so it carries the proposition, not just a list header. */
   readonly landing: {
@@ -153,6 +159,12 @@ const ID: Copy = {
   tagline: 'Gizi masakan Indonesia, dengan resep yang diasumsikan ditampilkan di bawahnya.',
   tagline5: 'Gizi masakan Indonesia',
   nav: { masakan: 'Masakan', bahan: 'Bahan', metode: 'Metode' },
+  lede: {
+    bahan: (jumlah, rilis) =>
+      `${jumlah} bahan dipilih dari ${rilis} dan dipetakan ke nama dapur Indonesia. Nilai per 100 g.`,
+    metode:
+      'Setiap angka di situs ini datang dari suatu tempat. Halaman ini menyebut dari mana, dan menyebut apa yang belum ada.',
+  },
   landing: {
     judul: 'Gizi masakan Indonesia, dengan resepnya',
     lede: 'Tidak ada satu resep nasi padang yang benar. Jadi setiap angka di sini datang dengan resep yang dipakai untuk menghitungnya — ditampilkan, bisa Anda ubah, dan angkanya ikut bergerak.',
@@ -284,6 +296,12 @@ const EN: Copy = {
   tagline: 'Nutrition for Indonesian dishes, with the recipe it assumed shown underneath.',
   tagline5: 'Indonesian dish nutrition',
   nav: { masakan: 'Dishes', bahan: 'Ingredients', metode: 'Method' },
+  lede: {
+    bahan: (jumlah, rilis) =>
+      `${jumlah} ingredients curated from ${rilis} and mapped to Indonesian kitchen names. Values are per 100 g.`,
+    metode:
+      'Every number on this site comes from somewhere. This page says where, and says what is missing.',
+  },
   landing: {
     judul: 'Nutrition for Indonesian dishes, with the recipe shown',
     lede: 'There is no single correct nasi padang. So every number here arrives with the recipe used to calculate it — shown, editable, and the numbers move when you change it.',

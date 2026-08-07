@@ -6,6 +6,7 @@ import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
 import { formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
 import { DaftarMasakan, type KartuMasakan } from '@/components/masakan/DaftarMasakan'
 import { ContohBerjalan } from '@/components/masakan/ContohBerjalan'
+import { pageMetadata } from '@/lib/metadata'
 
 /**
  * What each card shows. Energi, protein and zat besi at equal weight — energy
@@ -16,6 +17,18 @@ const KARTU_NUTRIENT_IDS = ['208', '203', '303'] as const
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }))
+}
+
+export function generateMetadata({ params }: { params: { locale: string } }) {
+  const locale = isLocale(params.locale) ? params.locale : 'id'
+  const copy = copyFor(locale)
+  // The same heading and lede the page renders below.
+  return pageMetadata({
+    locale,
+    title: copy.landing.judul,
+    description: copy.landing.lede,
+    path: 'masakan',
+  })
 }
 
 export default function MasakanPage({ params }: { params: { locale: string } }) {

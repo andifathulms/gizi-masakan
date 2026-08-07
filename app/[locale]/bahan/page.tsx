@@ -3,9 +3,21 @@ import { fdcRelease, loadFdcTable, unmatchedIngredients } from '@/lib/sources/fd
 import { NUTRIENTS } from '@/lib/nutrition/nutrients'
 import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
 import { formatNutrient } from '@/lib/format'
+import { pageMetadata } from '@/lib/metadata'
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }))
+}
+
+export function generateMetadata({ params }: { params: { locale: string } }) {
+  const locale = isLocale(params.locale) ? params.locale : 'id'
+  const copy = copyFor(locale)
+  return pageMetadata({
+    locale,
+    title: copy.nav.bahan,
+    description: copy.lede.bahan(loadFdcTable().entries.size, fdcRelease().release),
+    path: 'bahan',
+  })
 }
 
 /**
@@ -38,9 +50,7 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
     <div>
       <h1 className="font-display text-2xl text-rim">{copy.nav.bahan}</h1>
       <p className="mt-4 max-w-prose text-base text-ink-soft">
-        {locale === 'en'
-          ? `${entries.length} ingredients curated from ${release.release} and mapped to Indonesian kitchen names. Values are per 100 g.`
-          : `${entries.length} bahan dipilih dari ${release.release} dan dipetakan ke nama dapur Indonesia. Nilai per 100 g.`}
+        {copy.lede.bahan(entries.length, release.release)}
       </p>
 
       {[...byKategori.entries()].map(([kategori, list]) => (

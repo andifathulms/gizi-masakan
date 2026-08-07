@@ -7,9 +7,16 @@ import { urtStatus } from '@/lib/portion'
 import { AKG_CITATION, AKG_CITATION_URL, AKG_KELOMPOK, AKG_KELOMPOK_TIDAK_DIMUAT, AKG_TRANSCRIBED_ON } from '@/lib/akg'
 import { RECIPES } from '@/lib/resep'
 import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
+import { pageMetadata } from '@/lib/metadata'
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }))
+}
+
+export function generateMetadata({ params }: { params: { locale: string } }) {
+  const locale = isLocale(params.locale) ? params.locale : 'id'
+  const copy = copyFor(locale)
+  return pageMetadata({ locale, title: copy.nav.metode, description: copy.lede.metode, path: 'metode' })
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -41,9 +48,7 @@ export default function MetodePage({ params }: { params: { locale: string } }) {
     <div>
       <h1 className="font-display text-2xl text-rim">{copy.nav.metode}</h1>
       <p className="mt-4 max-w-prose text-md text-ink-soft">
-        {en
-          ? 'Every number on this site comes from somewhere. This page says where, and says what is missing.'
-          : 'Setiap angka di situs ini datang dari suatu tempat. Halaman ini menyebut dari mana, dan menyebut apa yang belum ada.'}
+        {copy.lede.metode}
       </p>
 
       <Section title={en ? 'What this is, and is not' : 'Ini apa, dan bukan apa'}>
