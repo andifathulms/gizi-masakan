@@ -30,6 +30,19 @@ export function formatNutrient(value: number, nutrientId: string, locale: Locale
   }).format(value)
 }
 
+/**
+ * A multiplier or a ratio — a retention factor, or a weight divided by 100.
+ * Two decimals, always: these appear inside arithmetic the reader is invited to
+ * check, and a ratio rounded to whole numbers turns 2.5 into 3 and makes the
+ * sum on screen visibly wrong.
+ */
+export function formatFactor(value: number, locale: Locale): string {
+  return new Intl.NumberFormat(localeTag(locale), {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value)
+}
+
 export function formatPercent(fraction: number, locale: Locale): string {
   return new Intl.NumberFormat(localeTag(locale), {
     style: 'percent',

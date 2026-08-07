@@ -56,6 +56,20 @@ export interface Copy {
     readonly gagal: string
     readonly perluUbah: string
   }
+  /** The worked example on the landing page. PRD §2's own illustration —
+      move the santan and watch the number move — performed rather than
+      described. */
+  readonly contoh: {
+    readonly judul: string
+    readonly lede: string
+    readonly geser: string
+    readonly langkah1: string
+    readonly langkah2: string
+    readonly langkah3: string
+    readonly totalLabel: string
+    readonly jujur: string
+    readonly buka: string
+  }
   readonly plate: {
     readonly perPorsi: string
     readonly seluruhResep: string
@@ -176,6 +190,17 @@ const ID: Copy = {
     gagal: 'Peramban ini menolak menyimpan. Kalau Anda memakai mode penyamaran, penyimpanan lokal biasanya dimatikan.',
     perluUbah: 'Ubah dulu salah satu takaran di atas, baru ada yang bisa disimpan.',
   },
+  contoh: {
+    judul: 'Satu angka, dari awal sampai akhir',
+    lede: 'Nasi uduk memakai santan encer. Geser takarannya dan lihat angkanya bergerak — inilah cara kerja seluruh situs ini, jadi tidak ada yang perlu dipercaya begitu saja.',
+    geser: 'Santan encer',
+    langkah1: 'Ambil beratnya, bagi 100',
+    langkah2: 'Kalikan nilai energi santan per 100 g',
+    langkah3: 'Itulah sumbangan santan ke energi seluruh resep',
+    totalLabel: 'Energi seluruh resep, semua bahan dijumlahkan',
+    jujur: 'Berat resepnya perkiraan, belum ditimbang. Nilai santannya dari basis data Amerika. Keduanya disebut di halaman masakannya.',
+    buka: 'Buka nasi uduk dengan takaran ini →',
+  },
   plate: {
     perPorsi: 'Per porsi',
     seluruhResep: 'Seluruh resep',
@@ -290,6 +315,17 @@ const EN: Copy = {
     hapusNama: (nama) => `version ${nama}`,
     gagal: 'This browser refused to save. Local storage is usually switched off in private browsing.',
     perluUbah: 'Change one of the weights above first, then there is something to save.',
+  },
+  contoh: {
+    judul: 'One number, start to finish',
+    lede: 'Nasi uduk is cooked with thin coconut milk. Move the amount and watch the number move — this is how the whole site works, so nothing here has to be taken on trust.',
+    geser: 'Thin coconut milk',
+    langkah1: 'Take its weight, divide by 100',
+    langkah2: 'Multiply by the energy in 100 g of coconut milk',
+    langkah3: 'That is what the coconut milk contributes to the whole recipe',
+    totalLabel: 'Energy for the whole recipe, every ingredient added up',
+    jujur: 'The recipe weights are estimates, not weighed. The coconut milk values come from a US database. Both are stated on the dish page.',
+    buka: 'Open nasi uduk with these weights →',
   },
   plate: {
     perPorsi: 'Per portion',

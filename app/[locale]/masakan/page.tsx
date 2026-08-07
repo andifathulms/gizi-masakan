@@ -5,6 +5,7 @@ import { findUnmatched, loadFdcTable } from '@/lib/sources/fdc/load'
 import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
 import { formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
 import { DaftarMasakan, type KartuMasakan } from '@/components/masakan/DaftarMasakan'
+import { ContohBerjalan } from '@/components/masakan/ContohBerjalan'
 
 /**
  * What each card shows. Energi, protein and zat besi at equal weight — energy
@@ -66,6 +67,11 @@ export default function MasakanPage({ params }: { params: { locale: string } }) 
           </li>
         ))}
       </ul>
+
+      {/* The proposition, performed. It sits above the dish list because it is
+          what the list is for — a reader who scrolls no further has still seen
+          one number derived end to end. */}
+      <ContohBerjalan locale={locale} />
 
       <h2 className="mt-section font-display text-xl text-rim">
         {copy.nav.masakan}
