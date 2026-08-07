@@ -4,7 +4,14 @@ import { RECIPES, recipesByKategori } from '@/lib/resep'
 import { compute } from '@/lib/nutrition/compute'
 import { findUnmatched, loadFdcTable } from '@/lib/sources/fdc/load'
 import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
-import { formatNutrient } from '@/lib/format'
+import { formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
+
+/**
+ * What each card shows. Energi, protein and zat besi at equal weight — energy
+ * is one nutrient among many (invariant 13), and it was previously the only
+ * number on the card, which made it the headline by omission.
+ */
+const KARTU_NUTRIENT_IDS = ['208', '203', '303'] as const
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }))
@@ -53,7 +60,6 @@ export default function MasakanPage({ params }: { params: { locale: string } }) 
           <ul className="mt-3 grid gap-3 sm:grid-cols-2">
             {recipes.map((recipe) => {
               const trace = compute({ recipe, table, unmatched: { get: findUnmatched } })
-              const energy = trace.totals.find((total) => total.nutrientId === '208')!
               return (
                 <li key={recipe.id}>
                   <Link
@@ -64,23 +70,41 @@ export default function MasakanPage({ params }: { params: { locale: string } }) 
                       {recipe.namaId}
                     </span>
                     <span className="mt-1 block text-sm text-ink-soft">{recipe.deskripsiId}</span>
-                    <span className="mt-3 block border-t border-rim/20 pt-2 text-sm">
-                      <span className="font-mono">
-                        {formatNutrient(energy.total / recipe.porsi, '208', locale)}
-                      </span>{' '}
-                      <span className="text-ink-soft">
-                        kcal / {copy.plate.perPorsi.toLowerCase()}
-                      </span>
-                      {/* Phrased as something the dish does, not as a defect
-                          count: naming a gap is the product, not a failure. */}
-                      {!trace.lengkap && (
-                        <span className="mt-1 block text-xs text-chip">
-                          {locale === 'en'
-                            ? `names ${trace.gaps.length} things it cannot count`
-                            : `menyebut ${trace.gaps.length} hal yang tidak bisa dihitung`}
-                        </span>
-                      )}
+                    {/* Three nutrients at identical weight, not energy alone.
+                        Invariant 13 and PRD §5 say energy is one nutrient among
+                        many; when it is the only number on a card it becomes
+                        the headline by omission, which is the calorie-first
+                        framing §5 exists to prevent. Protein and zat besi are
+                        the two the stunting-and-deficiency framing cares about
+                        most, and both are already in the trace. */}
+                    <span className="mt-3 grid grid-cols-3 gap-2 border-t border-rim/20 pt-2 text-sm">
+                      {KARTU_NUTRIENT_IDS.map((id) => {
+                        const total = trace.totals.find((entry) => entry.nutrientId === id)!
+                        return (
+                          <span key={id} className="block">
+                            <span className="block text-xs text-ink-soft">
+                              {nutrientLabel(id, locale)}
+                            </span>
+                            <span className="font-mono">
+                              {formatNutrient(total.total / recipe.porsi, id, locale)}
+                            </span>{' '}
+                            <span className="text-xs text-ink-soft">{unitLabel(id)}</span>
+                          </span>
+                        )
+                      })}
                     </span>
+                    <span className="mt-2 block text-xs text-ink-soft">
+                      {copy.plate.perPorsi.toLowerCase()}
+                    </span>
+                    {/* Phrased as something the dish does, not as a defect
+                        count: naming a gap is the product, not a failure. */}
+                    {!trace.lengkap && (
+                      <span className="mt-1 block text-xs text-chip">
+                        {locale === 'en'
+                          ? `names ${trace.gaps.length} things it cannot count`
+                          : `menyebut ${trace.gaps.length} hal yang tidak bisa dihitung`}
+                      </span>
+                    )}
                   </Link>
                 </li>
               )
