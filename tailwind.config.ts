@@ -52,6 +52,8 @@ const config: Config = {
          the rhythm is chosen deliberately where it matters and nothing else
          silently shifts. */
       spacing: {
+        bar: 'var(--bar-min)',
+        'bar-sliver': 'var(--bar-min-sliver)',
         gutter: 'var(--space-5)',
         block: 'var(--space-6)',
         section: 'var(--space-7)',

@@ -108,7 +108,7 @@ export function Kecukupan({
 
                   {adequacy.type === 'dibandingkan' ? (
                     <>
-                      <span className="h-3 min-w-[80px] flex-1 bg-rim/10">
+                      <span className="h-3 min-w-bar flex-1 bg-rim/10">
                         <span
                           className="move-together block h-3 bg-adequate"
                           style={{ width: `${Math.min(100, Math.round(adequacy.bagian * 100))}%` }}

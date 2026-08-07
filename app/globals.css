@@ -55,6 +55,12 @@
   --space-6: 2rem;
   --space-7: 3rem;
   --space-8: 4rem;
+
+  /* Minimum widths for the two proportion bars. Tokens rather than literal
+     pixels so they scale with text zoom like everything else, and so a bar
+     minimum is set in one place. */
+  --bar-min: 5rem;
+  --bar-min-sliver: 0.125rem;
 }
 
 @layer base {
@@ -76,10 +82,34 @@
     .move-together {
       transition: width 220ms cubic-bezier(0.2, 0.7, 0.3, 1);
     }
+
+    /* The card hover tint. Behind the same guard as everything else, so the
+       comment above stays true. */
+    .card-hover {
+      transition:
+        background-color 120ms ease,
+        border-color 120ms ease;
+    }
   }
 
-  /* Focus is visible on every interactive thing, in rim, off the element. */
-  :where(a, button, input, select):focus-visible {
+  /* Focus is visible on every interactive thing, in rim, off the element.
+     Not wrapped in :where() — that has zero specificity, so any utility class
+     would silently win and the indicator would vanish without a warning.
+     [tabindex] is included because the scrollable table regions and the focus
+     targets used after a reset or delete are exactly that. */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid rgb(var(--rim));
+    outline-offset: 2px;
+  }
+
+  /* The segmented control hides its radios and styles the labels, so the
+     indicator has to follow the checked input out to its label. */
+  label:has(> input:focus-visible) {
     outline: 2px solid rgb(var(--rim));
     outline-offset: 2px;
   }

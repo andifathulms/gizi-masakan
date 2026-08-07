@@ -104,7 +104,7 @@ export function DaftarMasakan({
               <li key={entry.id}>
                 <Link
                   href={`/${locale}/masakan/${entry.id}/`}
-                  className="list-card block h-full px-4 py-4 transition-colors hover:border-rim hover:bg-enamel-deep"
+                  className="list-card card-hover block h-full px-4 py-4 hover:border-rim hover:bg-enamel-deep"
                 >
                   <span lang="id" className="font-display text-md font-medium text-rim">
                     {entry.namaId}

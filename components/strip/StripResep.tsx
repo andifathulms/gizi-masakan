@@ -162,7 +162,7 @@ export function StripResep({
                 <td className="py-2 pl-4">
                   {contribution ? (
                     <div className="flex items-center gap-2">
-                      <div className="h-2 min-w-[2px] flex-1 bg-rim/10">
+                      <div className="h-2 min-w-bar-sliver flex-1 bg-rim/10">
                         <div
                           className="move-together h-2 bg-rim/70"
                           style={{ width: `${Math.round(share * 100)}%` }}
