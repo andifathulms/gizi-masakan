@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 /**
  * The dish list with its search box.
@@ -11,54 +11,59 @@
  * Matching itself lives in lib/resep/cari — pure, and tested against the real
  * recipe set.
  */
-import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
-import { cari, type CariEntry } from '@/lib/resep/cari'
-import { copyFor, type Locale } from '@/lib/i18n'
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { cari, type CariEntry } from "@/lib/resep/cari";
+import { copyFor, type Locale } from "@/lib/i18n";
 
 export interface KartuMasakan extends CariEntry {
   /** Pre-rendered so the component does no nutrition work. */
-  readonly nutrients: readonly { readonly id: string; readonly label: string; readonly value: string; readonly unit: string }[]
-  readonly gapCount: number
+  readonly nutrients: readonly {
+    readonly id: string;
+    readonly label: string;
+    readonly value: string;
+    readonly unit: string;
+  }[];
+  readonly gapCount: number;
 }
 
-const PARAM = 'cari'
+const PARAM = "cari";
 
 export function DaftarMasakan({
   kartu,
   locale,
 }: {
-  kartu: readonly KartuMasakan[]
-  locale: Locale
+  kartu: readonly KartuMasakan[];
+  locale: Locale;
 }) {
-  const copy = copyFor(locale)
-  const [query, setQuery] = useState('')
-  const adopted = useRef(false)
+  const copy = copyFor(locale);
+  const [query, setQuery] = useState("");
+  const adopted = useRef(false);
 
   // Adopt an incoming ?cari= after hydration. The list is prerendered whole, so
   // reading the URL during render would mismatch — and the unfiltered list is
   // the right thing to have in the static HTML anyway.
   useEffect(() => {
-    setQuery(new URLSearchParams(window.location.search).get(PARAM) ?? '')
-    adopted.current = true
-  }, [])
+    setQuery(new URLSearchParams(window.location.search).get(PARAM) ?? "");
+    adopted.current = true;
+  }, []);
 
   useEffect(() => {
-    if (!adopted.current) return
-    const trimmed = query.trim()
-    const url = `${window.location.pathname}${trimmed ? `?${PARAM}=${encodeURIComponent(trimmed)}` : ''}`
-    window.history.replaceState(null, '', url)
-  }, [query])
+    if (!adopted.current) return;
+    const trimmed = query.trim();
+    const url = `${window.location.pathname}${trimmed ? `?${PARAM}=${encodeURIComponent(trimmed)}` : ""}`;
+    window.history.replaceState(null, "", url);
+  }, [query]);
 
-  const hasil = cari(kartu, query)
+  const hasil = cari(kartu, query);
 
   // Category order is the authored one; search filters within it and never
   // reorders, so a dish does not move up the page for invisible reasons.
-  const byKategori = new Map<string, KartuMasakan[]>()
+  const byKategori = new Map<string, KartuMasakan[]>();
   for (const entry of hasil) {
-    const existing = byKategori.get(entry.kategori)
-    if (existing) existing.push(entry)
-    else byKategori.set(entry.kategori, [entry])
+    const existing = byKategori.get(entry.kategori);
+    if (existing) existing.push(entry);
+    else byKategori.set(entry.kategori, [entry]);
   }
 
   return (
@@ -75,7 +80,9 @@ export function DaftarMasakan({
           />
         </label>
         <p aria-live="polite" className="text-sm text-ink-soft">
-          {query.trim() ? copy.cari.hasil(hasil.length, kartu.length) : copy.cari.semua(kartu.length)}
+          {query.trim()
+            ? copy.cari.hasil(hasil.length, kartu.length)
+            : copy.cari.semua(kartu.length)}
         </p>
       </div>
 
@@ -89,7 +96,9 @@ export function DaftarMasakan({
 
       {[...byKategori.entries()].map(([kategori, entries]) => (
         <section key={kategori} className="mt-block">
-          <h3 className="font-display text-lg capitalize text-rim">{kategori}</h3>
+          <h3 lang="id" className="font-display text-lg capitalize text-rim">
+            {kategori}
+          </h3>
           <ul className="mt-3 grid gap-3 sm:grid-cols-2">
             {entries.map((entry) => (
               <li key={entry.id}>
@@ -97,16 +106,27 @@ export function DaftarMasakan({
                   href={`/${locale}/masakan/${entry.id}/`}
                   className="list-card block h-full px-4 py-4 transition-colors hover:border-rim hover:bg-enamel-deep"
                 >
-                  <span className="font-display text-md font-medium text-rim">{entry.namaId}</span>
-                  <span className="mt-1 block text-sm text-ink-soft">{entry.deskripsiId}</span>
+                  <span
+                    lang="id"
+                    className="font-display text-md font-medium text-rim"
+                  >
+                    {entry.namaId}
+                  </span>
+                  <span className="mt-1 block text-sm text-ink-soft">
+                    {entry.deskripsiId}
+                  </span>
                   {/* Three nutrients at identical weight, not energy alone —
                       invariant 13. Values arrive pre-rendered. */}
                   <span className="mt-3 grid grid-cols-3 gap-2 border-t border-rim/20 pt-2 text-sm">
                     {entry.nutrients.map((nutrient) => (
                       <span key={nutrient.id} className="block">
-                        <span className="block text-xs text-ink-soft">{nutrient.label}</span>
-                        <span className="font-mono">{nutrient.value}</span>{' '}
-                        <span className="text-xs text-ink-soft">{nutrient.unit}</span>
+                        <span className="block text-xs text-ink-soft">
+                          {nutrient.label}
+                        </span>
+                        <span className="font-mono">{nutrient.value}</span>{" "}
+                        <span className="text-xs text-ink-soft">
+                          {nutrient.unit}
+                        </span>
                       </span>
                     ))}
                   </span>
@@ -127,5 +147,5 @@ export function DaftarMasakan({
         </section>
       ))}
     </div>
-  )
+  );
 }

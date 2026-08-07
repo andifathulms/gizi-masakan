@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 /**
  * The recipe strip — PRD §6.1. One row per ingredient, its gram weight
@@ -10,20 +10,25 @@
  * says so — an ingredient that vanished from this list would be the exact
  * failure invariant 2 exists to prevent.
  */
-import { NUTRIENTS } from '@/lib/nutrition/nutrients'
-import type { NutritionTrace, Recipe } from '@/lib/nutrition/trace'
-import { copyFor, type Locale } from '@/lib/i18n'
-import { formatGram, formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
+import { NUTRIENTS } from "@/lib/nutrition/nutrients";
+import type { NutritionTrace, Recipe } from "@/lib/nutrition/trace";
+import { copyFor, type Locale } from "@/lib/i18n";
+import {
+  formatGram,
+  formatNutrient,
+  nutrientLabel,
+  unitLabel,
+} from "@/lib/format";
 
 interface Props {
-  trace: NutritionTrace
-  recipe: Recipe
-  locale: Locale
-  nutrientId: string
-  onNutrientChange: (nutrientId: string) => void
-  beratOverrideG: Record<string, number>
-  onBeratChange: (ingredientId: string, beratG: number) => void
-  onReset: () => void
+  trace: NutritionTrace;
+  recipe: Recipe;
+  locale: Locale;
+  nutrientId: string;
+  onNutrientChange: (nutrientId: string) => void;
+  beratOverrideG: Record<string, number>;
+  onBeratChange: (ingredientId: string, beratG: number) => void;
+  onReset: () => void;
 }
 
 export function StripResep({
@@ -36,20 +41,29 @@ export function StripResep({
   onBeratChange,
   onReset,
 }: Props) {
-  const copy = copyFor(locale)
-  const total = trace.totals.find((entry) => entry.nutrientId === nutrientId)!
-  const largest = total.contributions.reduce((max, c) => Math.max(max, c.total), 0)
-  const edited = Object.keys(beratOverrideG).length > 0
+  const copy = copyFor(locale);
+  const total = trace.totals.find((entry) => entry.nutrientId === nutrientId)!;
+  const largest = total.contributions.reduce(
+    (max, c) => Math.max(max, c.total),
+    0,
+  );
+  const edited = Object.keys(beratOverrideG).length > 0;
 
   // Rows in recipe order — the order you would cook in, not a ranking. The bar
   // lengths carry the ranking.
   const rows = recipe.bahan.map((bahan) => {
-    const contribution = total.contributions.find((c) => c.ingredientId === bahan.ingredientId)
-    const known = trace.bahan.find((entry) => entry.ingredientId === bahan.ingredientId)
-    const missing = trace.bahanTanpaData.find((entry) => entry.ingredientId === bahan.ingredientId)
-    const beratG = beratOverrideG[bahan.ingredientId] ?? bahan.beratG
-    return { bahan, contribution, known, missing, beratG }
-  })
+    const contribution = total.contributions.find(
+      (c) => c.ingredientId === bahan.ingredientId,
+    );
+    const known = trace.bahan.find(
+      (entry) => entry.ingredientId === bahan.ingredientId,
+    );
+    const missing = trace.bahanTanpaData.find(
+      (entry) => entry.ingredientId === bahan.ingredientId,
+    );
+    const beratG = beratOverrideG[bahan.ingredientId] ?? bahan.beratG;
+    return { bahan, contribution, known, missing, beratG };
+  });
 
   return (
     <section>
@@ -65,13 +79,17 @@ export function StripResep({
             >
               {NUTRIENTS.map((nutrient) => (
                 <option key={nutrient.id} value={nutrient.id}>
-                  {locale === 'en' ? nutrient.labelEn : nutrient.labelId}
+                  {locale === "en" ? nutrient.labelEn : nutrient.labelId}
                 </option>
               ))}
             </select>
           </label>
           {edited && (
-            <button type="button" onClick={onReset} className="text-edited underline underline-offset-4">
+            <button
+              type="button"
+              onClick={onReset}
+              className="text-edited underline underline-offset-4"
+            >
               {copy.strip.kembalikan}
             </button>
           )}
@@ -80,7 +98,8 @@ export function StripResep({
 
       <table className="mt-4 w-full text-sm">
         <caption className="sr-only">
-          {copy.strip.judul} — {copy.strip.sumbangan}: {nutrientLabel(nutrientId, locale)}
+          {copy.strip.judul} — {copy.strip.sumbangan}:{" "}
+          {nutrientLabel(nutrientId, locale)}
         </caption>
         <thead>
           <tr className="border-b border-rim/25 text-left text-ink-soft">
@@ -97,21 +116,29 @@ export function StripResep({
         </thead>
         <tbody>
           {rows.map(({ bahan, contribution, known, missing, beratG }) => {
-            const isEdited = beratOverrideG[bahan.ingredientId] !== undefined
-            const isEstimate = bahan.provenance === 'perkiraan'
-            const share = largest > 0 && contribution ? contribution.total / largest : 0
+            const isEdited = beratOverrideG[bahan.ingredientId] !== undefined;
+            const isEstimate = bahan.provenance === "perkiraan";
+            const share =
+              largest > 0 && contribution ? contribution.total / largest : 0;
             return (
-              <tr key={bahan.ingredientId} className="border-b border-rim/10 align-top">
+              <tr
+                key={bahan.ingredientId}
+                className="border-b border-rim/10 align-top"
+              >
                 <th scope="row" className="py-2 pr-3 text-left font-normal">
-                  <span className={missing ? 'text-chip' : undefined}>
+                  <span lang="id" className={missing ? "text-chip" : undefined}>
                     {known?.namaId ?? missing?.namaId ?? bahan.ingredientId}
                   </span>
                   {known?.pengolahanLabel && (
-                    <span className="block text-xs text-chip">{known.pengolahanLabel}</span>
+                    <span className="block text-xs text-chip">
+                      {known.pengolahanLabel}
+                    </span>
                   )}
                   {missing && (
                     <span className="block text-xs text-chip">
-                      {locale === 'en' ? 'no data — not counted' : 'tidak ada datanya — tidak dihitung'}
+                      {locale === "en"
+                        ? "no data — not counted"
+                        : "tidak ada datanya — tidak dihitung"}
                     </span>
                   )}
                 </th>
@@ -127,17 +154,22 @@ export function StripResep({
                       step={1}
                       value={beratG}
                       onChange={(event) => {
-                        const next = Number(event.target.value)
-                        if (Number.isFinite(next) && next >= 0) onBeratChange(bahan.ingredientId, next)
+                        const next = Number(event.target.value);
+                        if (Number.isFinite(next) && next >= 0)
+                          onBeratChange(bahan.ingredientId, next);
                       }}
                       className={`w-16 rounded border border-rim/30 bg-enamel px-1 py-0.5 text-right font-mono ${
-                        isEdited || isEstimate ? 'text-edited' : ''
+                        isEdited || isEstimate ? "text-edited" : ""
                       }`}
                     />
                     <span className="text-chip">g</span>
                   </label>
                   <span className="block text-xs text-chip">
-                    {isEdited ? copy.strip.diedit : isEstimate ? copy.strip.perkiraan : copy.strip.ditimbang}
+                    {isEdited
+                      ? copy.strip.diedit
+                      : isEstimate
+                        ? copy.strip.perkiraan
+                        : copy.strip.ditimbang}
                   </span>
                 </td>
 
@@ -151,36 +183,39 @@ export function StripResep({
                         />
                       </div>
                       <span className="w-24 shrink-0 text-right font-mono">
-                        {formatNutrient(contribution.total, nutrientId, locale)}{' '}
-                        <span className="text-chip">{unitLabel(nutrientId)}</span>
+                        {formatNutrient(contribution.total, nutrientId, locale)}{" "}
+                        <span className="text-chip">
+                          {unitLabel(nutrientId)}
+                        </span>
                       </span>
                     </div>
                   ) : (
                     <span className="text-chip">
                       {missing
-                        ? locale === 'en'
-                          ? 'no value — this dish is understated by whatever it contributes'
-                          : 'tidak ada nilainya — angka masakan ini kurang sebanyak sumbangannya'
-                        : locale === 'en'
-                          ? 'no value for this nutrient'
-                          : 'tidak ada nilai untuk nutrien ini'}
+                        ? locale === "en"
+                          ? "no value — this dish is understated by whatever it contributes"
+                          : "tidak ada nilainya — angka masakan ini kurang sebanyak sumbangannya"
+                        : locale === "en"
+                          ? "no value for this nutrient"
+                          : "tidak ada nilai untuk nutrien ini"}
                     </span>
                   )}
                 </td>
               </tr>
-            )
+            );
           })}
         </tbody>
       </table>
 
       <p className="mt-3 text-sm text-ink-soft">
-        {locale === 'en'
-          ? 'Weights in terracotta are estimates or your edits, not measurements.'
-          : 'Berat berwarna terakota adalah perkiraan atau hasil suntingan Anda, bukan hasil timbangan.'}{' '}
+        {locale === "en"
+          ? "Weights in terracotta are estimates or your edits, not measurements."
+          : "Berat berwarna terakota adalah perkiraan atau hasil suntingan Anda, bukan hasil timbangan."}{" "}
         <span className="font-mono">
-          {formatGram(trace.massa.mentahG, locale)} g {locale === 'en' ? 'raw in total' : 'total mentah'}
+          {formatGram(trace.massa.mentahG, locale)} g{" "}
+          {locale === "en" ? "raw in total" : "total mentah"}
         </span>
       </p>
     </section>
-  )
+  );
 }
