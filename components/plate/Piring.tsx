@@ -39,7 +39,7 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
   const scale = perPorsiView ? 1 / trace.porsi : 1
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-block">
       <section className="plate-card px-5 py-5 sm:px-7 sm:py-6">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h1 className="font-display text-2xl text-rim">{trace.namaId}</h1>
@@ -144,9 +144,16 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
 
       <Kecukupan trace={trace} locale={locale} />
 
+      {/* Below this rule is the working, not the answer: the derivation of the
+          selected nutrient and where the recipe came from. The trace is
+          deliberately on the page rather than behind a tap (PRD §6.4), but
+          flattening it against the plate made the page read as one
+          undifferentiated column. */}
+      <hr className="mt-section border-t border-rim/25" />
+
       <JejakNutrien trace={trace} locale={locale} nutrientId={nutrientId} />
 
-      <section className="text-sm text-chip">
+      <section className="text-sm text-ink-soft">
         <h2 className="font-display text-lg text-rim">
           {locale === 'en' ? 'Where this recipe comes from' : 'Asal resep ini'}
         </h2>
