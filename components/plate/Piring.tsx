@@ -9,13 +9,14 @@
  * lib/nutrition. This component's job is to hold the edits and render a trace.
  */
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { compute } from '@/lib/nutrition/compute'
 import { findUnmatched, loadFdcTable } from '@/lib/sources/fdc/load'
 import { HEADLINE_NUTRIENT_IDS, NUTRIENTS } from '@/lib/nutrition/nutrients'
 import { perPorsi, type Recipe } from '@/lib/nutrition/trace'
 import { copyFor, type Locale } from '@/lib/i18n'
 import { formatGram, formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
+import { usePlateState } from '@/lib/url/use-plate-state'
 import { StripResep } from '@/components/strip/StripResep'
 import { PanelKekosongan } from '@/components/plate/PanelKekosongan'
 import { Kecukupan } from '@/components/adequacy/Kecukupan'
@@ -26,9 +27,10 @@ const unmatched = { get: findUnmatched }
 
 export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
   const copy = copyFor(locale)
-  const [beratOverrideG, setBeratOverrideG] = useState<Record<string, number>>({})
-  const [nutrientId, setNutrientId] = useState<string>('208')
-  const [perPorsiView, setPerPorsiView] = useState(true)
+  /* One piece of state for the whole plate, mirrored in the query string so a
+     view survives a refresh and can be sent to someone else. */
+  const [view, setView] = usePlateState(recipe.bahan.map((bahan) => bahan.ingredientId))
+  const { nutrientId, perPorsiView, kelompokId, beratOverrideG } = view
 
   const trace = useMemo(
     () => compute({ recipe, table, unmatched, beratOverrideG }),
@@ -57,7 +59,7 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
         <div className="mt-5 flex gap-1 text-sm" role="group">
           <button
             type="button"
-            onClick={() => setPerPorsiView(true)}
+            onClick={() => setView({ perPorsiView: true })}
             aria-pressed={perPorsiView}
             className={`rounded-l border border-rim/40 px-3 py-1 ${perPorsiView ? 'bg-rim text-enamel' : 'text-rim'}`}
           >
@@ -65,7 +67,7 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
           </button>
           <button
             type="button"
-            onClick={() => setPerPorsiView(false)}
+            onClick={() => setView({ perPorsiView: false })}
             aria-pressed={!perPorsiView}
             className={`rounded-r border border-rim/40 px-3 py-1 ${!perPorsiView ? 'bg-rim text-enamel' : 'text-rim'}`}
           >
@@ -132,17 +134,22 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
         recipe={recipe}
         locale={locale}
         nutrientId={nutrientId}
-        onNutrientChange={setNutrientId}
+        onNutrientChange={(next) => setView({ nutrientId: next })}
         beratOverrideG={beratOverrideG}
         onBeratChange={(ingredientId, beratG) =>
-          setBeratOverrideG((current) => ({ ...current, [ingredientId]: beratG }))
+          setView({ beratOverrideG: { ...beratOverrideG, [ingredientId]: beratG } })
         }
-        onReset={() => setBeratOverrideG({})}
+        onReset={() => setView({ beratOverrideG: {} })}
       />
 
       <PanelKekosongan trace={trace} locale={locale} />
 
-      <Kecukupan trace={trace} locale={locale} />
+      <Kecukupan
+        trace={trace}
+        locale={locale}
+        kelompokId={kelompokId}
+        onKelompokChange={(next) => setView({ kelompokId: next })}
+      />
 
       {/* Below this rule is the working, not the answer: the derivation of the
           selected nutrient and where the recipe came from. The trace is

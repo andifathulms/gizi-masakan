@@ -11,7 +11,6 @@
  * A share over 100% overflows the track and is labelled with its real number.
  * It is not styled as a warning, because it is not one.
  */
-import { useState } from 'react'
 import { AKG_CITATION, AKG_KELOMPOK, KELOMPOK_AWAL, adequacyFor, findKelompok } from '@/lib/akg'
 import { NUTRIENTS, type NutrientDef, type NutrientGroup } from '@/lib/nutrition/nutrients'
 import { perPorsi, type NutritionTrace } from '@/lib/nutrition/trace'
@@ -45,9 +44,23 @@ function byGroup(): Map<NutrientGroup, NutrientDef[]> {
   return grouped
 }
 
-export function Kecukupan({ trace, locale }: { trace: NutritionTrace; locale: Locale }) {
+/**
+ * Controlled on the AKG group: the selection is held by the plate so it can be
+ * mirrored into the query string with the rest of the view state, rather than
+ * being local state that a refresh throws away.
+ */
+export function Kecukupan({
+  trace,
+  locale,
+  kelompokId,
+  onKelompokChange,
+}: {
+  trace: NutritionTrace
+  locale: Locale
+  kelompokId: string
+  onKelompokChange: (kelompokId: string) => void
+}) {
   const copy = copyFor(locale)
-  const [kelompokId, setKelompokId] = useState(KELOMPOK_AWAL)
   const kelompok = findKelompok(kelompokId) ?? findKelompok(KELOMPOK_AWAL)!
 
   return (
@@ -58,7 +71,7 @@ export function Kecukupan({ trace, locale }: { trace: NutritionTrace; locale: Lo
           <span className="text-ink-soft">{copy.adequacy.kelompok}</span>
           <select
             value={kelompokId}
-            onChange={(event) => setKelompokId(event.target.value)}
+            onChange={(event) => onKelompokChange(event.target.value)}
             className="rounded border border-rim/40 bg-enamel px-2 py-1"
           >
             {AKG_KELOMPOK.map((entry) => (
