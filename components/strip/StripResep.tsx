@@ -10,6 +10,7 @@
  * says so — an ingredient that vanished from this list would be the exact
  * failure invariant 2 exists to prevent.
  */
+import { useRef } from 'react'
 import { NUTRIENTS } from '@/lib/nutrition/nutrients'
 import type { NutritionTrace, Recipe } from '@/lib/nutrition/trace'
 import { copyFor, type Locale } from '@/lib/i18n'
@@ -37,6 +38,10 @@ export function StripResep({
   onReset,
 }: Props) {
   const copy = copyFor(locale)
+  /* The reset button renders only while there are edits, so activating it
+     unmounts it and drops focus to <body> — WCAG 2.4.3. Focus moves to the
+     section heading instead, which is where the reader now is. */
+  const judulRef = useRef<HTMLHeadingElement>(null)
   const total = trace.totals.find((entry) => entry.nutrientId === nutrientId)!
   const largest = total.contributions.reduce((max, c) => Math.max(max, c.total), 0)
   const edited = Object.keys(beratOverrideG).length > 0
@@ -54,7 +59,9 @@ export function StripResep({
   return (
     <section>
       <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <h2 className="font-display text-lg text-rim">{copy.strip.judul}</h2>
+        <h2 ref={judulRef} tabIndex={-1} className="font-display text-lg text-rim">
+          {copy.strip.judul}
+        </h2>
         <div className="flex items-center gap-3 text-sm">
           <label className="flex items-center gap-2">
             <span className="text-ink-soft">{copy.strip.pilihNutrien}</span>

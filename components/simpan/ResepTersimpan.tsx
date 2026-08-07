@@ -13,7 +13,7 @@
  * out loud, because a "save" button in a nutrition app is exactly where a
  * reader would reasonably expect a food diary to begin.
  */
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   entryId,
   untukMasakan,
@@ -38,6 +38,10 @@ export function ResepTersimpan({
   const { entries, ready, save, remove } = useResepTersimpan()
   const [nama, setNama] = useState('')
   const [gagal, setGagal] = useState(false)
+  /* Deleting a version removes the row holding the button that did it, which
+     drops focus to <body> — WCAG 2.4.3. Focus moves to the list, which is
+     where the result of the deletion is. */
+  const daftarRef = useRef<HTMLUListElement>(null)
 
   const milik = untukMasakan(entries, dishId)
   const adaPerubahan = Object.keys(beratOverrideG).length > 0
@@ -91,7 +95,7 @@ export function ResepTersimpan({
       {gagal && <p className="mt-2 max-w-prose text-sm text-edited">{copy.simpan.gagal}</p>}
 
       {ready && (
-        <ul className="mt-4 space-y-2 text-sm">
+        <ul ref={daftarRef} tabIndex={-1} className="mt-4 space-y-2 text-sm">
           {milik.length === 0 && <li className="text-ink-soft">{copy.simpan.kosong}</li>}
           {milik.map((entry) => (
             <li key={entry.id} className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -111,7 +115,10 @@ export function ResepTersimpan({
               </button>
               <button
                 type="button"
-                onClick={() => remove(entry.id)}
+                onClick={() => {
+                  remove(entry.id)
+                  daftarRef.current?.focus()
+                }}
                 className="text-ink-soft underline underline-offset-4 hover:text-rim"
               >
                 {copy.simpan.hapus}
