@@ -13,10 +13,37 @@
  */
 import { useState } from 'react'
 import { AKG_CITATION, AKG_KELOMPOK, KELOMPOK_AWAL, adequacyFor, findKelompok } from '@/lib/akg'
-import { NUTRIENTS } from '@/lib/nutrition/nutrients'
+import { NUTRIENTS, type NutrientDef, type NutrientGroup } from '@/lib/nutrition/nutrients'
 import { perPorsi, type NutritionTrace } from '@/lib/nutrition/trace'
 import { copyFor, type Locale } from '@/lib/i18n'
 import { formatNutrient, formatPercent, nutrientLabel, unitLabel } from '@/lib/format'
+
+/**
+ * Group labels for the four buckets `NutrientDef.group` already carries. The
+ * field existed from the start and nothing rendered it, so all 25 nutrients
+ * arrived as one undifferentiated list — and "am I getting enough iron", the
+ * question PRD §5 says this tool exists to answer, meant reading all 25.
+ *
+ * Reading order is unchanged: NUTRIENTS order is preserved inside each group,
+ * and the groups appear in the order they first occur, so energy stays first.
+ */
+const GROUP_LABEL: Record<NutrientGroup, Record<Locale, string>> = {
+  energi: { id: 'Energi', en: 'Energy' },
+  makro: { id: 'Makronutrien', en: 'Macronutrients' },
+  mineral: { id: 'Mineral', en: 'Minerals' },
+  vitamin: { id: 'Vitamin', en: 'Vitamins' },
+  lain: { id: 'Lainnya', en: 'Other' },
+}
+
+function byGroup(): Map<NutrientGroup, NutrientDef[]> {
+  const grouped = new Map<NutrientGroup, NutrientDef[]>()
+  for (const nutrient of NUTRIENTS) {
+    const existing = grouped.get(nutrient.group)
+    if (existing) existing.push(nutrient)
+    else grouped.set(nutrient.group, [nutrient])
+  }
+  return grouped
+}
 
 export function Kecukupan({ trace, locale }: { trace: NutritionTrace; locale: Locale }) {
   const copy = copyFor(locale)
@@ -45,46 +72,56 @@ export function Kecukupan({ trace, locale }: { trace: NutritionTrace; locale: Lo
 
       <p className="mt-2 max-w-prose text-base text-ink-soft">{copy.adequacy.penjelasan}</p>
 
-      <ul className="mt-4 space-y-2">
-        {NUTRIENTS.map((nutrient) => {
-          const total = trace.totals.find((entry) => entry.nutrientId === nutrient.id)!
-          const amount = perPorsi(trace, total)
-          const adequacy = adequacyFor(kelompok, nutrient.id, amount)
-          return (
-            <li key={nutrient.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-              <span className="w-40 shrink-0">{nutrientLabel(nutrient.id, locale)}</span>
-              <span className="w-24 shrink-0 text-right font-mono">
-                {formatNutrient(amount, nutrient.id, locale)}{' '}
-                <span className="text-chip">{unitLabel(nutrient.id)}</span>
-              </span>
-
-              {adequacy.type === 'dibandingkan' ? (
-                <>
-                  <span className="h-3 min-w-[80px] flex-1 bg-rim/10">
-                    <span
-                      className="move-together block h-3 bg-adequate"
-                      style={{ width: `${Math.min(100, Math.round(adequacy.bagian * 100))}%` }}
-                    />
+      {[...byGroup().entries()].map(([group, nutrients]) => (
+        <div key={group} className="mt-5">
+          <h3 className="border-b border-rim/20 pb-1 text-sm font-medium text-rim">
+            {GROUP_LABEL[group][locale]}
+          </h3>
+          <ul className="mt-2 space-y-2">
+            {nutrients.map((nutrient) => {
+              const total = trace.totals.find((entry) => entry.nutrientId === nutrient.id)!
+              const amount = perPorsi(trace, total)
+              const adequacy = adequacyFor(kelompok, nutrient.id, amount)
+              return (
+                <li
+                  key={nutrient.id}
+                  className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"
+                >
+                  <span className="w-40 shrink-0">{nutrientLabel(nutrient.id, locale)}</span>
+                  <span className="w-24 shrink-0 text-right font-mono">
+                    {formatNutrient(amount, nutrient.id, locale)}{' '}
+                    <span className="text-chip">{unitLabel(nutrient.id)}</span>
                   </span>
-                  <span className="w-16 shrink-0 text-right font-mono text-adequate">
-                    {formatPercent(adequacy.bagian, locale)}
-                  </span>
-                </>
-              ) : (
-                <span className="flex-1 text-chip">
-                  {copy.adequacy.tidakDibandingkan} — {adequacy.reason}
-                </span>
-              )}
 
-              {!total.lengkap && (
-                <span className="w-full text-xs text-chip sm:w-auto">
-                  {locale === 'en' ? 'incomplete' : 'belum lengkap'}
-                </span>
-              )}
-            </li>
-          )
-        })}
-      </ul>
+                  {adequacy.type === 'dibandingkan' ? (
+                    <>
+                      <span className="h-3 min-w-[80px] flex-1 bg-rim/10">
+                        <span
+                          className="move-together block h-3 bg-adequate"
+                          style={{ width: `${Math.min(100, Math.round(adequacy.bagian * 100))}%` }}
+                        />
+                      </span>
+                      <span className="w-16 shrink-0 text-right font-mono text-adequate">
+                        {formatPercent(adequacy.bagian, locale)}
+                      </span>
+                    </>
+                  ) : (
+                    <span className="flex-1 text-chip">
+                      {copy.adequacy.tidakDibandingkan} — {adequacy.reason}
+                    </span>
+                  )}
+
+                  {!total.lengkap && (
+                    <span className="w-full text-xs text-chip sm:w-auto">
+                      {locale === 'en' ? 'incomplete' : 'belum lengkap'}
+                    </span>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      ))}
 
       <p className="mt-4 max-w-prose text-xs text-ink-soft">{AKG_CITATION}</p>
     </section>
