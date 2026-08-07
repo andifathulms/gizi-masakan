@@ -43,6 +43,16 @@ export function formatFactor(value: number, locale: Locale): string {
   }).format(value)
 }
 
+/**
+ * A signed change. The sign is the whole point — "12 kcal" and "−12 kcal" are
+ * opposite facts — so it is always written, including the plus.
+ */
+export function formatDelta(value: number, nutrientId: string, locale: Locale): string {
+  const magnitude = formatNutrient(Math.abs(value), nutrientId, locale)
+  if (Math.abs(value) < Number.EPSILON) return `±${magnitude}`
+  return `${value > 0 ? '+' : '−'}${magnitude}`
+}
+
 export function formatPercent(fraction: number, locale: Locale): string {
   return new Intl.NumberFormat(localeTag(locale), {
     style: 'percent',

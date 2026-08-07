@@ -91,6 +91,10 @@ export interface Copy {
         pair invites the conclusion that gaining weight in the pan gains
         nutrients with it. */
     readonly dasarBerat: string
+    /** The authored figure, kept beside the edited one. Without it the reader
+        sees where they landed but not how far they moved. */
+    readonly resepAsli: string
+    readonly selisih: (delta: string) => string
   }
   readonly strip: {
     readonly judul: string
@@ -236,6 +240,8 @@ const ID: Copy = {
     beratMentah: 'Berat mentah',
     beratMatang: 'Berat matang',
     tidakDiketahui: 'tidak diketahui',
+    resepAsli: 'resep asli',
+    selisih: (delta) => `${delta} dari resep asli`,
     dasarBerat:
       'Angka gizi di atas dihitung dari berat mentah. Berat matang berbeda karena air masuk atau keluar waktu dimasak — itu tidak menambah atau mengurangi gizinya.',
   },
@@ -381,6 +387,8 @@ const EN: Copy = {
     beratMentah: 'Raw weight',
     beratMatang: 'Cooked weight',
     tidakDiketahui: 'not known',
+    resepAsli: 'authored recipe',
+    selisih: (delta) => `${delta} from the authored recipe`,
     dasarBerat:
       'The nutrition figures above are calculated from the raw weight. The cooked weight differs because water enters or leaves during cooking — that neither adds nor removes nutrients.',
   },

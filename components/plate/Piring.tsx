@@ -15,7 +15,7 @@ import { findUnmatched, loadFdcTable } from '@/lib/sources/fdc/load'
 import { HEADLINE_NUTRIENT_IDS, NUTRIENTS } from '@/lib/nutrition/nutrients'
 import { perPorsi, type Recipe } from '@/lib/nutrition/trace'
 import { copyFor, type Locale } from '@/lib/i18n'
-import { formatGram, formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
+import { formatDelta, formatGram, formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
 import { usePlateState } from '@/lib/url/use-plate-state'
 import { StripResep } from '@/components/strip/StripResep'
 import { PanelKekosongan } from '@/components/plate/PanelKekosongan'
@@ -38,6 +38,11 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
     [recipe, beratOverrideG, pengolahanOverride],
   )
 
+  /* The authored recipe's own trace, so an edited plate can show what it
+     departed from. Memoised on the recipe alone — it never changes as the
+     reader edits, and computing it costs about a tenth of a millisecond. */
+  const dasar = useMemo(() => compute({ recipe, table, unmatched }), [recipe])
+
   const edited =
     Object.keys(beratOverrideG).length > 0 || Object.keys(pengolahanOverride).length > 0
   const scale = perPorsiView ? 1 / trace.porsi : 1
@@ -47,6 +52,9 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
      happen; without this it is silent. WCAG 4.1.3 Status Messages.
      One region, reporting the selected nutrient — announcing all eight totals
      on every keystroke would be noise, not information. */
+  const asliFor = (id: string) =>
+    dasar.totals.find((entry) => entry.nutrientId === id)?.total ?? 0
+
   const selected = trace.totals.find((entry) => entry.nutrientId === nutrientId)!
   const pengumuman = copy.diperbarui(
     nutrientLabel(nutrientId, locale),
@@ -120,6 +128,22 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
                       attribute, which never appears on a touch screen — which
                       meant an incomplete total looked complete on a phone.
                       Invariant 2 requires the gap to be visible. */}
+                  {/* PRD §2 turns on watching the number move. Once the
+                      reader stops moving it, the movement was gone: they saw
+                      where they landed and not how far. */}
+                  {edited && (
+                    <span className="mt-0.5 block text-xs font-normal text-ink-soft">
+                      {copy.plate.resepAsli}{' '}
+                      <span className="font-mono">
+                        {formatNutrient(asliFor(id) * scale, id, locale)}
+                      </span>{' '}
+                      <span className="text-chip">
+                        {copy.plate.selisih(
+                          formatDelta((total.total - asliFor(id)) * scale, id, locale),
+                        )}
+                      </span>
+                    </span>
+                  )}
                   {!total.lengkap && (
                     <span className="ml-1 align-middle text-sm text-chip">
                       †<span className="sr-only"> {copy.gaps.ringkasTidakLengkap}</span>
