@@ -35,12 +35,14 @@ pnpm test:conservation      # contribution sums, mass balance
 pnpm test:gaps              # missing-value handling, both directions
 pnpm fdc:fetch              # DEV/CI — download FDC SR Legacy bulk CSV
 pnpm fdc:build              # filter to curated list, project nutrients, write binary
+pnpm factors:fetch          # DEV/CI — download the two USDA public-domain factor tables
+pnpm factors:build          # transcribe them, derive rice/vegetable yields
 pnpm data:validate          # licence gate, FDC ids, citations, URT dates, recipe refs
 pnpm typecheck
 pnpm lint
 ```
 
-`pnpm data:validate` gates the build and CI. `fdc:fetch` and `fdc:build` are development and scheduled-CI only — never part of `pnpm build`, never in the browser bundle.
+`pnpm data:validate` gates the build and CI. `fdc:*` and `factors:*` are development and scheduled-CI only — never part of `pnpm build`, never in the browser bundle. `factors:fetch` needs `poppler-utils` for `pdftotext`.
 
 ## Layout
 
@@ -165,4 +167,12 @@ The site states plainly that it is a personal project, that ingredient values ar
 
 ## Current state
 
-M0 — not yet scaffolded. Next: the FDC fetch-filter-project pipeline, the curated ingredient list, and the licence manifest with TKPI recorded as excluded. **No compute work until the ingredient table validates.**
+**M2 shipped.** M0 through M4 are in: pipeline, engine, plate with inline recipe editing, ingredient browser, method page, AKG adequacy. 12 recipes, 70 ingredients, 94 tests, 28.3 KB of the 200 KB data budget.
+
+Three things are deliberately incomplete, and each is stated in the product rather than hidden:
+
+1. **Recipe gram weights are not weighed.** All marked `perkiraan`, rendered in terracotta. Changing one to `ditimbang` means replacing the number with a scale reading and dating it. This is the most valuable remaining work — see PRD §4.
+2. **The URT table is empty.** Invariant 9 forbids unmeasured entries, so portions show in grams. `data/urt/takaran.json` carries the measuring protocol and the list of takaran to weigh.
+3. **13 Indonesian ingredients have no source.** Recorded in `data/ingredients/unmatched.json`, still present in the recipes, named as gaps in every trace. **Do not resolve any of them from TKPI.**
+
+Next, in order of value: weigh the URT table; weigh the existing recipes; then M3's remaining dishes toward forty. Local recipe saving (§6.6) is the one M5 feature not yet built.
