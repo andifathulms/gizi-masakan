@@ -1,0 +1,132 @@
+{
+  "id": "gado-gado",
+  "namaId": "Gado-gado",
+  "nameEn": "Vegetables with peanut sauce",
+  "deskripsiId": "Sayur rebus, tahu, tempe, telur, dan bumbu kacang. Selisih antara gado-gado dua warung lebih besar daripada ketelitian yang bisa diklaim aplikasi mana pun — jadi ubahlah takarannya.",
+  "kategori": "sayur",
+  "porsi": 2,
+  "bahan": [
+    {
+      "ingredientId": "kol",
+      "beratG": 80,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus sebentar",
+        "labelEn": "Blanched",
+        "retentionCode": "3005"
+      },
+      "catatan": "Tidak ada faktor yield untuk kol rebus, jadi berat matangnya dibiarkan tidak diketahui."
+    },
+    {
+      "ingredientId": "kacang-panjang",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Boiled",
+        "yieldRef": { "kind": "derived", "id": "kacang-panjang-direbus" },
+        "retentionCode": "3005"
+      }
+    },
+    {
+      "ingredientId": "taoge",
+      "beratG": 50,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus sebentar",
+        "labelEn": "Blanched",
+        "yieldRef": { "kind": "derived", "id": "taoge-direbus" },
+        "retentionCode": "3005"
+      }
+    },
+    {
+      "ingredientId": "timun",
+      "beratG": 50,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kentang",
+      "beratG": 80,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Boiled",
+        "yieldRef": { "kind": "derived", "id": "kentang-direbus" },
+        "retentionCode": "3307"
+      }
+    },
+    {
+      "ingredientId": "tahu-goreng",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "catatan": "Memakai entri FDC tahu yang sudah digoreng, jadi minyak serapnya sudah termasuk dan tidak perlu ditaksir terpisah."
+    },
+    {
+      "ingredientId": "tempe",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Digoreng",
+        "labelEn": "Fried",
+        "retentionCode": "0505"
+      },
+      "catatan": "FDC tidak punya entri tempe goreng, dan serapan minyaknya belum ditimbang. Minyaknya karena itu tidak ikut dihitung — angka lemak resep ini kurang dari kenyataannya."
+    },
+    {
+      "ingredientId": "telur-ayam",
+      "beratG": 55,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Hard cooked",
+        "retentionCode": "0105"
+      }
+    },
+    {
+      "ingredientId": "kacang-tanah-sangrai",
+      "beratG": 70,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "cabai-rawit",
+      "beratG": 6,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 6,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "gula-merah",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "asam-jawa",
+      "beratG": 5,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 3,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "catatan": "Air untuk mengencerkan bumbu kacang."
+    },
+    {
+      "ingredientId": "krupuk-udang",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Susunan gado-gado Jakarta dengan bumbu kacang diulek. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

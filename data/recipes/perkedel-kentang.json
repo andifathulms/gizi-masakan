@@ -1,0 +1,37 @@
+{
+  "id": "perkedel-kentang",
+  "namaId": "Perkedel kentang",
+  "nameEn": "Potato fritters",
+  "deskripsiId": "Kentang rebus dilumat, dibumbui, dibentuk bulat, dicelup telur, lalu digoreng.",
+  "kategori": "lauk",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "kentang",
+      "beratG": 400,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus lalu digoreng",
+        "labelEn": "Boiled then fried",
+        "yieldRef": { "kind": "derived", "id": "kentang-direbus" },
+        "retentionCode": "3315"
+      },
+      "catatan": "Faktor yield-nya untuk kentang rebus saja. Penggorengan sesudahnya mengurangi berat lagi, dan besarnya belum diukur."
+    },
+    { "ingredientId": "telur-ayam", "beratG": 55, "provenance": "perkiraan",
+      "pengolahan": { "labelId": "Digoreng", "labelEn": "Fried", "retentionCode": "0103" } },
+    { "ingredientId": "bawang-merah", "beratG": 30, "provenance": "perkiraan" },
+    { "ingredientId": "bawang-putih", "beratG": 8, "provenance": "perkiraan" },
+    { "ingredientId": "daun-bawang", "beratG": 15, "provenance": "perkiraan" },
+    { "ingredientId": "seledri", "beratG": 10, "provenance": "perkiraan" },
+    { "ingredientId": "pala-bubuk", "beratG": 1, "provenance": "perkiraan" },
+    { "ingredientId": "lada-hitam", "beratG": 1, "provenance": "perkiraan" },
+    { "ingredientId": "garam", "beratG": 5, "provenance": "perkiraan" },
+    { "ingredientId": "bawang-goreng", "beratG": 10, "provenance": "perkiraan" }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Perkedel kentang rumahan. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

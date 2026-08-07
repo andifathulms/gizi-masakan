@@ -1,0 +1,51 @@
+{
+  "id": "tumis-kangkung",
+  "namaId": "Tumis kangkung",
+  "nameEn": "Stir-fried water spinach",
+  "deskripsiId": "Kangkung ditumis dengan bawang dan cabai. Bahan utamanya justru yang tidak punya data — halaman ini menunjukkan apa yang terjadi kalau begitu.",
+  "kategori": "sayur",
+  "porsi": 2,
+  "bahan": [
+    {
+      "ingredientId": "kangkung",
+      "beratG": 250,
+      "provenance": "perkiraan",
+      "catatan": "Bahan utama resep ini, dan tidak ada padanannya di FDC. Angka gizi hidangan ini karena itu jauh lebih rendah dari kenyataannya — bukan karena kangkungnya tidak bergizi, tapi karena datanya tidak ada."
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 25,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 10,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "cabai-merah",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "terasi",
+      "beratG": 5,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 3,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Tumis kangkung terasi rumahan. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

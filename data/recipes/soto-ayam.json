@@ -1,0 +1,136 @@
+{
+  "id": "soto-ayam",
+  "namaId": "Soto ayam",
+  "nameEn": "Chicken soup with turmeric",
+  "deskripsiId": "Kuah kuning, ayam disuwir, bihun, taoge, seledri. Kuahnya bening, jadi sebagian besar energinya datang dari ayam dan bihun.",
+  "kategori": "berkuah",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "ayam-utuh-kulit",
+      "beratG": 500,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Simmered",
+        "yieldRef": { "kind": "usda", "code": "5010" },
+        "retentionCode": "0856"
+      },
+      "catatan": "Kuahnya ikut dimakan, jadi kode retensi yang dipakai adalah CHICKEN,SIMMERED,W/DRIPPINGS."
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 1200,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bihun-kering",
+      "beratG": 80,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Boiled",
+        "yieldRef": { "kind": "derived", "id": "bihun-direbus" },
+        "retentionCode": "0432"
+      }
+    },
+    {
+      "ingredientId": "taoge",
+      "beratG": 80,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus sebentar",
+        "labelEn": "Blanched",
+        "yieldRef": { "kind": "derived", "id": "taoge-direbus" },
+        "retentionCode": "3006"
+      }
+    },
+    {
+      "ingredientId": "kol",
+      "beratG": 60,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus sebentar",
+        "labelEn": "Blanched",
+        "retentionCode": "3006"
+      }
+    },
+    {
+      "ingredientId": "seledri",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "daun-bawang",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 30,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 12,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kunyit-bubuk",
+      "beratG": 4,
+      "provenance": "perkiraan",
+      "catatan": "Di dapur biasanya kunyit segar. Yang ada di tabel kunyit bubuk kering, jadi per gramnya jauh lebih pekat. Kalau Anda pakai kunyit segar, kira-kira lima kali berat ini."
+    },
+    {
+      "ingredientId": "jahe",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "ketumbar",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kemiri",
+      "beratG": 12,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "serai",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "daun-jeruk",
+      "beratG": 3,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "lengkuas",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 20,
+      "provenance": "perkiraan",
+      "catatan": "Minyak untuk menumis bumbu. Semuanya masuk ke kuah, jadi ikut dihitung penuh."
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "jeruk-nipis",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Soto ayam kuah kuning gaya Lamongan tanpa koya. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

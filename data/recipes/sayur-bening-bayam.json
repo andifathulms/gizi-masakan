@@ -1,0 +1,45 @@
+{
+  "id": "sayur-bening-bayam",
+  "namaId": "Sayur bening bayam",
+  "nameEn": "Clear spinach soup",
+  "deskripsiId": "Bayam dan jagung dalam kuah bening. Kuahnya diminum, jadi mineral yang larut tetap ikut termakan — itu sebabnya kode retensinya yang WATER USED.",
+  "kategori": "sayur",
+  "porsi": 3,
+  "bahan": [
+    {
+      "ingredientId": "bayam",
+      "beratG": 200,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus, kuah dimakan",
+        "labelEn": "Boiled, water consumed",
+        "retentionCode": "3006"
+      },
+      "catatan": "Bayam Indonesia (Amaranthus) didekati dengan spinach (Spinacia). Beda genus — angkanya perkiraan kasar, bukan padanan."
+    },
+    { "ingredientId": "labu-siam", "beratG": 100, "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus",
+        "labelEn": "Boiled",
+        "yieldRef": { "kind": "derived", "id": "labu-siam-direbus" },
+        "retentionCode": "3456"
+      }
+    },
+    { "ingredientId": "wortel", "beratG": 60, "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus, kuah dimakan",
+        "labelEn": "Boiled, water consumed",
+        "retentionCode": "3456"
+      }
+    },
+    { "ingredientId": "bawang-merah", "beratG": 20, "provenance": "perkiraan" },
+    { "ingredientId": "garam", "beratG": 4, "provenance": "perkiraan" },
+    { "ingredientId": "gula-pasir", "beratG": 3, "provenance": "perkiraan" },
+    { "ingredientId": "air", "beratG": 700, "provenance": "perkiraan" }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Sayur bening rumahan tanpa jagung manis, karena jagung belum ada di daftar bahan. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

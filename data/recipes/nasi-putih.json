@@ -1,0 +1,33 @@
+{
+  "id": "nasi-putih",
+  "namaId": "Nasi putih",
+  "nameEn": "Steamed white rice",
+  "deskripsiId": "Beras ditanak dengan air, tanpa garam. Dasar dari hampir semua hidangan lain di sini.",
+  "kategori": "nasi",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "beras-putih",
+      "beratG": 300,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditanak",
+        "labelEn": "Boiled and steamed",
+        "yieldRef": { "kind": "derived", "id": "beras-ditanak" },
+        "retentionCode": "0432"
+      },
+      "catatan": "Air tanak tidak dibuang, jadi kode retensi yang dipakai adalah RICE,WHITE/BROWN,COOKED,WATER USED."
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 450,
+      "provenance": "perkiraan",
+      "catatan": "Air ikut ditimbang karena menentukan berat matang. Sumbangan gizinya nol menurut FDC, bukan karena diabaikan."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Perbandingan beras dan air 1:1,5 yang lazim dipakai untuk rice cooker rumahan. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

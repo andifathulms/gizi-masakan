@@ -1,0 +1,49 @@
+{
+  "id": "semur-daging",
+  "namaId": "Semur daging",
+  "nameEn": "Beef in sweet soy stew",
+  "deskripsiId": "Sengkel sapi dimasak lama dengan kecap manis, pala, dan cengkeh. Kecap manisnya bahan utama rasa — dan tidak ada datanya.",
+  "kategori": "lauk",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "daging-sapi-sengkel",
+      "beratG": 500,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Dimasak lama, kuah dimakan",
+        "labelEn": "Braised, with drippings",
+        "yieldRef": { "kind": "usda", "code": "x-beef-retail-cuts-all-boneless-braised" },
+        "retentionCode": "0702"
+      }
+    },
+    {
+      "ingredientId": "kecap-manis",
+      "beratG": 80,
+      "provenance": "perkiraan",
+      "catatan": "Tidak ada di tabel bahan. Kecap manis sebagian besar gula aren, jadi angka karbohidrat dan gula hidangan ini kurang banyak dari kenyataannya."
+    },
+    { "ingredientId": "bawang-bombay", "beratG": 100, "provenance": "perkiraan" },
+    { "ingredientId": "bawang-putih", "beratG": 15, "provenance": "perkiraan" },
+    { "ingredientId": "kentang", "beratG": 200, "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Direbus dalam kuah",
+        "labelEn": "Boiled in stew",
+        "yieldRef": { "kind": "derived", "id": "kentang-direbus" },
+        "retentionCode": "3309"
+      } },
+    { "ingredientId": "pala-bubuk", "beratG": 1, "provenance": "perkiraan" },
+    { "ingredientId": "cengkeh", "beratG": 1, "provenance": "perkiraan" },
+    { "ingredientId": "kayu-manis", "beratG": 2, "provenance": "perkiraan" },
+    { "ingredientId": "lada-hitam", "beratG": 2, "provenance": "perkiraan" },
+    { "ingredientId": "daun-salam", "beratG": 2, "provenance": "perkiraan" },
+    { "ingredientId": "minyak-sawit", "beratG": 20, "provenance": "perkiraan" },
+    { "ingredientId": "garam", "beratG": 5, "provenance": "perkiraan" },
+    { "ingredientId": "air", "beratG": 600, "provenance": "perkiraan" }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Semur daging Betawi dengan kentang. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

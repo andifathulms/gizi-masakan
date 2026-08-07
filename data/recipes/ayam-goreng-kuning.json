@@ -1,0 +1,78 @@
+{
+  "id": "ayam-goreng-kuning",
+  "namaId": "Ayam goreng kuning",
+  "nameEn": "Turmeric fried chicken",
+  "deskripsiId": "Ayam diungkep dengan bumbu kuning sampai meresap, lalu digoreng.",
+  "kategori": "lauk",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "ayam-paha-kulit",
+      "beratG": 600,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Diungkep lalu digoreng",
+        "labelEn": "Braised then fried",
+        "yieldRef": { "kind": "usda", "code": "5094" },
+        "retentionCode": "0803"
+      },
+      "catatan": "Faktor yield yang dipakai adalah paha ayam dipanggang, karena USDA tidak menerbitkan yield untuk ayam yang diungkep lalu digoreng. Ini pendekatan, dan disebut di sini supaya tidak terbaca sebagai angka pas."
+    },
+    {
+      "ingredientId": "kunyit-bubuk",
+      "beratG": 5,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "ketumbar",
+      "beratG": 5,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-putih",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "bawang-merah",
+      "beratG": 35,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "kemiri",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "lengkuas",
+      "beratG": 15,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "serai",
+      "beratG": 20,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "daun-salam",
+      "beratG": 2,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 8,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 300,
+      "provenance": "perkiraan",
+      "catatan": "Air ungkepan, hampir seluruhnya menyusut."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Ayam ungkep bumbu kuning, digoreng sebentar sebelum disajikan. Belum ditimbang; minyak goreng yang terserap belum diukur dan tidak dihitung."
+  },
+  "ditulisPada": "2026-08-07"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "pecel-lele",
+  "namaId": "Pecel lele",
+  "nameEn": "Fried catfish with sambal",
+  "deskripsiId": "Lele goreng, sambal terasi, dan lalapan mentah. Sambalnya kecil tapi bawa garam dan cabai yang tidak sedikit.",
+  "kategori": "lauk",
+  "porsi": 2,
+  "bahan": [
+    {
+      "ingredientId": "ikan-lele",
+      "beratG": 350,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Digoreng",
+        "labelEn": "Fried, without coating",
+        "retentionCode": "2309"
+      },
+      "catatan": "Lele budidaya Indonesia didekati dengan channel catfish liar Amerika. Kadar lemaknya bisa berbeda jauh tergantung pakan."
+    },
+    { "ingredientId": "jeruk-nipis", "beratG": 10, "provenance": "perkiraan" },
+    { "ingredientId": "cabai-rawit", "beratG": 20, "provenance": "perkiraan" },
+    { "ingredientId": "cabai-merah", "beratG": 20, "provenance": "perkiraan" },
+    { "ingredientId": "bawang-merah", "beratG": 20, "provenance": "perkiraan" },
+    { "ingredientId": "bawang-putih", "beratG": 8, "provenance": "perkiraan" },
+    { "ingredientId": "tomat", "beratG": 40, "provenance": "perkiraan" },
+    { "ingredientId": "terasi", "beratG": 5, "provenance": "perkiraan" },
+    { "ingredientId": "gula-merah", "beratG": 8, "provenance": "perkiraan" },
+    { "ingredientId": "garam", "beratG": 4, "provenance": "perkiraan" },
+    { "ingredientId": "minyak-sawit", "beratG": 15, "provenance": "perkiraan",
+      "catatan": "Minyak untuk menggoreng sambal saja. Minyak yang terserap lelenya belum diukur dan tidak dihitung." },
+    { "ingredientId": "timun", "beratG": 60, "provenance": "perkiraan" },
+    { "ingredientId": "selada", "beratG": 30, "provenance": "perkiraan" },
+    { "ingredientId": "kol", "beratG": 40, "provenance": "perkiraan" }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Pecel lele pinggir jalan dengan sambal terasi dan lalapan. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

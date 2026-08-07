@@ -1,0 +1,35 @@
+{
+  "id": "telur-dadar",
+  "namaId": "Telur dadar",
+  "nameEn": "Indonesian omelette",
+  "deskripsiId": "Telur dikocok dengan bawang merah dan daun bawang, digoreng tipis.",
+  "kategori": "lauk",
+  "porsi": 2,
+  "bahan": [
+    {
+      "ingredientId": "telur-ayam",
+      "beratG": 110,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Didadar",
+        "labelEn": "Fried, scrambled",
+        "retentionCode": "0103"
+      }
+    },
+    { "ingredientId": "bawang-merah", "beratG": 20, "provenance": "perkiraan" },
+    { "ingredientId": "daun-bawang", "beratG": 10, "provenance": "perkiraan" },
+    { "ingredientId": "cabai-rawit", "beratG": 4, "provenance": "perkiraan" },
+    {
+      "ingredientId": "minyak-sawit",
+      "beratG": 10,
+      "provenance": "perkiraan",
+      "catatan": "Minyak untuk mendadar hampir seluruhnya terserap ke telurnya, jadi ikut dihitung penuh. Ini asumsi, bukan hasil timbangan."
+    },
+    { "ingredientId": "garam", "beratG": 2, "provenance": "perkiraan" }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Telur dadar rumahan. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}

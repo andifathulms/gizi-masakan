@@ -1,0 +1,34 @@
+{
+  "id": "tempe-goreng",
+  "namaId": "Tempe goreng",
+  "nameEn": "Fried tempeh",
+  "deskripsiId": "Tempe diiris, dibumbui ketumbar dan bawang putih, lalu digoreng. Sederhana, dan bolongnya jelas: serapan minyaknya belum ditimbang.",
+  "kategori": "lauk",
+  "porsi": 3,
+  "bahan": [
+    {
+      "ingredientId": "tempe",
+      "beratG": 250,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Digoreng",
+        "labelEn": "Fried",
+        "retentionCode": "0505"
+      }
+    },
+    { "ingredientId": "bawang-putih", "beratG": 8, "provenance": "perkiraan" },
+    { "ingredientId": "ketumbar", "beratG": 3, "provenance": "perkiraan" },
+    { "ingredientId": "garam", "beratG": 4, "provenance": "perkiraan" },
+    {
+      "ingredientId": "air",
+      "beratG": 50,
+      "provenance": "perkiraan",
+      "catatan": "Air rendaman bumbu. Sebagian besar menguap saat digoreng."
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Tempe goreng bumbu ketumbar, tanpa tepung. Belum ditimbang, dan minyak yang terserap belum diukur sehingga tidak masuk hitungan sama sekali."
+  },
+  "ditulisPada": "2026-08-07"
+}

@@ -1,0 +1,53 @@
+{
+  "id": "nasi-uduk",
+  "namaId": "Nasi uduk",
+  "nameEn": "Coconut milk rice",
+  "deskripsiId": "Beras ditanak dengan santan encer, serai, dan daun salam. Angkanya bergerak jauh kalau santannya diubah — coba saja.",
+  "kategori": "nasi",
+  "porsi": 4,
+  "bahan": [
+    {
+      "ingredientId": "beras-putih",
+      "beratG": 300,
+      "provenance": "perkiraan",
+      "pengolahan": {
+        "labelId": "Ditanak dengan santan",
+        "labelEn": "Cooked in coconut milk",
+        "yieldRef": { "kind": "derived", "id": "beras-ditanak" },
+        "retentionCode": "0432"
+      },
+      "catatan": "Faktor yield diturunkan untuk beras yang ditanak dengan air. Menanak dengan santan menambah lemak dan padatan, jadi berat matangnya sebenarnya lebih tinggi dari angka ini."
+    },
+    {
+      "ingredientId": "santan-encer",
+      "beratG": 250,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "air",
+      "beratG": 200,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "serai",
+      "beratG": 15,
+      "provenance": "perkiraan",
+      "catatan": "Tidak ada di tabel bahan. Sengaja tetap ditulis supaya kekosongannya kelihatan."
+    },
+    {
+      "ingredientId": "daun-salam",
+      "beratG": 2,
+      "provenance": "perkiraan"
+    },
+    {
+      "ingredientId": "garam",
+      "beratG": 4,
+      "provenance": "perkiraan"
+    }
+  ],
+  "sumber": {
+    "type": "own-composition",
+    "catatan": "Susunan rumahan Jakarta: santan encer, bukan kental, supaya nasinya tidak berminyak. Belum ditimbang."
+  },
+  "ditulisPada": "2026-08-07"
+}
