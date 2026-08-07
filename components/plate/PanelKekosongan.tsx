@@ -41,9 +41,15 @@ export function PanelKekosongan({ trace, locale }: { trace: NutritionTrace; loca
   }
 
   return (
-    <section>
+    /* Bordered and set on the deeper enamel, because this panel is the
+       project's correctness story (invariant 2, PRD §13's top risk) and it was
+       rendering as the quietest block on the page — chip-grey headings, chip-
+       grey items, no container, sandwiched between two stronger sections.
+       "Present but visibly incomplete" (PRD §9) should not mean easy to skip.
+       Chip grey stays on the gap items themselves, where it means missing. */
+    <section className="rounded-plate border border-rim/40 bg-enamel-deep px-5 py-4">
       <h2 className="font-display text-lg text-rim">{copy.gaps.judul}</h2>
-      <p className="mt-2 max-w-prose text-base">
+      <p className="mt-2 max-w-prose text-base font-medium">
         {trace.lengkap ? copy.gaps.ringkasLengkap : copy.gaps.ringkasTidakLengkap}
       </p>
 
@@ -63,7 +69,7 @@ export function PanelKekosongan({ trace, locale }: { trace: NutritionTrace; loca
 
       {[...grouped.entries()].map(([severity, gaps]) => (
         <div key={severity} className="mt-4">
-          <h3 className="text-sm font-medium text-chip">
+          <h3 className="text-sm font-medium text-ink">
             {heading(severity, locale)} ({gaps.length})
           </h3>
           <ul className="mt-1 space-y-1 text-sm text-chip">
