@@ -16,7 +16,17 @@ export function isLocale(value: string): value is Locale {
 export interface Copy {
   readonly siteName: string
   readonly tagline: string
+  /** Four or five words under the wordmark. The site has to say what it is on
+      every page, not only on the one whose heading happens to explain it. */
+  readonly tagline5: string
   readonly nav: { masakan: string; bahan: string; metode: string }
+  /** The dish index doubles as the landing page — it is what the root
+      redirects to — so it carries the proposition, not just a list header. */
+  readonly landing: {
+    readonly judul: string
+    readonly lede: string
+    readonly poin: readonly { readonly judul: string; readonly isi: string }[]
+  }
   readonly plate: {
     readonly perPorsi: string
     readonly seluruhResep: string
@@ -66,7 +76,26 @@ export interface Copy {
 const ID: Copy = {
   siteName: 'Gizi Masakan',
   tagline: 'Gizi masakan Indonesia, dengan resep yang diasumsikan ditampilkan di bawahnya.',
+  tagline5: 'Gizi masakan Indonesia, dengan resepnya',
   nav: { masakan: 'Masakan', bahan: 'Bahan', metode: 'Metode' },
+  landing: {
+    judul: 'Gizi masakan Indonesia, dengan resepnya',
+    lede: 'Tidak ada satu resep nasi padang yang benar. Jadi setiap angka di sini datang dengan resep yang dipakai untuk menghitungnya — ditampilkan, bisa Anda ubah, dan angkanya ikut bergerak.',
+    poin: [
+      {
+        judul: 'Resepnya ditampilkan, dan bisa diubah',
+        isi: 'Ganti santannya dari 50 g jadi 100 g, semua angka ikut berubah. Warna terakota menandai perkiraan dan suntingan Anda.',
+      },
+      {
+        judul: 'Yang tidak terhitung, disebut',
+        isi: 'Bahan yang belum ada datanya tetap ditampilkan dan dinamai. Tidak pernah dihapus diam-diam, tidak pernah diisi nol.',
+      },
+      {
+        judul: 'Alat rujukan, bukan pelacak',
+        isi: 'Tidak ada total harian, jatah kalori, atau rentetan hari. Pertanyaannya "apakah sudah cukup", bukan "apakah sudah lewat".',
+      },
+    ],
+  },
   plate: {
     perPorsi: 'Per porsi',
     seluruhResep: 'Seluruh resep',
@@ -118,7 +147,26 @@ const ID: Copy = {
 const EN: Copy = {
   siteName: 'Gizi Masakan',
   tagline: 'Nutrition for Indonesian dishes, with the recipe it assumed shown underneath.',
+  tagline5: 'Indonesian dish nutrition, with the recipe',
   nav: { masakan: 'Dishes', bahan: 'Ingredients', metode: 'Method' },
+  landing: {
+    judul: 'Nutrition for Indonesian dishes, with the recipe shown',
+    lede: 'There is no single correct nasi padang. So every number here arrives with the recipe used to calculate it — shown, editable, and the numbers move when you change it.',
+    poin: [
+      {
+        judul: 'The recipe is shown, and editable',
+        isi: 'Change the coconut milk from 50 g to 100 g and every number moves. Terracotta marks estimates and your own edits.',
+      },
+      {
+        judul: 'What cannot be counted is named',
+        isi: 'An ingredient with no data still gets a row and a name. Never quietly dropped, never filled in with a zero.',
+      },
+      {
+        judul: 'A reference, not a tracker',
+        isi: 'No daily totals, no calorie budget, no streaks. The question is "am I getting enough", never "have I gone over".',
+      },
+    ],
+  },
   plate: {
     perPorsi: 'Per portion',
     seluruhResep: 'Whole recipe',

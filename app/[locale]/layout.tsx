@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
+import { NavUtama } from '@/components/chrome/NavUtama'
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }))
@@ -21,34 +22,37 @@ export default function LocaleLayout({
   return (
     <div className="min-h-screen">
       <header className="border-b border-rim/25">
-        <div className="mx-auto flex max-w-4xl flex-wrap items-baseline gap-x-6 gap-y-2 px-5 py-4">
-          <Link href={`/${locale}/masakan/`} className="font-display text-xl font-medium text-rim">
-            {copy.siteName}
+        <div className="mx-auto flex max-w-4xl flex-wrap items-center gap-x-6 gap-y-3 px-gutter py-4">
+          {/* The wordmark carries the one-line proposition, so the site says
+              what it is even on a page whose own heading does not. */}
+          <Link href={`/${locale}/masakan/`} className="mr-2 leading-tight">
+            <span className="block font-display text-lg font-medium text-rim">
+              {copy.siteName}
+            </span>
+            <span className="block text-xs text-ink-soft">{copy.tagline5}</span>
           </Link>
-          <nav className="flex gap-4 text-sm">
-            <Link href={`/${locale}/masakan/`} className="hover:text-rim">
-              {copy.nav.masakan}
-            </Link>
-            <Link href={`/${locale}/bahan/`} className="hover:text-rim">
-              {copy.nav.bahan}
-            </Link>
-            <Link href={`/${locale}/metode/`} className="hover:text-rim">
-              {copy.nav.metode}
-            </Link>
-          </nav>
+
+          <NavUtama locale={locale} />
+
+          {/* Labelled as a language switch rather than sitting in the nav as a
+              bare word that reads like a fourth section. */}
           <Link
             href={`/${other}/masakan/`}
-            className="ml-auto text-sm text-chip underline underline-offset-4 hover:text-rim"
+            lang={other}
+            className="ml-auto text-sm text-ink-soft underline underline-offset-4 hover:text-rim"
           >
+            <span aria-hidden="true">🌐 </span>
             {other === 'en' ? 'English' : 'Bahasa Indonesia'}
           </Link>
         </div>
       </header>
 
-      <main className="mx-auto max-w-4xl px-5 py-8">{children}</main>
+      <main className="mx-auto max-w-4xl px-gutter py-block">{children}</main>
 
-      <footer className="mt-12 border-t border-rim/25">
-        <p className="mx-auto max-w-4xl px-5 py-6 text-sm leading-relaxed text-chip">
+      <footer className="mt-section border-t border-rim/25">
+        {/* ink-soft, not chip: this is the standing disclaimer, not a gap.
+            Chip grey is reserved for missing data — PRD §9. */}
+        <p className="mx-auto max-w-4xl px-gutter py-block text-sm text-ink-soft">
           {copy.disclaimer}
         </p>
       </footer>
