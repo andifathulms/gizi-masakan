@@ -191,8 +191,17 @@ function parseYields(): YieldRow[] {
       skipped += 1
       continue
     }
+    const description = match[3]!.trim()
+    const method = match[4]!.replace(/,$/, '').trim()
     rows.push({
-      code: match[2] ?? '',
+      // Generic retail-cut rows carry no NDB number. They still need a stable,
+      // unique key, or they collide with each other in the lookup map.
+      code:
+        match[2] ??
+        `x-${`${description} ${method}`
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '')}`,
       description: match[3]!.trim(),
       method: match[4]!.replace(/,$/, '').trim(),
       yieldPercent,

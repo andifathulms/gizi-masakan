@@ -269,42 +269,42 @@
       "basis": "usda-yields"
     },
     {
-      "code": "",
+      "code": "x-beef-retail-cuts-all-bone-in-braised",
       "description": "Beef, retail cuts, all, bone in",
       "method": "Braised",
       "factor": 0.73,
       "basis": "usda-yields"
     },
     {
-      "code": "",
+      "code": "x-beef-retail-cuts-all-boneless-braised",
       "description": "Beef, retail cuts, all, boneless",
       "method": "Braised",
       "factor": 0.67,
       "basis": "usda-yields"
     },
     {
-      "code": "",
+      "code": "x-beef-retail-cuts-bone-in-all-temps-roasted",
       "description": "Beef, retail cuts, bone in, all temps",
       "method": "Roasted",
       "factor": 0.77,
       "basis": "usda-yields"
     },
     {
-      "code": "",
+      "code": "x-beef-retail-cuts-boneless-all-temps-roasted",
       "description": "Beef, retail cuts, boneless, all temps",
       "method": "Roasted",
       "factor": 0.79,
       "basis": "usda-yields"
     },
     {
-      "code": "",
+      "code": "x-beef-retail-cuts-boneless-short-ribs-braised",
       "description": "Beef, retail cuts, boneless, short ribs",
       "method": "Braised",
       "factor": 0.66,
       "basis": "usda-yields"
     },
     {
-      "code": "",
+      "code": "x-beef-retail-cuts-steaks-bone-in-and-boneless-cooking",
       "description": "Beef, retail cuts, steaks, bone in and boneless",
       "method": "cooking",
       "factor": 0.76,
@@ -444,21 +444,21 @@
       "basis": "usda-yields"
     },
     {
-      "code": "",
+      "code": "x-lamb-retail-cuts-roasts-all-samples-roasted",
       "description": "Lamb, retail cuts, roasts, all samples",
       "method": "Roasted",
       "factor": 0.74,
       "basis": "usda-yields"
     },
     {
-      "code": "",
+      "code": "x-lamb-retail-cuts-shoulder-shank-breast-flank-braised",
       "description": "Lamb, retail cuts, shoulder, shank, breast, flank",
       "method": "Braised",
       "factor": 0.6,
       "basis": "usda-yields"
     },
     {
-      "code": "",
+      "code": "x-lamb-retail-cuts-shoulder-shank-breast-flank-simmered",
       "description": "Lamb, retail cuts, shoulder, shank, breast, flank",
       "method": "Simmered",
       "factor": 0.6,
