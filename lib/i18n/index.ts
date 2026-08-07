@@ -36,6 +36,19 @@ export interface Copy {
     readonly kosong: (query: string) => string
     readonly menyebut: (count: number) => string
   }
+  /** Locally saved recipe versions — PRD §6.6. */
+  readonly simpan: {
+    readonly judul: string
+    readonly penjelasan: string
+    readonly namaLabel: string
+    readonly namaPlaceholder: string
+    readonly tombol: string
+    readonly kosong: string
+    readonly muat: string
+    readonly hapus: string
+    readonly gagal: string
+    readonly perluUbah: string
+  }
   readonly plate: {
     readonly perPorsi: string
     readonly seluruhResep: string
@@ -117,6 +130,19 @@ const ID: Copy = {
       `Tidak ada masakan yang cocok dengan "${query}". Yang ada di sini baru sebagian kecil dari masakan Indonesia — kalau belum ketemu, kemungkinan besar memang belum ditulis.`,
     menyebut: (count) => `menyebut ${count} hal yang tidak bisa dihitung`,
   },
+  simpan: {
+    judul: 'Simpan versi Anda',
+    penjelasan:
+      'Simpan takaran Anda sendiri untuk masakan ini di perangkat ini. Tidak ada yang dikirim ke mana pun, dan tidak ada catatan harian — ini menyimpan resep, bukan yang Anda makan.',
+    namaLabel: 'Nama versi',
+    namaPlaceholder: 'Misalnya: versi rumah',
+    tombol: 'Simpan',
+    kosong: 'Belum ada versi tersimpan untuk masakan ini.',
+    muat: 'Pakai',
+    hapus: 'Hapus',
+    gagal: 'Peramban ini menolak menyimpan. Kalau Anda memakai mode penyamaran, penyimpanan lokal biasanya dimatikan.',
+    perluUbah: 'Ubah dulu salah satu takaran di atas, baru ada yang bisa disimpan.',
+  },
   plate: {
     perPorsi: 'Per porsi',
     seluruhResep: 'Seluruh resep',
@@ -197,6 +223,19 @@ const EN: Copy = {
     kosong: (query) =>
       `Nothing matches "${query}". What is here is a small fraction of Indonesian cooking — if you cannot find it, it most likely has not been written yet.`,
     menyebut: (count) => `names ${count} things it cannot count`,
+  },
+  simpan: {
+    judul: 'Save your version',
+    penjelasan:
+      'Keep your own weights for this dish on this device. Nothing is sent anywhere, and there is no daily record — this saves a recipe, not what you ate.',
+    namaLabel: 'Version name',
+    namaPlaceholder: 'For example: how we make it',
+    tombol: 'Save',
+    kosong: 'No saved versions for this dish yet.',
+    muat: 'Use',
+    hapus: 'Delete',
+    gagal: 'This browser refused to save. Local storage is usually switched off in private browsing.',
+    perluUbah: 'Change one of the weights above first, then there is something to save.',
   },
   plate: {
     perPorsi: 'Per portion',

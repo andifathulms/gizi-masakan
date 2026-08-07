@@ -21,6 +21,7 @@ import { StripResep } from '@/components/strip/StripResep'
 import { PanelKekosongan } from '@/components/plate/PanelKekosongan'
 import { Kecukupan } from '@/components/adequacy/Kecukupan'
 import { JejakNutrien } from '@/components/trace/JejakNutrien'
+import { ResepTersimpan } from '@/components/simpan/ResepTersimpan'
 
 const table = loadFdcTable()
 const unmatched = { get: findUnmatched }
@@ -140,6 +141,13 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
           setView({ beratOverrideG: { ...beratOverrideG, [ingredientId]: beratG } })
         }
         onReset={() => setView({ beratOverrideG: {} })}
+      />
+
+      <ResepTersimpan
+        dishId={recipe.id}
+        locale={locale}
+        beratOverrideG={beratOverrideG}
+        onMuat={(saved) => setView({ beratOverrideG: { ...saved } })}
       />
 
       <PanelKekosongan trace={trace} locale={locale} />
