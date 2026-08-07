@@ -33,6 +33,7 @@ pnpm test                   # vitest watch
 pnpm test:run               # vitest once — before every commit
 pnpm test:conservation      # contribution sums, mass balance
 pnpm test:gaps              # missing-value handling, both directions
+pnpm test:state             # URL round trip, saved-recipe store, search
 pnpm fdc:fetch              # DEV/CI — download FDC SR Legacy bulk CSV
 pnpm fdc:build              # filter to curated list, project nutrients, write binary
 pnpm factors:fetch          # DEV/CI — download the two USDA public-domain factor tables
@@ -71,6 +72,9 @@ lib/
     trace.ts                # NutritionTrace types
   portion/                  # URT → grams
   akg/                      # requirement lookup by age/sex
+  url/                      # plate view state ⇄ query string. Pure + a hook.
+  simpan/                   # locally saved recipe versions. Pure + a hook.
+  resep/cari.ts             # dish search. Pure, a rule not a ranking.
 scripts/
   fdc-pipeline.ts           # DEV/CI — fetch, filter, project, emit
 data/
@@ -107,7 +111,7 @@ tests/
 
 10. **Recipes are authored data.** Each is cited to a source or explicitly marked as own composition. Never scraped, never copied from a copyrighted cookbook.
 
-11. **No tracking primitives anywhere.** No daily total, no running sum across dishes, no "remaining", no logging store, no date-keyed consumption records, no streak counter. If a type or a route implies accumulation across a day, it does not belong here.
+11. **No tracking primitives anywhere.** No daily total, no running sum across dishes, no "remaining", no logging store, no date-keyed consumption records, no streak counter. If a type or a route implies accumulation across a day, it does not belong here. The saved-recipe store is held to this by test: its keys are exactly `{id, dishId, nama, beratOverrideG}` and a stray timestamp is dropped on load. **Never add a date to it.**
 
 12. **No weight, BMI, or weight-goal anything.** Not in the model, not in the UI, not in the copy.
 
@@ -119,7 +123,11 @@ tests/
 
 16. **Zero network requests at runtime.** No API, no font CDN, no analytics. Everything bundled.
 
-17. **Nothing is computed in a component.** Components render a `NutritionTrace`.
+17. **Nothing is computed in a component.** Components render a `NutritionTrace`. The dish list projects its cards to strings at build time so the search box filters strings, not traces.
+
+18. **Anything the reader can change lives in the URL.** Selected nutrient, per-portion toggle, AKG group, edited weights and the dish search are all query parameters, so a view survives a refresh and can be sent to someone. Component-only state for a reader-visible choice is a bug.
+
+19. **Every untrusted input is validated, never coerced.** Query strings and the localStorage store both feed gram weights into the engine. A weight that is negative, NaN, Infinity or non-numeric is dropped; an unknown nutrient or AKG id falls back to the default. A coerced value produces a plausible wrong number, which is invariant 2's failure mode by another route.
 
 ## Working style
 
@@ -177,4 +185,6 @@ Three things are deliberately incomplete, and each is stated in the product rath
 2. **The URT table is empty.** Invariant 9 forbids unmeasured entries, so portions show in grams. `data/urt/takaran.json` carries the measuring protocol and the list of takaran to weigh.
 3. **13 Indonesian ingredients have no source.** Recorded in `data/ingredients/unmatched.json`, still present in the recipes, named as gaps in every trace. **Do not resolve any of them from TKPI.**
 
-Next, in order of value: weigh the URT table; weigh the existing recipes; then M3's remaining dishes toward forty. Local recipe saving (§6.6) is the one M5 feature not yet built.
+**M5 is complete.** URL state, dish search and local recipe saving all shipped; 150 tests.
+
+Next, in order of value: weigh the URT table; weigh the existing recipes; then M3's remaining dishes toward forty. All three are kitchen-scale work, not code.

@@ -11,6 +11,7 @@
     "test:run": "vitest run",
     "test:conservation": "vitest run tests/conservation",
     "test:gaps": "vitest run tests/gaps",
+    "test:state": "vitest run tests/url tests/simpan tests/cari",
     "fdc:fetch": "tsx scripts/fdc-pipeline.ts fetch",
     "fdc:build": "tsx scripts/fdc-pipeline.ts build",
     "factors:fetch": "tsx scripts/factors-pipeline.ts fetch",
