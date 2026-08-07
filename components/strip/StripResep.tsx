@@ -13,6 +13,7 @@
 import { useRef } from 'react'
 import { NUTRIENTS } from '@/lib/nutrition/nutrients'
 import { alternatifUntuk } from '@/lib/nutrition/pengolahan'
+import { kepekaan, LANGKAH_G } from '@/lib/nutrition/sensitivity'
 import type { NutritionTrace, Recipe } from '@/lib/nutrition/trace'
 import { copyFor, type Locale } from '@/lib/i18n'
 import { formatGram, formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
@@ -51,6 +52,9 @@ export function StripResep({
   const largest = total.contributions.reduce((max, c) => Math.max(max, c.total), 0)
   const edited =
     Object.keys(beratOverrideG).length > 0 || Object.keys(pengolahanOverride).length > 0
+  /* Top three by rate. Three because the tail is rounding — a forty-ingredient
+     dish has a handful that move the number and the rest are noise. */
+  const peka = kepekaan(trace, nutrientId).slice(0, 3)
 
   // Rows in recipe order — the order you would cook in, not a ranking. The bar
   // lengths carry the ranking.
@@ -249,6 +253,35 @@ export function StripResep({
           </tbody>
         </table>
       </div>
+
+      {/* The bars above rank by share of the total. This ranks by rate, which
+          is a different question and the one a reader with a different recipe
+          actually has. Kept out of the table so the strip does not get wider. */}
+      {peka.length > 0 && (
+        <section className="mt-4">
+          <h3 className="text-sm font-medium text-ink">{copy.strip.kepekaanJudul}</h3>
+          <p className="mt-1 max-w-prose text-sm text-ink-soft">
+            {copy.strip.kepekaanPenjelasan(
+              formatGram(LANGKAH_G, locale),
+              nutrientLabel(nutrientId, locale).toLowerCase(),
+            )}
+          </p>
+          <ul className="mt-2 space-y-1 text-sm">
+            {peka.map((row) => (
+              <li key={row.ingredientId}>
+                <span lang="id">{row.namaId}</span>{' '}
+                <span className="font-mono">
+                  +{formatNutrient(row.perLangkah, nutrientId, locale)} {unitLabel(nutrientId)}
+                </span>{' '}
+                <span className="text-ink-soft">
+                  / {formatGram(LANGKAH_G, locale)} g · {copy.strip.berat.toLowerCase()}{' '}
+                  <span className="font-mono">{formatGram(row.beratG, locale)} g</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* Said next to the control, because the consequence of using it —
           losing the cooked weight — is not obvious. */}

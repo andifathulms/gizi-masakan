@@ -107,6 +107,10 @@ export interface Copy {
     readonly caraMasakAsli: string
     readonly caraMasakDiganti: string
     readonly caraMasakPenjelasan: string
+    /** Where the number is most sensitive to the recipe being wrong. */
+    readonly kepekaanJudul: string
+    readonly kepekaanPenjelasan: (langkah: string, nutrien: string) => string
+    readonly kepekaanBaris: (nama: string, jumlah: string, berat: string) => string
   }
   readonly gaps: {
     readonly judul: string
@@ -248,6 +252,10 @@ const ID: Copy = {
     caraMasak: 'Cara masak',
     caraMasakAsli: 'seperti di resep',
     caraMasakDiganti: 'diganti — berat matang jadi tidak diketahui',
+    kepekaanJudul: 'Yang paling menggerakkan angka ini',
+    kepekaanPenjelasan: (langkah, nutrien) =>
+      `Kalau resep Anda berbeda dari yang di atas, di sinilah bedanya paling terasa. Angkanya adalah perubahan ${nutrien} per ${langkah} g bahan itu — jadi ini soal kepekatan, bukan saran. Bahan yang dipakai cuma sedikit bisa saja pekat tanpa banyak berpengaruh, karena itu beratnya sekarang ikut ditulis.`,
+    kepekaanBaris: (nama, jumlah, berat) => `${nama} — ${jumlah}, sekarang ${berat} g`,
     caraMasakPenjelasan:
       'Cara masak menentukan faktor retensi, jadi mengubahnya mengubah angka gizinya. Pilihannya adalah operasi USDA untuk kelompok bahan yang sama; faktor yield resep ini hanya berlaku untuk cara masak aslinya, jadi kalau diganti berat matangnya jadi tidak diketahui dan disebut sebagai kekosongan.',
   },
@@ -389,6 +397,10 @@ const EN: Copy = {
     caraMasak: 'Cooking method',
     caraMasakAsli: 'as the recipe has it',
     caraMasakDiganti: 'changed — cooked weight now unknown',
+    kepekaanJudul: 'What moves this number most',
+    kepekaanPenjelasan: (langkah, nutrien) =>
+      `If your recipe differs from the one above, this is where the difference tells. The figure is the change in ${nutrien} per ${langkah} g of that ingredient — so it is about concentration, not advice. Something used in a small amount can be concentrated without mattering much, which is why its current weight is printed beside it.`,
+    kepekaanBaris: (nama, jumlah, berat) => `${nama} — ${jumlah}, now ${berat} g`,
     caraMasakPenjelasan:
       'The cooking method selects the retention factor, so changing it changes the nutrition. The choices are USDA operations for the same food group; this recipe\u2019s yield factor was published for the original method, so changing it leaves the cooked weight unknown and named as a gap.',
   },
