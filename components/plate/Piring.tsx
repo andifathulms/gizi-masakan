@@ -1,0 +1,156 @@
+'use client'
+
+/**
+ * The plate, the recipe strip, the gaps, the adequacy and the trace — the whole
+ * dish view, and the one place edited weights live.
+ *
+ * Invariant 17: nothing is computed here. State is the edited gram weights;
+ * everything shown comes from `compute`, which is pure and lives in
+ * lib/nutrition. This component's job is to hold the edits and render a trace.
+ */
+import { useMemo, useState } from 'react'
+import { compute } from '@/lib/nutrition/compute'
+import { findUnmatched, loadFdcTable } from '@/lib/sources/fdc/load'
+import { HEADLINE_NUTRIENT_IDS, NUTRIENTS } from '@/lib/nutrition/nutrients'
+import { perPorsi, type Recipe } from '@/lib/nutrition/trace'
+import { copyFor, type Locale } from '@/lib/i18n'
+import { formatGram, formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
+import { StripResep } from '@/components/strip/StripResep'
+import { PanelKekosongan } from '@/components/plate/PanelKekosongan'
+import { Kecukupan } from '@/components/adequacy/Kecukupan'
+import { JejakNutrien } from '@/components/trace/JejakNutrien'
+
+const table = loadFdcTable()
+const unmatched = { get: findUnmatched }
+
+export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
+  const copy = copyFor(locale)
+  const [beratOverrideG, setBeratOverrideG] = useState<Record<string, number>>({})
+  const [nutrientId, setNutrientId] = useState<string>('208')
+  const [perPorsiView, setPerPorsiView] = useState(true)
+
+  const trace = useMemo(
+    () => compute({ recipe, table, unmatched, beratOverrideG }),
+    [recipe, beratOverrideG],
+  )
+
+  const edited = Object.keys(beratOverrideG).length > 0
+  const scale = perPorsiView ? 1 / trace.porsi : 1
+
+  return (
+    <div className="flex flex-col gap-8">
+      <section className="plate-card px-5 py-5 sm:px-7 sm:py-6">
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h1 className="font-display text-3xl text-rim">{trace.namaId}</h1>
+          <span className="text-sm text-chip">
+            {recipe.porsi} {copy.plate.porsi}
+          </span>
+        </div>
+        <p className="mt-2 max-w-prose text-sm leading-relaxed text-ink/80">
+          {recipe.deskripsiId}
+        </p>
+        <p className="mt-3 max-w-prose text-sm leading-relaxed text-edited">
+          {copy.plate.estimasi}
+        </p>
+
+        <div className="mt-5 flex gap-1 text-sm" role="group">
+          <button
+            type="button"
+            onClick={() => setPerPorsiView(true)}
+            aria-pressed={perPorsiView}
+            className={`rounded-l border border-rim/40 px-3 py-1 ${perPorsiView ? 'bg-rim text-enamel' : 'text-rim'}`}
+          >
+            {copy.plate.perPorsi}
+          </button>
+          <button
+            type="button"
+            onClick={() => setPerPorsiView(false)}
+            aria-pressed={!perPorsiView}
+            className={`rounded-r border border-rim/40 px-3 py-1 ${!perPorsiView ? 'bg-rim text-enamel' : 'text-rim'}`}
+          >
+            {copy.plate.seluruhResep}
+          </button>
+        </div>
+
+        {/* Headline nutrients. Energy is first in reading order and is styled
+            exactly like the others — invariant 13 forbids making it dominant. */}
+        <dl className="mt-5 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
+          {HEADLINE_NUTRIENT_IDS.map((id) => {
+            const total = trace.totals.find((entry) => entry.nutrientId === id)!
+            return (
+              <div key={id}>
+                <dt className="text-sm text-chip">{nutrientLabel(id, locale)}</dt>
+                <dd className="font-mono text-lg">
+                  <span className={edited ? 'text-edited' : undefined}>
+                    {formatNutrient(total.total * scale, id, locale)}
+                  </span>{' '}
+                  <span className="text-sm text-chip">{unitLabel(id)}</span>
+                  {!total.lengkap && (
+                    <span className="ml-1 align-middle text-xs text-chip" title={copy.gaps.ringkasTidakLengkap}>
+                      ⃰
+                    </span>
+                  )}
+                </dd>
+              </div>
+            )
+          })}
+        </dl>
+
+        <dl className="mt-5 flex flex-wrap gap-x-8 gap-y-2 border-t border-rim/20 pt-4 text-sm">
+          <div className="flex gap-2">
+            <dt className="text-chip">{copy.plate.beratMentah}</dt>
+            <dd className="font-mono">{formatGram(trace.massa.mentahG, locale)} g</dd>
+          </div>
+          <div className="flex gap-2">
+            <dt className="text-chip">{copy.plate.beratMatang}</dt>
+            <dd className="font-mono">
+              {trace.massa.matangG === undefined ? (
+                <span className="text-chip">{copy.plate.tidakDiketahui}</span>
+              ) : (
+                `${formatGram(trace.massa.matangG, locale)} g`
+              )}
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <StripResep
+        trace={trace}
+        recipe={recipe}
+        locale={locale}
+        nutrientId={nutrientId}
+        onNutrientChange={setNutrientId}
+        beratOverrideG={beratOverrideG}
+        onBeratChange={(ingredientId, beratG) =>
+          setBeratOverrideG((current) => ({ ...current, [ingredientId]: beratG }))
+        }
+        onReset={() => setBeratOverrideG({})}
+      />
+
+      <PanelKekosongan trace={trace} locale={locale} />
+
+      <Kecukupan trace={trace} locale={locale} />
+
+      <JejakNutrien trace={trace} locale={locale} nutrientId={nutrientId} />
+
+      <section className="text-sm leading-relaxed text-chip">
+        <h2 className="font-display text-lg text-rim">
+          {locale === 'en' ? 'Where this recipe comes from' : 'Asal resep ini'}
+        </h2>
+        <p className="mt-2 max-w-prose">
+          {trace.sumber.type === 'own-composition'
+            ? trace.sumber.catatan
+            : `${trace.sumber.sumber}`}
+        </p>
+        <p className="mt-2 max-w-prose">
+          {locale === 'en'
+            ? `Ingredient values from ${trace.ingredientRelease}.`
+            : `Nilai bahan dari ${trace.ingredientRelease}.`}
+        </p>
+      </section>
+    </div>
+  )
+}
+
+export const ALL_NUTRIENT_IDS = NUTRIENTS.map((nutrient) => nutrient.id)
+export { perPorsi }

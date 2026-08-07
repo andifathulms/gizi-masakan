@@ -5,7 +5,7 @@
   "packageManager": "pnpm@9.15.9",
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm data:validate && next build",
+    "build": "pnpm data:validate && next build && node scripts/postbuild.mjs",
     "preview": "node scripts/preview.mjs",
     "test": "vitest",
     "test:run": "vitest run",

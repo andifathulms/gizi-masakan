@@ -133,3 +133,31 @@ describe('every shipped recipe reports its own state truthfully', () => {
     expect(kecap?.reason.length).toBeGreaterThan(20)
   })
 })
+
+describe('the tracking-primitive check actually catches identifiers', () => {
+  // Guards the validator itself: stripping strings and comments must not turn
+  // the check into a no-op. If this ever passes trivially, PRD §5 stops being
+  // enforced by anything.
+  const stripLiterals = (source: string) =>
+    source
+      .replace(/\/\*[\s\S]*?\*\//g, ' ')
+      .replace(/\/\/[^\n]*/g, ' ')
+      .replace(/'(?:[^'\\\n]|\\.)*'/g, "''")
+      .replace(/"(?:[^"\\\n]|\\.)*"/g, '""')
+      .replace(/`(?:[^`\\]|\\.)*`/g, '``')
+
+  const hits = (source: string, term: string) =>
+    new RegExp(`\\b${term}\\b`, 'i').test(stripLiterals(source))
+
+  it('flags a real identifier', () => {
+    expect(hits('const dailyTotal = sum(dishes)', 'dailyTotal')).toBe(true)
+    expect(hits('function sisaKalori() {}', 'sisaKalori')).toBe(true)
+    expect(hits('state.streak += 1', 'streak')).toBe(true)
+  })
+
+  it('does not flag the word appearing in copy that explains its absence', () => {
+    expect(hits('<p>There is no streak counter here.</p>'.replace(/</g, ''), 'streak')).toBe(true)
+    expect(hits("const copy = 'no streak counter, deliberately'", 'streak')).toBe(false)
+    expect(hits('// no streak counter, deliberately', 'streak')).toBe(false)
+  })
+})

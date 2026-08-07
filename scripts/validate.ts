@@ -295,9 +295,18 @@ check('no tracking primitives in lib/ or app/', () => {
         continue
       }
       if (!/\.tsx?$/.test(path)) continue
-      const text = readFileSync(path, 'utf8')
+      // Identifiers, not prose. The method page explains at length that there
+      // are no streaks and no daily totals, and saying so must not trip the
+      // check that enforces it — so string literals and comments come out
+      // first, and what remains is code.
+      const code = readFileSync(path, 'utf8')
+        .replace(/\/\*[\s\S]*?\*\//g, ' ')
+        .replace(/\/\/[^\n]*/g, ' ')
+        .replace(/'(?:[^'\\\n]|\\.)*'/g, "''")
+        .replace(/"(?:[^"\\\n]|\\.)*"/g, '""')
+        .replace(/`(?:[^`\\]|\\.)*`/g, '``')
       for (const term of banned) {
-        if (new RegExp(`\\b${term}\\b`, 'i').test(text)) {
+        if (new RegExp(`\\b${term}\\b`, 'i').test(code)) {
           offenders.push(`${path.slice(ROOT.length + 1)}: ${term}`)
         }
       }

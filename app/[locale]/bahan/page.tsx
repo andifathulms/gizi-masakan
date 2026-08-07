@@ -1,0 +1,124 @@
+import { notFound } from 'next/navigation'
+import { fdcRelease, loadFdcTable, unmatchedIngredients } from '@/lib/sources/fdc/load'
+import { NUTRIENTS } from '@/lib/nutrition/nutrients'
+import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
+import { formatNutrient } from '@/lib/format'
+
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }))
+}
+
+/**
+ * The ingredient browser — PRD §6.5. Indonesian names, FDC ids, and the variety
+ * notes where the US entry is an imperfect match.
+ *
+ * The second half lists the ingredients FDC cannot supply at all. They belong
+ * here for the same reason they stay in the recipes: an ingredient browser that
+ * only showed what it had would imply it had everything.
+ */
+export default function BahanPage({ params }: { params: { locale: string } }) {
+  if (!isLocale(params.locale)) notFound()
+  const locale = params.locale as Locale
+  const copy = copyFor(locale)
+  const table = loadFdcTable()
+  const release = fdcRelease()
+  const entries = [...table.entries.values()]
+  const unmatched = unmatchedIngredients()
+
+  const byKategori = new Map<string, typeof entries>()
+  for (const entry of entries) {
+    const existing = byKategori.get(entry.kategori)
+    if (existing) existing.push(entry)
+    else byKategori.set(entry.kategori, [entry])
+  }
+
+  const shown = ['208', '203', '204', '205', '303']
+
+  return (
+    <div>
+      <h1 className="font-display text-3xl text-rim">{copy.nav.bahan}</h1>
+      <p className="mt-2 max-w-prose text-sm leading-relaxed">
+        {locale === 'en'
+          ? `${entries.length} ingredients curated from ${release.release} and mapped to Indonesian kitchen names. Values are per 100 g.`
+          : `${entries.length} bahan dipilih dari ${release.release} dan dipetakan ke nama dapur Indonesia. Nilai per 100 g.`}
+      </p>
+
+      {[...byKategori.entries()].map(([kategori, list]) => (
+        <section key={kategori} className="mt-8">
+          <h2 className="font-display text-xl capitalize text-rim">{kategori}</h2>
+          <div className="mt-2 overflow-x-auto">
+            <table className="w-full min-w-[42rem] text-sm">
+              <thead>
+                <tr className="border-b border-rim/25 text-left text-chip">
+                  <th scope="col" className="py-2 font-normal">
+                    {copy.strip.bahan}
+                  </th>
+                  {shown.map((id) => (
+                    <th key={id} scope="col" className="py-2 text-right font-normal">
+                      {NUTRIENTS.find((n) => n.id === id)![locale === 'en' ? 'labelEn' : 'labelId']}
+                    </th>
+                  ))}
+                  <th scope="col" className="py-2 pl-3 font-normal">
+                    FDC
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {list.map((entry) => (
+                  <tr key={entry.id} className="border-b border-rim/10 align-top">
+                    <th scope="row" className="py-2 pr-3 text-left font-normal">
+                      {entry.namaId}
+                      <span className="block text-xs text-chip">{entry.fdcDescription}</span>
+                      {entry.catatan && (
+                        <span className="mt-1 block max-w-prose text-xs leading-relaxed text-edited">
+                          {entry.catatan}
+                        </span>
+                      )}
+                    </th>
+                    {shown.map((id) => {
+                      const value = entry.per100[id]
+                      return (
+                        <td key={id} className="py-2 text-right font-mono">
+                          {value === undefined ? (
+                            <span className="text-chip" title={locale === 'en' ? 'no value in FDC' : 'tidak ada nilainya di FDC'}>
+                              —
+                            </span>
+                          ) : (
+                            formatNutrient(value, id, locale)
+                          )}
+                        </td>
+                      )
+                    })}
+                    <td className="py-2 pl-3 font-mono text-xs text-chip">{entry.fdcId}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ))}
+
+      <section className="mt-12">
+        <h2 className="font-display text-xl text-rim">
+          {locale === 'en' ? 'Ingredients with no source' : 'Bahan yang belum ada sumbernya'}
+        </h2>
+        <p className="mt-2 max-w-prose text-sm leading-relaxed">
+          {locale === 'en'
+            ? 'These are used in the recipes and cannot be given a number. They are listed here rather than approximated with a distant FDC entry.'
+            : 'Bahan-bahan ini dipakai di resep dan belum bisa diberi angka. Didaftarkan di sini, bukan didekati dengan entri FDC yang jauh.'}
+        </p>
+        <ul className="mt-3 space-y-2 text-sm leading-relaxed text-chip">
+          {unmatched.map((entry) => (
+            <li key={entry.id} className="max-w-prose">
+              <span className="text-ink">{entry.namaId}</span> — {entry.reason}{' '}
+              <span className="italic">
+                {locale === 'en' ? 'Would come from: ' : 'Akan datang dari: '}
+                {entry.wouldComeFrom}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  )
+}
