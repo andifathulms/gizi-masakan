@@ -1,0 +1,19 @@
+{
+  "$comment": "Indonesian ingredients with no acceptable public-domain source. They are recorded here rather than approximated with a distant FDC entry, and a recipe that uses one produces a named gap in its trace (invariant 2). Do NOT resolve any of these by pasting a TKPI value — that is the exact failure the licence gate exists to prevent.",
+  "recordedOn": "2026-08-07",
+  "ingredients": [
+    { "id": "kangkung", "namaId": "Kangkung", "nameEn": "Water spinach", "reason": "Ipomoea aquatica tidak ada di FDC SR Legacy. Bayam bukan padanan — beda genus, beda kadar mineral.", "wouldComeFrom": "TKPI" },
+    { "id": "lengkuas", "namaId": "Lengkuas", "nameEn": "Galangal", "reason": "Tidak ada entri galangal di FDC. Jahe bukan padanan.", "wouldComeFrom": "TKPI" },
+    { "id": "serai", "namaId": "Serai", "nameEn": "Lemongrass", "reason": "FDC SR Legacy tidak memuat serai sebagai bahan tunggal.", "wouldComeFrom": "TKPI" },
+    { "id": "kemiri", "namaId": "Kemiri", "nameEn": "Candlenut", "reason": "Aleurites moluccanus tidak ada di FDC. Kacang lain punya profil lemak yang berbeda.", "wouldComeFrom": "TKPI" },
+    { "id": "daun-jeruk", "namaId": "Daun jeruk purut", "nameEn": "Kaffir lime leaf", "reason": "Tidak ada di FDC.", "wouldComeFrom": "TKPI" },
+    { "id": "terasi", "namaId": "Terasi", "nameEn": "Fermented shrimp paste", "reason": "Tidak ada di FDC. Kandungan garam dan proteinnya tinggi dan khas; tidak bisa didekati dengan udang segar.", "wouldComeFrom": "TKPI" },
+    { "id": "gula-merah", "namaId": "Gula merah", "nameEn": "Palm sugar", "reason": "FDC tidak punya gula aren atau gula kelapa. Gula pasir bukan padanan: gula merah membawa mineral dan air yang tidak dibawa gula pasir.", "wouldComeFrom": "TKPI" },
+    { "id": "kecap-manis", "namaId": "Kecap manis", "nameEn": "Sweet soy sauce", "reason": "FDC hanya punya shoyu asin. Kecap manis sebagian besar gula aren — bukan bahan yang sama.", "wouldComeFrom": "TKPI atau label gizi produk (di luar lingkup)" },
+    { "id": "petai", "namaId": "Petai", "nameEn": "Stink bean", "reason": "Parkia speciosa tidak ada di FDC.", "wouldComeFrom": "TKPI" },
+    { "id": "melinjo", "namaId": "Melinjo", "nameEn": "Gnetum gnemon", "reason": "Tidak ada di FDC.", "wouldComeFrom": "TKPI" },
+    { "id": "daun-singkong", "namaId": "Daun singkong", "nameEn": "Cassava leaves", "reason": "FDC memuat umbinya, bukan daunnya. Daun singkong jauh lebih tinggi protein dan vitamin A.", "wouldComeFrom": "TKPI" },
+    { "id": "krupuk-udang", "namaId": "Kerupuk udang", "nameEn": "Prawn cracker", "reason": "Produk olahan; tidak ada entri generik di FDC SR Legacy dan dataset Branded dikecualikan (PRD §4).", "wouldComeFrom": "TKPI atau label gizi produk (di luar lingkup)" },
+    { "id": "bawang-goreng", "namaId": "Bawang goreng", "nameEn": "Fried shallots", "reason": "Bisa dihitung dari bawang merah plus minyak terserap, tapi angka serapan minyaknya belum ditimbang. Sampai ditimbang, ini tetap kekosongan.", "wouldComeFrom": "pengukuran sendiri" }
+  ]
+}
