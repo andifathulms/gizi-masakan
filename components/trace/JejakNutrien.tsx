@@ -31,7 +31,16 @@ export function JejakNutrien({
         {copy.trace.judul} — {nutrientLabel(nutrientId, locale)}
       </h2>
 
-      <div className="scroll-x mt-3">
+      {/* Focusable so the FDC id and retention columns can be reached without
+          a mouse (WCAG 2.1.1). role + name because a focusable container with
+          no role is an unlabelled tab stop; there is no native scrollable
+          region element. */}
+      <div
+        className="scroll-x mt-3"
+        tabIndex={0}
+        role="region"
+        aria-label={`${copy.trace.judul} — ${nutrientLabel(nutrientId, locale)}`}
+      >
         <table className="w-full min-w-[52rem] text-sm">
           <thead>
             <tr className="border-b border-rim/25 text-left text-ink-soft">

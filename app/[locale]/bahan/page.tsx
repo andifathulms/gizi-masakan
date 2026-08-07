@@ -52,7 +52,15 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
           <h2 lang="id" className="font-display text-lg capitalize text-rim">
             {kategori}
           </h2>
-          <div className="scroll-x mt-2">
+          {/* Focusable so the columns past the edge can be reached without a
+              mouse (WCAG 2.1.1); named because a focusable container with no
+              role announces nothing. */}
+          <div
+            className="scroll-x mt-2"
+            tabIndex={0}
+            role="region"
+            aria-label={`${copy.nav.bahan} — ${kategori}`}
+          >
             <table className="w-full min-w-[48rem] text-sm">
               <thead>
                 <tr className="border-b border-rim/25 text-left text-ink-soft">
