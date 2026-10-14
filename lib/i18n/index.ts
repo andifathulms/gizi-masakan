@@ -152,6 +152,11 @@ export interface Copy {
     readonly bahanHilang: string
     readonly nilaiHilang: string
     readonly faktorHilang: string
+    /** Said once over the grouped missing values, rather than once per value. */
+    readonly nilaiKosongPenjelasan: string
+    /** Labels for the two parts of the mass bar. */
+    readonly massaTerhitung: string
+    readonly massaTakTerhitung: string
     /** Legend for the chip mark on an incomplete total. Visible text, not a
         tooltip — a title attribute never appears on a touch screen. */
     readonly tandaBelumLengkap: string
@@ -325,6 +330,10 @@ const ID: Copy = {
     bahanHilang: 'Bahan tanpa data',
     nilaiHilang: 'Nilai gizi kosong',
     faktorHilang: 'Faktor pengolahan kosong',
+    nilaiKosongPenjelasan:
+      'FDC tidak punya nilai nutrien berikut untuk bahan ini. Nilainya tidak dianggap nol — bahan itu tidak dihitung untuk nutrien tersebut.',
+    massaTerhitung: 'terhitung',
+    massaTakTerhitung: 'tidak terhitung',
     tandaBelumLengkap: 'Angka bertanda ini belum lengkap — yang kurang disebut di "Yang tidak terhitung" di bawah.',
     belumLengkap: 'belum lengkap',
     semuaBelumLengkap: 'Semua angka di atas belum lengkap — yang kurang disebut di "Yang tidak terhitung" di bawah.',
@@ -493,6 +502,10 @@ const EN: Copy = {
     bahanHilang: 'Ingredients with no data',
     nilaiHilang: 'Missing nutrient values',
     faktorHilang: 'Missing cooking factors',
+    nilaiKosongPenjelasan:
+      'FDC has no value for these nutrients in this ingredient. The value is not taken as zero — the ingredient is left out of that nutrient’s total.',
+    massaTerhitung: 'counted',
+    massaTakTerhitung: 'not counted',
     tandaBelumLengkap: 'A marked number is incomplete — what is missing is named under "What is not counted" below.',
     belumLengkap: 'incomplete',
     semuaBelumLengkap: 'Every number above is incomplete — what is missing is named under "What is not counted" below.',

@@ -16,6 +16,7 @@ import { NUTRIENTS, type NutrientDef, type NutrientGroup } from '@/lib/nutrition
 import { perPorsi, type NutritionTrace } from '@/lib/nutrition/trace'
 import { copyFor, type Locale } from '@/lib/i18n'
 import { formatNutrient, formatPercent, nutrientLabel, unitLabel } from '@/lib/format'
+import { TandaChip } from '@/components/chrome/TandaChip'
 
 /**
  * Group labels for the four buckets `NutrientDef.group` already carries. The
@@ -66,13 +67,13 @@ export function Kecukupan({
   return (
     <section>
       <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <h2 className="font-display text-lg text-rim">{copy.adequacy.judul}</h2>
+        <h2 className="font-display text-xl text-rim">{copy.adequacy.judul}</h2>
         <label className="flex items-center gap-2 text-sm">
           <span className="text-ink-soft">{copy.adequacy.kelompok}</span>
           <select
             value={kelompokId}
             onChange={(event) => onKelompokChange(event.target.value)}
-            className="rounded border border-rim/40 bg-enamel px-2 py-1"
+            className="h-9 rounded border border-rim/40 bg-piring px-2"
           >
             {AKG_KELOMPOK.map((entry) => (
               <option key={entry.id} value={entry.id}>
@@ -89,68 +90,86 @@ export function Kecukupan({
           reads as an allowance being spent — the exact framing PRD §5 bans. */}
       <p className="mt-2 max-w-prose text-sm text-ink-soft">{copy.adequacy.rumus}</p>
       <p className="mt-1 max-w-prose text-xs text-ink-soft">{AKG_CITATION}</p>
+      {/* The mark explains itself in words wherever it appears. */}
+      {trace.totals.some((total) => !total.lengkap) && (
+        <p className="mt-3 flex max-w-prose gap-2 text-sm text-chip">
+          <TandaChip className="mt-1" />
+          <span>{copy.gaps.tandaBelumLengkap}</span>
+        </p>
+      )}
 
-      {[...byGroup().entries()].map(([group, nutrients]) => (
-        <div key={group} className="mt-5">
-          <h3 className="border-b border-rim/20 pb-1 text-sm font-medium text-rim">
-            {GROUP_LABEL[group][locale]}
-          </h3>
-          <ul className="mt-2 space-y-2">
-            {nutrients.map((nutrient) => {
-              const total = trace.totals.find((entry) => entry.nutrientId === nutrient.id)!
-              const amount = perPorsi(trace, total)
-              const adequacy = adequacyFor(kelompok, nutrient.id, amount)
-              return (
-                <li
-                  key={nutrient.id}
-                  className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"
-                >
-                  <span className="w-40 shrink-0">{nutrientLabel(nutrient.id, locale)}</span>
-                  <span className="w-24 shrink-0 text-right font-mono">
-                    {formatNutrient(amount, nutrient.id, locale)}{' '}
-                    <span className="text-chip">{unitLabel(nutrient.id)}</span>
-                  </span>
-
-                  {adequacy.type === 'dibandingkan' ? (
-                    <>
-                      <span className="h-3 min-w-bar flex-1 bg-rim/10">
-                        <span
-                          className="move-together block h-3 bg-adequate"
-                          style={{ width: `${Math.min(100, Math.round(adequacy.bagian * 100))}%` }}
-                        />
-                      </span>
-                      <span className="w-28 shrink-0 text-right">
-                        <span className="font-mono text-adequate">
-                          {formatPercent(adequacy.bagian, locale)}
-                        </span>{' '}
-                        {/* The denominator, printed. It was computed all along
-                            and never rendered, so the percentage referred to a
-                            quantity the reader could not see. */}
-                        <span className="block font-mono text-xs text-ink-soft">
-                          {copy.adequacy.dari(
-                            `${formatNutrient(adequacy.akg, nutrient.id, locale)} ${adequacy.unit}`,
-                          )}
+      {/* Groups flow into two columns on a wide screen, so "am I getting enough
+          iron" does not mean scrolling past all twenty-seven rows. Reading
+          order is unchanged and energy stays first. */}
+      <div className="mt-5 grid gap-x-10 gap-y-6 lg:grid-cols-2">
+        {[...byGroup().entries()].map(([group, nutrients]) => (
+          <div key={group} className="min-w-0">
+            <h3 className="border-b border-rim/20 pb-1 text-xs font-semibold uppercase tracking-wider text-rim-soft">
+              {GROUP_LABEL[group][locale]}
+            </h3>
+            <ul className="mt-1">
+              {nutrients.map((nutrient) => {
+                const total = trace.totals.find((entry) => entry.nutrientId === nutrient.id)!
+                const amount = perPorsi(trace, total)
+                const adequacy = adequacyFor(kelompok, nutrient.id, amount)
+                return (
+                  <li
+                    key={nutrient.id}
+                    className="grid grid-cols-[minmax(0,8.5rem)_5.5rem_minmax(0,1fr)] items-center gap-x-3 border-b border-rim/10 py-2 text-sm sm:grid-cols-[minmax(0,9.5rem)_6rem_minmax(0,1fr)_6.5rem]"
+                  >
+                    <span className="min-w-0">
+                      {nutrientLabel(nutrient.id, locale)}
+                      {!total.lengkap && (
+                        <span className="ml-1.5">
+                          <TandaChip />
+                          <span className="sr-only">
+                            {' '}
+                            {locale === 'en' ? 'incomplete' : 'belum lengkap'}
+                          </span>
                         </span>
+                      )}
+                    </span>
+                    <span className="text-right font-mono">
+                      {formatNutrient(amount, nutrient.id, locale)}{' '}
+                      <span className="text-ink-soft">{unitLabel(nutrient.id)}</span>
+                    </span>
+
+                    {adequacy.type === 'dibandingkan' ? (
+                      <>
+                        {/* Fills toward the figure, never drains from it. Over
+                            100% fills the track and says its real number; it is
+                            not styled as a warning, because it is not one. */}
+                        <span className="h-3 min-w-bar overflow-hidden rounded-full bg-adequate-tint">
+                          <span
+                            className="move-together block h-3 rounded-full bg-adequate"
+                            style={{ width: `${Math.min(100, Math.round(adequacy.bagian * 100))}%` }}
+                          />
+                        </span>
+                        <span className="col-span-3 text-right sm:col-span-1">
+                          <span className="font-mono font-semibold text-adequate">
+                            {formatPercent(adequacy.bagian, locale)}
+                          </span>{' '}
+                          {/* The denominator, printed. A percentage of a
+                              quantity the reader cannot see is not checkable. */}
+                          <span className="font-mono text-xs text-ink-soft sm:block">
+                            {copy.adequacy.dari(
+                              `${formatNutrient(adequacy.akg, nutrient.id, locale)} ${adequacy.unit}`,
+                            )}
+                          </span>
+                        </span>
+                      </>
+                    ) : (
+                      <span className="col-span-3 text-xs text-chip sm:col-span-2">
+                        {copy.adequacy.tidakDibandingkan} — {adequacy.reason}
                       </span>
-                    </>
-                  ) : (
-                    <span className="flex-1 text-chip">
-                      {copy.adequacy.tidakDibandingkan} — {adequacy.reason}
-                    </span>
-                  )}
-
-                  {!total.lengkap && (
-                    <span className="w-full text-xs text-chip sm:w-auto">
-                      {locale === 'en' ? 'incomplete' : 'belum lengkap'}
-                    </span>
-                  )}
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      ))}
-
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
     </section>
   )
 }

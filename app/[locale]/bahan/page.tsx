@@ -4,6 +4,7 @@ import { NUTRIENTS } from '@/lib/nutrition/nutrients'
 import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
 import { formatNutrient } from '@/lib/format'
 import { pageMetadata } from '@/lib/metadata'
+import { TandaChip } from '@/components/chrome/TandaChip'
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }))
@@ -48,13 +49,44 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
 
   return (
     <div>
-      <h1 className="font-display text-2xl text-rim">{copy.nav.bahan}</h1>
-      <p className="mt-4 max-w-prose text-base text-ink-soft">
+      <h1 className="font-display text-3xl text-rim">{copy.nav.bahan}</h1>
+      <p className="mt-4 max-w-prose text-md text-ink-soft">
         {copy.lede.bahan(entries.length, release.release)}
       </p>
 
+      {/* Links, not filters: they jump to a section, so there is no state to
+          hold and nothing to put in the URL. The last one is the list of
+          ingredients with no source — given the same footing as the rest. */}
+      <nav aria-label={locale === 'en' ? 'Categories' : 'Kategori'} className="mt-block">
+        <ul className="flex flex-wrap gap-2 text-sm">
+          {[...byKategori.entries()].map(([kategori, list]) => (
+            <li key={kategori}>
+              <a
+                href={`#kategori-${kategori}`}
+                className="inline-flex items-baseline gap-1.5 rounded-full border border-rim/30 bg-piring px-3.5 py-1.5 hover:border-rim hover:bg-rim-tint"
+              >
+                <span lang="id" className="capitalize">
+                  {kategori}
+                </span>
+                <span className="font-mono text-xs text-ink-soft">{list.length}</span>
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href="#tanpa-sumber"
+              className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-chip px-3.5 py-1.5 text-chip hover:bg-enamel-deep"
+            >
+              <TandaChip />
+              {locale === 'en' ? 'No source' : 'Belum ada sumbernya'}
+              <span className="font-mono text-xs">{unmatched.length}</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
       {[...byKategori.entries()].map(([kategori, list]) => (
-        <section key={kategori} className="mt-8">
+        <section key={kategori} id={`kategori-${kategori}`} className="mt-section scroll-mt-4">
           <h2 lang="id" className="font-display text-lg capitalize text-rim">
             {kategori}
           </h2>
@@ -76,7 +108,9 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
               </caption>
               <thead>
                 <tr className="border-b border-rim/25 text-left text-ink-soft">
-                  <th scope="col" className="py-2 pr-4 font-normal">
+                  {/* The name column stays put while the numbers scroll under
+                      it, so a row never loses which ingredient it is. */}
+                  <th scope="col" className="sticky left-0 z-10 bg-enamel py-2 pr-4 font-normal">
                     {copy.strip.bahan}
                   </th>
                   {shown.map((id) => (
@@ -96,7 +130,10 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
               <tbody>
                 {list.map((entry) => (
                   <tr key={entry.id} className="border-b border-rim/10 align-top">
-                    <th scope="row" className="py-2 pr-4 text-left font-normal">
+                    <th
+                      scope="row"
+                      className="sticky left-0 z-10 max-w-[16rem] bg-enamel py-2 pr-4 text-left font-normal"
+                    >
                       <span lang="id">{entry.namaId}</span>
                       <span lang="en" className="block text-xs text-chip">
                         {entry.fdcDescription}
@@ -133,7 +170,7 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
         </section>
       ))}
 
-      <section className="mt-12">
+      <section id="tanpa-sumber" className="mt-section scroll-mt-4 rounded-plate border border-rim/30 bg-enamel-deep px-5 py-5">
         <h2 className="font-display text-lg text-rim">
           {locale === 'en' ? 'Ingredients with no source' : 'Bahan yang belum ada sumbernya'}
         </h2>
@@ -142,13 +179,16 @@ export default function BahanPage({ params }: { params: { locale: string } }) {
             ? 'These are used in the recipes and cannot be given a number. They are listed here rather than approximated with a distant FDC entry.'
             : 'Bahan-bahan ini dipakai di resep dan belum bisa diberi angka. Didaftarkan di sini, bukan didekati dengan entri FDC yang jauh.'}
         </p>
-        <ul className="mt-3 space-y-2 text-sm text-chip">
+        <ul className="mt-3 grid gap-x-8 gap-y-3 text-sm text-chip lg:grid-cols-2">
           {unmatched.map((entry) => (
-            <li key={entry.id} className="max-w-prose">
-              <span className="text-ink">{entry.namaId}</span> — {entry.reason}{' '}
-              <span className="italic">
-                {locale === 'en' ? 'Would come from: ' : 'Akan datang dari: '}
-                {entry.wouldComeFrom}
+            <li key={entry.id} className="flex max-w-prose gap-2">
+              <TandaChip className="mt-1" />
+              <span>
+                <span className="font-medium text-ink">{entry.namaId}</span> — {entry.reason}{' '}
+                <span className="italic">
+                  {locale === 'en' ? 'Would come from: ' : 'Akan datang dari: '}
+                  {entry.wouldComeFrom}
+                </span>
               </span>
             </li>
           ))}

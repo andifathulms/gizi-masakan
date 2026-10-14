@@ -133,6 +133,34 @@ export function gapsByNutrient(gaps: readonly Gap[]): ReadonlyMap<NutrientId, re
   return byNutrient
 }
 
+/**
+ * The per-nutrient gaps grouped by ingredient, for the gaps panel.
+ *
+ * "FDC has no value for fibre in tempe", "…for vitamin E in tempe", "…for
+ * vitamin K in tempe" are one fact about tempe stated three times. Grouped,
+ * each ingredient is named once with the nutrients it lacks beside it. Every
+ * nutrient stays named — this regroups gaps, it never merges them away — and
+ * the tests assert the count is preserved exactly.
+ *
+ * Order is first appearance, so it follows the trace's own stable sort.
+ */
+export interface NilaiKosongBahan {
+  readonly ingredientId: string
+  readonly namaId: string
+  readonly nutrientIds: readonly NutrientId[]
+}
+
+export function nilaiKosongPerBahan(gaps: readonly Gap[]): readonly NilaiKosongBahan[] {
+  const byIngredient = new Map<string, { namaId: string; nutrientIds: NutrientId[] }>()
+  for (const gap of gaps) {
+    if (gap.type !== 'nilai-gizi-kosong') continue
+    const existing = byIngredient.get(gap.ingredientId)
+    if (existing) existing.nutrientIds.push(gap.nutrientId)
+    else byIngredient.set(gap.ingredientId, { namaId: gap.namaId, nutrientIds: [gap.nutrientId] })
+  }
+  return [...byIngredient.entries()].map(([ingredientId, entry]) => ({ ingredientId, ...entry }))
+}
+
 /* ------------------------------------------------- how much is not counted */
 
 /**
