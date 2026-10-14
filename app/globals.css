@@ -45,6 +45,12 @@
      the notch on an incomplete plate — never as text. */
   --iron: 34 32 28; /* #22201C */
 
+  /* Drop shadows. Their own token, because a shadow tinted with the rim
+     would glow cream once the rim inverts in the dark theme. */
+  --bayang: 29 74 114;
+
+  color-scheme: light;
+
   /* Type scale. One ramp, ~1.25, base 16px. Body copy never goes below base;
      sm is for dense tabular data and xs for true metadata. */
   --text-xs: 0.8125rem; /* 13px */
@@ -79,6 +85,43 @@
   /* Height of the phone's bottom tab bar, so anything pinned to the bottom of
      the screen sits above it rather than under it. Zero where there is none. */
   --tab-bar-h: 0px;
+}
+
+/* Enamel biru — the dark theme. Not an inverted page but the other plate on
+   the warung table: navy glaze with a cream rim. Follows the reader's system
+   setting; there is no toggle, because a reader's choice would have to live in
+   the URL (invariant 18), and a colour scheme is a device preference, not part
+   of the view being shared.
+
+   Same semantic roles, same 4.5:1 floor on every surface and tint —
+   tests/design/kontras.test.ts reads this block and holds it to it. Worst
+   case in brackets. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --enamel: 15 29 43; /* #0F1D2B */
+    --piring: 21 40 57; /* #152839 */
+    --enamel-deep: 10 21 32; /* #0A1520 */
+
+    --rim-tint: 29 58 85; /* #1D3A55 */
+    --edited-tint: 58 34 25; /* #3A2219 */
+    --adequate-tint: 26 51 36; /* #1A3324 */
+
+    --ink: 242 238 228; /* #F2EEE4 — [10.13] */
+    --ink-soft: 194 199 204; /* #C2C7CC — [6.90] */
+    --rim: 233 221 189; /* #E9DDBD — cream rim [8.69] */
+    --rim-soft: 169 196 221; /* #A9C4DD — [6.50] */
+
+    --edited: 244 162 124; /* #F4A27C — [5.76] */
+    --adequate: 147 207 140; /* #93CF8C — [6.45] */
+    --chip: 169 175 181; /* #A9AFB5 — [5.30] */
+
+    /* Lighter than the light theme's iron: bare steel has to read against a
+       navy ground, and the notch sits on a cream rim. */
+    --iron: 59 70 82; /* #3B4652 */
+    --bayang: 0 0 0;
+
+    color-scheme: dark;
+  }
 }
 
 /* Below sm the main navigation is a tab bar along the bottom of the screen
@@ -192,7 +235,7 @@
     box-shadow:
       inset 0 0 0 4px rgb(var(--piring)),
       inset 0 0 0 5px rgb(var(--rim) / 0.22),
-      0 18px 40px -28px rgb(var(--rim) / 0.55);
+      0 18px 40px -28px rgb(var(--bayang) / 0.55);
     background-image:
       radial-gradient(circle at 12% 18%, rgb(var(--rim) / 0.16) 0 1px, transparent 1.5px),
       radial-gradient(circle at 74% 9%, rgb(var(--rim) / 0.14) 0 0.8px, transparent 1.3px),

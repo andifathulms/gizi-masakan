@@ -29,7 +29,7 @@ export function ContohBerjalan({ locale, data }: { locale: Locale; data: DataCon
   if (!langkah) return null
 
   return (
-    <section className="rounded-plate border border-rim/25 bg-piring px-5 py-5 shadow-[0_18px_40px_-30px_rgb(var(--rim)/0.6)]">
+    <section className="rounded-plate border border-rim/25 bg-piring px-5 py-5 shadow-[0_18px_40px_-30px_rgb(var(--bayang)/0.6)]">
       <h2 className="font-display text-lg text-rim">{copy.contoh.judul}</h2>
       <p className="mt-2 max-w-prose text-base text-ink-soft">{copy.contoh.lede}</p>
 
