@@ -99,7 +99,7 @@ export function DaftarMasakan({
           <h3 lang="id" className="font-display text-lg capitalize text-rim">
             {kategori}
           </h3>
-          <ul className="mt-3 grid gap-3 sm:grid-cols-2">
+          <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {entries.map((entry) => (
               <li key={entry.id}>
                 {/* Column layout so the numbers line up across a row of cards:

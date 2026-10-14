@@ -95,6 +95,20 @@ export interface Copy {
         sees where they landed but not how far they moved. */
     readonly resepAsli: string
     readonly selisih: (delta: string) => string
+    /** Legend for the nutrient tiles, which are also the selector for the
+        recipe bars — the instruction has to be visible, not a hover. */
+    readonly pilihNutrien: string
+    /** The pinned summary bar on a phone links back to the full plate. */
+    readonly lihatRingkasan: string
+    readonly diubah: string
+  }
+  /** In-page links from the plate to the sections below it. */
+  readonly lompat: {
+    readonly label: string
+    readonly resep: string
+    readonly kekosongan: string
+    readonly kecukupan: string
+    readonly jejak: string
   }
   readonly strip: {
     readonly judul: string
@@ -115,6 +129,16 @@ export interface Copy {
     readonly kepekaanJudul: string
     readonly kepekaanPenjelasan: (langkah: string, nutrien: string) => string
     readonly kepekaanBaris: (nama: string, jumlah: string, berat: string) => string
+    /** The nutrients not on the plate's tiles, reachable from one select. */
+    readonly nutrienLain: string
+    readonly barMenunjukkan: string
+    /** Stepper buttons, named with the ingredient so a screen reader does not
+        hear "minus, plus" sixteen times over. */
+    readonly kurangi: (nama: string, gram: string) => string
+    readonly tambah: (nama: string, gram: string) => string
+    /** What the terracotta tick on a bar marks. */
+    readonly tandaAsli: string
+    readonly resepAsliTanda: (jumlah: string) => string
   }
   readonly gaps: {
     readonly judul: string
@@ -126,6 +150,9 @@ export interface Copy {
     /** Legend for the marker on an incomplete total. Visible text, not a
         tooltip — a title attribute never appears on a touch screen. */
     readonly tandaBelumLengkap: string
+    /** The same legend when every total on the plate is incomplete — said once
+        for all of them rather than as a marker repeated on every tile. */
+    readonly semuaBelumLengkap: string
     /** How much of the dish the arithmetic could not reach. Strictly mass —
         the copy must never imply a share of the nutrient. */
     readonly massaDish: (takG: string, mentahG: string, persen: string) => string
@@ -235,15 +262,25 @@ const ID: Copy = {
     seluruhResep: 'Seluruh resep',
     dasarPerhitungan: 'Angka dihitung untuk',
     porsi: 'porsi',
-    estimasi: 'Angka ini dari resep di bawah. Ubah takarannya kalau resep Anda berbeda.',
+    estimasi: 'Angka ini dari resep yang dipakai. Ubah takarannya kalau resep Anda berbeda.',
     ubahTakaran: 'Ubah takaran',
     beratMentah: 'Berat mentah',
     beratMatang: 'Berat matang',
     tidakDiketahui: 'tidak diketahui',
     resepAsli: 'resep asli',
     selisih: (delta) => `${delta} dari resep asli`,
+    pilihNutrien: 'Ketuk satu nutrien untuk melihat sumbangan tiap bahan di resep.',
+    lihatRingkasan: 'Lihat semua angka',
+    diubah: 'diubah',
     dasarBerat:
       'Angka gizi di atas dihitung dari berat mentah. Berat matang berbeda karena air masuk atau keluar waktu dimasak — itu tidak menambah atau mengurangi gizinya.',
+  },
+  lompat: {
+    label: 'Lompat ke',
+    resep: 'Resep',
+    kekosongan: 'Yang tidak terhitung',
+    kecukupan: 'Kecukupan',
+    jejak: 'Asal angka',
   },
   strip: {
     judul: 'Resep yang dipakai',
@@ -262,6 +299,12 @@ const ID: Copy = {
     kepekaanPenjelasan: (langkah, nutrien) =>
       `Kalau resep Anda berbeda dari yang di atas, di sinilah bedanya paling terasa. Angkanya adalah perubahan ${nutrien} per ${langkah} g bahan itu — jadi ini soal kepekatan, bukan saran. Bahan yang dipakai cuma sedikit bisa saja pekat tanpa banyak berpengaruh, karena itu beratnya sekarang ikut ditulis.`,
     kepekaanBaris: (nama, jumlah, berat) => `${nama} — ${jumlah}, sekarang ${berat} g`,
+    nutrienLain: 'Nutrien lain',
+    barMenunjukkan: 'Bar menunjukkan sumbangan ke',
+    kurangi: (nama, gram) => `Kurangi ${nama} ${gram} g`,
+    tambah: (nama, gram) => `Tambah ${nama} ${gram} g`,
+    tandaAsli: 'Garis terakota di sebuah bar menandai posisi resep asli.',
+    resepAsliTanda: (jumlah) => `resep asli: ${jumlah}`,
     caraMasakPenjelasan:
       'Cara masak menentukan faktor retensi, jadi mengubahnya mengubah angka gizinya. Pilihannya adalah operasi USDA untuk kelompok bahan yang sama; faktor yield resep ini hanya berlaku untuk cara masak aslinya, jadi kalau diganti berat matangnya jadi tidak diketahui dan disebut sebagai kekosongan.',
   },
@@ -273,6 +316,7 @@ const ID: Copy = {
     nilaiHilang: 'Nilai gizi kosong',
     faktorHilang: 'Faktor pengolahan kosong',
     tandaBelumLengkap: '† angka ini belum lengkap — yang kurang disebut di "Yang tidak terhitung" di bawah.',
+    semuaBelumLengkap: 'Semua angka di atas belum lengkap — yang kurang disebut di "Yang tidak terhitung" di bawah.',
     massaDish: (takG, mentahG, persen) =>
       `${takG} g dari ${mentahG} g bahan mentah — ${persen} dari beratnya — tidak menyumbang apa pun ke angka mana pun, karena datanya tidak ada. Ini ukuran berat, bukan ukuran gizinya: ${persen} berat tidak berarti ${persen} gizinya.`,
     massaNutrien: (takG, mentahG, persen) =>
@@ -382,15 +426,25 @@ const EN: Copy = {
     seluruhResep: 'Whole recipe',
     dasarPerhitungan: 'Show numbers for',
     porsi: 'portions',
-    estimasi: 'These numbers come from the recipe below. Change the weights if yours differs.',
+    estimasi: 'These numbers come from the recipe this assumed. Change the weights if yours differs.',
     ubahTakaran: 'Edit weights',
     beratMentah: 'Raw weight',
     beratMatang: 'Cooked weight',
     tidakDiketahui: 'not known',
     resepAsli: 'authored recipe',
     selisih: (delta) => `${delta} from the authored recipe`,
+    pilihNutrien: 'Tap a nutrient to see what each ingredient in the recipe contributes to it.',
+    lihatRingkasan: 'See every number',
+    diubah: 'edited',
     dasarBerat:
       'The nutrition figures above are calculated from the raw weight. The cooked weight differs because water enters or leaves during cooking — that neither adds nor removes nutrients.',
+  },
+  lompat: {
+    label: 'Jump to',
+    resep: 'Recipe',
+    kekosongan: 'Not counted',
+    kecukupan: 'Adequacy',
+    jejak: 'Derivation',
   },
   strip: {
     judul: 'The recipe this assumed',
@@ -409,6 +463,12 @@ const EN: Copy = {
     kepekaanPenjelasan: (langkah, nutrien) =>
       `If your recipe differs from the one above, this is where the difference tells. The figure is the change in ${nutrien} per ${langkah} g of that ingredient — so it is about concentration, not advice. Something used in a small amount can be concentrated without mattering much, which is why its current weight is printed beside it.`,
     kepekaanBaris: (nama, jumlah, berat) => `${nama} — ${jumlah}, now ${berat} g`,
+    nutrienLain: 'Other nutrients',
+    barMenunjukkan: 'Bars show the contribution to',
+    kurangi: (nama, gram) => `Remove ${gram} g of ${nama}`,
+    tambah: (nama, gram) => `Add ${gram} g of ${nama}`,
+    tandaAsli: 'A terracotta tick on a bar marks where the authored recipe sat.',
+    resepAsliTanda: (jumlah) => `authored recipe: ${jumlah}`,
     caraMasakPenjelasan:
       'The cooking method selects the retention factor, so changing it changes the nutrition. The choices are USDA operations for the same food group; this recipe\u2019s yield factor was published for the original method, so changing it leaves the cooked weight unknown and named as a gap.',
   },
@@ -420,6 +480,7 @@ const EN: Copy = {
     nilaiHilang: 'Missing nutrient values',
     faktorHilang: 'Missing cooking factors',
     tandaBelumLengkap: '† this number is incomplete — what is missing is named under "What is not counted" below.',
+    semuaBelumLengkap: 'Every number above is incomplete — what is missing is named under "What is not counted" below.',
     massaDish: (takG, mentahG, persen) =>
       `${takG} g of ${mentahG} g of raw ingredients — ${persen} of the weight — contributes nothing to any number here, because there is no data for it. That is a measure of weight, not of nutrition: ${persen} of the weight does not mean ${persen} of the nutrients.`,
     massaNutrien: (takG, mentahG, persen) =>

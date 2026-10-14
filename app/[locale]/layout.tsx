@@ -68,7 +68,7 @@ export default function LocaleLayout({
     <html lang={locale} className={fontVariables}>
       <body className="min-h-screen font-sans antialiased">
         <header className="border-b border-rim/25">
-          <div className="mx-auto flex max-w-4xl flex-wrap items-center gap-x-6 gap-y-3 px-gutter py-4">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-3 px-gutter py-4">
             {/* The wordmark carries the one-line proposition, so the site says
               what it is even on a page whose own heading does not. */}
             <Link
@@ -99,14 +99,14 @@ export default function LocaleLayout({
           </div>
         </header>
 
-        <main className="mx-auto max-w-4xl px-gutter py-block">{children}</main>
+        <main className="mx-auto max-w-6xl px-gutter py-block">{children}</main>
 
         {/* One seam. The disclaimer and the maker's mark share the footer's
           existing rule rather than each getting their own: the first is a
           legal and data notice, the second is personal credit, and they are
           kept apart by position, not by another divider. */}
         <footer className="mt-section border-t border-rim/25">
-          <div className="mx-auto flex max-w-4xl flex-col gap-5 px-gutter py-block sm:flex-row sm:items-end sm:justify-between">
+          <div className="mx-auto flex max-w-6xl flex-col gap-5 px-gutter py-block sm:flex-row sm:items-end sm:justify-between">
             {/* ink-soft, not chip: this is the standing disclaimer, not a gap.
               Chip grey is reserved for missing data — PRD §9. */}
             <p className="max-w-prose text-sm text-ink-soft">{copy.disclaimer}</p>

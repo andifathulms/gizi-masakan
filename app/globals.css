@@ -61,6 +61,10 @@
      minimum is set in one place. */
   --bar-min: 5rem;
   --bar-min-sliver: 0.125rem;
+
+  /* Height of the phone's bottom tab bar, so anything pinned to the bottom of
+     the screen sits above it rather than under it. Zero where there is none. */
+  --tab-bar-h: 0px;
 }
 
 @layer base {
@@ -80,7 +84,11 @@
      adequacy fill together. Nothing else animates. PRD §9. */
   @media (prefers-reduced-motion: no-preference) {
     .move-together {
-      transition: width 220ms cubic-bezier(0.2, 0.7, 0.3, 1);
+      /* left, for the tick that marks the authored recipe on an edited bar —
+         it is part of the same moment, not a second animation. */
+      transition:
+        width 220ms cubic-bezier(0.2, 0.7, 0.3, 1),
+        left 220ms cubic-bezier(0.2, 0.7, 0.3, 1);
     }
 
     /* The card hover tint. Behind the same guard as everything else, so the
