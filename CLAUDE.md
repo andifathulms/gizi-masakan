@@ -177,7 +177,9 @@ The site states plainly that it is a personal project, that ingredient values ar
 
 ## Current state
 
-**M0 through M5 are in**: pipeline, engine, plate with inline recipe editing, ingredient browser, method page, AKG adequacy, URL state, dish search, local recipe saving. **40 recipes** across nasi, mi, berkuah, lauk, sayur, jajanan and minuman — M3's content target met. 70 ingredients, 262 tests, 28.3 KB of the 200 KB data budget.
+**M0 through M5 are in**: pipeline, engine, plate with inline recipe editing, ingredient browser, method page, AKG adequacy, URL state, dish search, local recipe saving. **40 recipes** across nasi, mi, berkuah, lauk, sayur, jajanan and minuman — M3's content target met. 70 ingredients, 341 tests, 28.3 KB of the 200 KB data budget.
+
+**The October 2026 redesign is in** (PRD §9): cobalt enamel palette with a dark "enamel biru" theme that follows the system setting, Fraunces + Plus Jakarta Sans, shape-coded honesty markers, a two-column dish view with a sticky plate and steppers, recipe-ring dish cards with `?kategori=`, and bottom tabs on phones. The nav says "Cara Hitung" but the route is still `/metode/` — keep it, shared links depend on it and a static export has no redirects.
 
 Three things are deliberately incomplete, and each is stated in the product rather than hidden:
 

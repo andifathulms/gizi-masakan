@@ -174,6 +174,8 @@ Because colour is load-bearing here — chip grey *names a gap*, terracotta *nam
 
 All values live as CSS custom properties in `app/globals.css` and reach components only through the semantic names in `tailwind.config.ts`. A raw hex in a component is a bug.
 
+**Dark: enamel biru.** The other plate on the warung table — navy glaze `#0F1D2B`, cream rim `#E9DDBD` — follows the reader's system setting. It keeps every semantic role and the same 4.5:1 floor, asserted by the same test. There is no toggle: a reader's choice would have to live in the URL, and a colour scheme is a device preference, not part of a shared view.
+
 **Markers carry shape as well as colour.** Colour alone is not a signal every reader receives, so each honesty colour has a second cue that survives greyscale: an estimate is terracotta with a dotted underline; an edit is terracotta, heavier, on the edited tint; a gap is hatched — the only pattern in the product — and marked with the chip glyph, a ring with a notch of bare iron. An incomplete dish is a chipped plate: the rim of its plate card carries the same notch. Every mark is named in text beside it; the mark never stands in for the words.
 
 **Type.** Two families, no more. **Fraunces** for display and dish names — variable, with its soft axis set so the serifs round toward a hand-painted menu board. **Plus Jakarta Sans** for prose and controls, and for numerals — drawn by Tokotype, an Indonesian foundry, for the city of Jakarta. Both are self-hosted through `next/font`.
