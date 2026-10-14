@@ -13,7 +13,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { copyFor, isLocale, LOCALES, type Locale } from '@/lib/i18n'
-import { NavUtama } from '@/components/chrome/NavUtama'
+import { NavUtama, PilihBahasa, TabBawah } from '@/components/chrome/NavUtama'
 import { MARK_ALT, brand, SITE_URL } from '@/lib/brand'
 import { Lambang } from '@/components/chrome/Lambang'
 import { MakerSignature } from '@/components/chrome/MakerSignature'
@@ -62,12 +62,11 @@ export default function LocaleLayout({
   if (!isLocale(params.locale)) notFound()
   const locale = params.locale as Locale
   const copy = copyFor(locale)
-  const other = locale === 'id' ? 'en' : 'id'
 
   return (
     <html lang={locale} className={fontVariables}>
       <body className="min-h-screen font-sans antialiased">
-        <header className="border-b border-rim/25">
+        <header className="border-b border-rim/20 bg-enamel">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-3 px-gutter py-4">
             {/* The wordmark carries the one-line proposition, so the site says
               what it is even on a page whose own heading does not. */}
@@ -88,14 +87,7 @@ export default function LocaleLayout({
 
             {/* Labelled as a language switch rather than sitting in the nav as a
               bare word that reads like a fourth section. */}
-            <Link
-              href={`/${other}/masakan/`}
-              lang={other}
-              className="ml-auto text-sm text-ink-soft underline underline-offset-4 hover:text-rim"
-            >
-              <span aria-hidden="true">🌐 </span>
-              {other === 'en' ? 'English' : 'Bahasa Indonesia'}
-            </Link>
+            <PilihBahasa locale={locale} />
           </div>
         </header>
 
@@ -113,6 +105,8 @@ export default function LocaleLayout({
             <MakerSignature />
           </div>
         </footer>
+
+        <TabBawah locale={locale} />
       </body>
     </html>
   )

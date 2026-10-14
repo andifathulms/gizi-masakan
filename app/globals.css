@@ -81,6 +81,19 @@
   --tab-bar-h: 0px;
 }
 
+/* Below sm the main navigation is a tab bar along the bottom of the screen
+   (components/chrome/NavUtama). The page reserves its height so the footer
+   is never hidden under it. */
+@media (max-width: 639px) {
+  :root {
+    --tab-bar-h: calc(4rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  body {
+    padding-bottom: var(--tab-bar-h);
+  }
+}
+
 @layer base {
   html {
     /* Tabular numerals everywhere by default — every gram weight, nutrient

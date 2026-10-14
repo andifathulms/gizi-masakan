@@ -41,6 +41,11 @@ export interface Copy {
     readonly hasil: (found: number, total: number) => string
     readonly kosong: (query: string) => string
     readonly menyebut: (count: number) => string
+    /** The category chips. */
+    readonly kategoriLabel: string
+    readonly semuaKategori: string
+    /** The heaviest ingredients, stated beside the composition ring. */
+    readonly palingBerat: string
   }
   /** Locally saved recipe versions — PRD §6.6. */
   readonly simpan: {
@@ -199,7 +204,7 @@ const ID: Copy = {
   siteName: 'Gizi Masakan',
   tagline: 'Gizi masakan Indonesia, dengan resep yang diasumsikan ditampilkan di bawahnya.',
   tagline5: 'Gizi masakan Indonesia',
-  nav: { masakan: 'Masakan', bahan: 'Bahan', metode: 'Metode' },
+  nav: { masakan: 'Masakan', bahan: 'Bahan', metode: 'Cara Hitung' },
   lede: {
     bahan: (jumlah, rilis) =>
       `${jumlah} bahan dipilih dari ${rilis} dan dipetakan ke nama dapur Indonesia. Nilai per 100 g.`,
@@ -232,6 +237,9 @@ const ID: Copy = {
     kosong: (query) =>
       `Tidak ada masakan yang cocok dengan "${query}". Yang ada di sini baru sebagian kecil dari masakan Indonesia — kalau belum ketemu, kemungkinan besar memang belum ditulis.`,
     menyebut: (count) => `menyebut ${count} hal yang tidak bisa dihitung`,
+    kategoriLabel: 'Saring menurut kategori',
+    semuaKategori: 'Semua',
+    palingBerat: 'Paling berat',
   },
   simpan: {
     judul: 'Simpan versi Anda',
@@ -364,7 +372,7 @@ const EN: Copy = {
   siteName: 'Gizi Masakan',
   tagline: 'Nutrition for Indonesian dishes, with the recipe it assumed shown underneath.',
   tagline5: 'Indonesian dish nutrition',
-  nav: { masakan: 'Dishes', bahan: 'Ingredients', metode: 'Method' },
+  nav: { masakan: 'Dishes', bahan: 'Ingredients', metode: 'How it’s counted' },
   lede: {
     bahan: (jumlah, rilis) =>
       `${jumlah} ingredients curated from ${rilis} and mapped to Indonesian kitchen names. Values are per 100 g.`,
@@ -397,6 +405,9 @@ const EN: Copy = {
     kosong: (query) =>
       `Nothing matches "${query}". What is here is a small fraction of Indonesian cooking — if you cannot find it, it most likely has not been written yet.`,
     menyebut: (count) => `names ${count} things it cannot count`,
+    kategoriLabel: 'Filter by category',
+    semuaKategori: 'All',
+    palingBerat: 'Heaviest',
   },
   simpan: {
     judul: 'Save your version',

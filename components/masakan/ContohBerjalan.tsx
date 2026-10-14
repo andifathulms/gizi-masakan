@@ -29,14 +29,14 @@ export function ContohBerjalan({ locale, data }: { locale: Locale; data: DataCon
   if (!langkah) return null
 
   return (
-    <section className="mt-block rounded-plate border border-rim/40 bg-enamel-deep px-5 py-5">
+    <section className="rounded-plate border border-rim/25 bg-piring px-5 py-5 shadow-[0_18px_40px_-30px_rgb(var(--rim)/0.6)]">
       <h2 className="font-display text-lg text-rim">{copy.contoh.judul}</h2>
       <p className="mt-2 max-w-prose text-base text-ink-soft">{copy.contoh.lede}</p>
 
       <label className="mt-4 block max-w-md">
         <span className="flex items-baseline justify-between text-sm">
           <span lang="id">{copy.contoh.geser}</span>
-          <span className="font-mono text-edited">{langkah.beratLabel} g</span>
+          <span className="font-mono tanda-diubah">{langkah.beratLabel} g</span>
         </span>
         <input
           type="range"
