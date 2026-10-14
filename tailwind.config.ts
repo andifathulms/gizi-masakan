@@ -21,7 +21,12 @@ const config: Config = {
     extend: {
       colors: {
         enamel: token('enamel'),
+        piring: token('piring'),
         'enamel-deep': token('enamel-deep'),
+        'rim-tint': token('rim-tint'),
+        'edited-tint': token('edited-tint'),
+        'adequate-tint': token('adequate-tint'),
+        iron: token('iron'),
         rim: token('rim'),
         'rim-soft': token('rim-soft'),
         ink: token('ink'),
@@ -60,7 +65,7 @@ const config: Config = {
         page: 'var(--space-8)',
       },
       borderRadius: {
-        plate: '14px',
+        plate: '18px',
       },
     },
   },

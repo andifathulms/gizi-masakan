@@ -18,6 +18,7 @@ import { langkahBerat, LANGKAH_STEPPER_G } from '@/lib/portion/langkah'
 import type { NutritionTrace, Recipe } from '@/lib/nutrition/trace'
 import { copyFor, type Locale } from '@/lib/i18n'
 import { formatGram, formatNutrient, nutrientLabel, unitLabel } from '@/lib/format'
+import { TandaChip } from '@/components/chrome/TandaChip'
 
 interface Props {
   trace: NutritionTrace
@@ -118,7 +119,7 @@ export function StripResep({
                 onReset()
                 judulRef.current?.focus()
               }}
-              className="rounded-full border border-edited px-3 py-1 text-edited hover:bg-edited/10"
+              className="rounded-full border border-edited px-3 py-1 text-edited hover:bg-edited-tint"
             >
               {copy.strip.kembalikan}
             </button>
@@ -210,7 +211,8 @@ export function StripResep({
                   <span className="block text-xs text-ink-soft">{known.pengolahanLabel}</span>
                 )}
                 {missing && (
-                  <span className="block text-xs text-chip">
+                  <span className="mt-0.5 flex items-center gap-1 text-xs text-chip">
+                    <TandaChip />
                     {locale === 'en'
                       ? 'no data — not counted'
                       : 'tidak ada datanya — tidak dihitung'}
@@ -227,7 +229,7 @@ export function StripResep({
                 <span className="inline-flex items-center gap-1">
                   <span
                     className={`inline-flex h-11 items-stretch overflow-hidden rounded border ${
-                      isEdited ? 'border-edited bg-edited/10' : 'border-rim/30 bg-enamel'
+                      isEdited ? 'border-edited bg-edited-tint' : 'border-rim/30 bg-piring'
                     }`}
                   >
                     <button
@@ -236,7 +238,7 @@ export function StripResep({
                       onClick={() =>
                         onBeratChange(bahan.ingredientId, langkahBerat(beratG, -LANGKAH_STEPPER_G))
                       }
-                      className="w-9 text-md text-rim hover:bg-rim/10"
+                      className="w-9 text-md text-rim hover:bg-rim-tint"
                     >
                       −
                     </button>
@@ -253,7 +255,7 @@ export function StripResep({
                           onBeratChange(bahan.ingredientId, next)
                       }}
                       className={`w-14 border-x border-rim/20 bg-transparent px-1 text-right font-mono [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
-                        isEdited || isEstimate ? 'text-edited' : ''
+                        isEdited ? 'tanda-diubah' : isEstimate ? 'tanda-perkiraan' : ''
                       }`}
                     />
                     <button
@@ -262,7 +264,7 @@ export function StripResep({
                       onClick={() =>
                         onBeratChange(bahan.ingredientId, langkahBerat(beratG, LANGKAH_STEPPER_G))
                       }
-                      className="w-9 text-md text-rim hover:bg-rim/10"
+                      className="w-9 text-md text-rim hover:bg-rim-tint"
                     >
                       +
                     </button>
@@ -281,7 +283,7 @@ export function StripResep({
               <div className="col-span-2 min-w-0 sm:col-span-1">
                 {contribution ? (
                   <div className="flex items-center gap-3">
-                    <div className="relative h-2.5 min-w-bar-sliver flex-1 rounded-full bg-rim/10">
+                    <div className="relative h-2.5 min-w-bar-sliver flex-1 rounded-full bg-rim-tint">
                       <div
                         className="move-together h-2.5 rounded-full bg-rim/70"
                         style={{ width: `${Math.round(share * 100)}%` }}
@@ -316,7 +318,11 @@ export function StripResep({
                     </span>
                   </div>
                 ) : (
-                  <span className="text-chip">
+                  /* Hatched, the one pattern in the product: there is no bar
+                     because there is no number, and the track says so. */
+                  <span className="block">
+                    <span aria-hidden="true" className="arsir block h-2.5 rounded-full" />
+                    <span className="mt-1 block text-xs text-chip">
                     {missing
                       ? locale === 'en'
                         ? 'no value — this dish is understated by whatever it contributes'
@@ -324,6 +330,7 @@ export function StripResep({
                       : locale === 'en'
                         ? 'no value for this nutrient'
                         : 'tidak ada nilai untuk nutrien ini'}
+                    </span>
                   </span>
                 )}
               </div>

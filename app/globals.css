@@ -11,25 +11,39 @@
  * modifiers (border-rim/25, bg-rim/10) keep working against a variable.
  */
 :root {
-  /* Surfaces */
-  --enamel: 242 239 230; /* #F2EFE6 */
-  --enamel-deep: 231 226 212; /* #E7E2D4 */
+  /* Surfaces. Enamelware, PRD §9: a glazed off-white ground, a brighter
+     glaze for the raised plate, and a recessed panel. */
+  --enamel: 247 245 239; /* #F7F5EF — page ground */
+  --piring: 255 253 248; /* #FFFDF8 — the plate and other raised surfaces */
+  --enamel-deep: 236 232 220; /* #ECE8DC — recessed panels */
 
-  /* Ink. Contrast against enamel / enamel-deep, in that order.
-     Every one of these clears WCAG AA 4.5:1 on both surfaces — the palette
-     carries meaning here (invariant 14), so it has to be readable to carry it. */
-  --ink: 33 31 26; /* #211F1A — 14.32 / 12.72 */
-  --ink-soft: 74 72 65; /* #4A4841 —  7.96 /  7.07 */
-  --rim: 39 72 99; /* #274863 —  8.33 /  7.40 */
-  --rim-soft: 65 98 126; /* #41627E —  5.58 /  4.96 */
+  /* Tints, for selected, edited and adequacy backgrounds. Solid tokens rather
+     than opacity modifiers, so the contrast of text on them is a fixed number
+     that tests/design/kontras.test.ts can assert, not a composite that depends
+     on whatever happens to be underneath. */
+  --rim-tint: 228 236 243; /* #E4ECF3 */
+  --edited-tint: 246 228 218; /* #F6E4DA */
+  --adequate-tint: 226 236 221; /* #E2ECDD */
+
+  /* Ink. Every one of these clears WCAG AA 4.5:1 on every surface and tint
+     above — the palette carries meaning here (invariant 14), so it has to be
+     readable to carry it. Worst case in brackets. */
+  --ink: 28 27 23; /* #1C1B17 — [13.97] */
+  --ink-soft: 74 72 65; /* #4A4841 — [7.42] */
+  --rim: 29 74 114; /* #1D4A72 — cobalt rim [7.49] */
+  --rim-soft: 62 100 137; /* #3E6489 — [5.02] */
 
   /* The honesty palette — PRD §9.
      edited   terracotta  user-edited values and stated estimates
      chip     grey        gaps, missing data, unadjusted nutrients
      adequate leaf green  adequacy fills, nothing else */
-  --edited: 143 61 34; /* #8F3D22 —  6.39 /  5.68 */
-  --adequate: 58 97 57; /* #3A6139 —  6.19 /  5.50 */
-  --chip: 94 91 84; /* #5E5B54 —  5.89 /  5.23 */
+  --edited: 154 63 29; /* #9A3F1D — [5.49] */
+  --adequate: 46 106 58; /* #2E6A3A — [5.26] */
+  --chip: 95 92 85; /* #5F5C55 — [5.41] */
+
+  /* The steel under a chipped enamel edge. Drawn only as the chip glyph and
+     the notch on an incomplete plate — never as text. */
+  --iron: 34 32 28; /* #22201C */
 
   /* Type scale. One ramp, ~1.25, base 16px. Body copy never goes below base;
      sm is for dense tabular data and xs for true metadata. */
@@ -78,6 +92,9 @@
     @apply bg-enamel text-ink;
     font-size: var(--text-base);
     line-height: var(--leading-normal);
+    /* Plus Jakarta Sans draws a narrow word space; at 13–15px "Per porsi"
+       read as one word. A twentieth of an em restores the gap. */
+    word-spacing: 0.05em;
   }
 
   /* The one orchestrated moment: editing a weight moves every bar, total and
@@ -155,15 +172,75 @@
 
   /* The rim motif is a real border on the plate card, used nowhere else —
      PRD §9, "not applied decoratively elsewhere". It belongs to the dish view
-     and to nothing that merely links to one. */
+     and to nothing that merely links to one. A cobalt rim, a hairline where
+     the glaze meets it, and a faint speckle, as on a real piring kaleng. */
   .plate-card {
-    @apply rounded-plate border-2 border-rim bg-enamel;
-    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.5);
+    @apply relative rounded-plate border-[3px] border-rim bg-piring;
+    box-shadow:
+      inset 0 0 0 4px rgb(var(--piring)),
+      inset 0 0 0 5px rgb(var(--rim) / 0.22),
+      0 18px 40px -28px rgb(var(--rim) / 0.55);
+    background-image:
+      radial-gradient(circle at 12% 18%, rgb(var(--rim) / 0.16) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 74% 9%, rgb(var(--rim) / 0.14) 0 0.8px, transparent 1.3px),
+      radial-gradient(circle at 88% 64%, rgb(var(--rim) / 0.16) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 33% 82%, rgb(var(--rim) / 0.14) 0 0.8px, transparent 1.3px),
+      radial-gradient(circle at 56% 44%, rgb(var(--rim) / 0.12) 0 0.7px, transparent 1.2px);
+  }
+
+  /* An incomplete dish is a chipped plate: a notch of bare iron in the rim.
+     The same mark as the chip glyph that names each gap, so the plate says
+     "something here is missing" before a single number is read. Decorative —
+     the gap itself is always named in text. */
+  .plate-card[data-belum-lengkap]::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    right: 2.5rem;
+    width: 1.625rem;
+    height: 0.5625rem;
+    background: rgb(var(--iron));
+    clip-path: polygon(0 0, 100% 0, 82% 70%, 58% 100%, 30% 78%, 12% 92%);
   }
 
   /* An index card is a link to a plate, not a plate. Single hairline rule, no
-     rim, no inset highlight — so the 2px rim still means "this is the dish". */
+     rim, no inset highlight — so the rim still means "this is the dish". */
   .list-card {
-    @apply rounded-plate border border-rim/30 bg-enamel;
+    @apply rounded-plate border border-rim/25 bg-piring;
+  }
+
+  /* The honesty markers carry shape as well as colour, so they survive
+     greyscale, colour blindness and a bad screen (PRD §9).
+     - an estimate is terracotta with a dotted underline: unfinished
+     - an edit is terracotta, heavier, on the edited tint: yours
+     - a gap is hatched, and named in text beside it */
+  .tanda-perkiraan {
+    color: rgb(var(--edited));
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
+  }
+
+  .tanda-diubah {
+    color: rgb(var(--edited));
+    font-weight: 600;
+  }
+
+  /* The only pattern in the product, so it cannot be read as a value. */
+  .arsir {
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgb(var(--chip) / 0.55) 0 1.5px,
+      transparent 1.5px 6px
+    );
+  }
+}
+
+@layer utilities {
+  /* Fraunces' soft axis rounds the serifs toward a hand-painted menu board.
+     Set with the family so every display heading gets it. */
+  .font-display {
+    font-variation-settings: 'SOFT' 50;
   }
 }

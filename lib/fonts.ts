@@ -2,25 +2,31 @@
  * The two faces, shared by both root layouts.
  *
  * Self-hosted through next/font — invariant 16 forbids any runtime network
- * request, and a font CDN is a network request.
+ * request, and a font CDN is a network request. next/font downloads them once,
+ * at build time, and serves them from the site.
  *
- * Two families is the budget. Tabular figures for gram weights and nutrient
- * values come from `font-variant-numeric: tabular-nums` on `html`, not from a
- * third monospace face.
+ * Two families is the budget, PRD §9:
+ *
+ * - Fraunces for display and dish names. Variable, with a "soft" axis that
+ *   rounds the serifs toward a hand-painted warung menu board; set in
+ *   globals.css alongside the family.
+ * - Plus Jakarta Sans for prose, controls and numerals. Drawn by Tokotype, an
+ *   Indonesian foundry, for the city of Jakarta. Its open counters keep 13px
+ *   metadata legible, and it carries tabular figures — so gram weights and
+ *   nutrient values still come from `font-variant-numeric: tabular-nums` on
+ *   `html`, not from a third monospace face.
  */
-import { Zilla_Slab, Figtree } from 'next/font/google'
+import { Fraunces, Plus_Jakarta_Sans } from 'next/font/google'
 
-const display = Zilla_Slab({
+const display = Fraunces({
   subsets: ['latin'],
-  /* 400 and 500 only. Weight 700 was preloaded on all 88 pages and used
-     nowhere: across app/ and components/, font-display co-occurs with
-     font-medium four times and with font-bold or font-semibold never. */
-  weight: ['400', '500'],
+  /* Variable weight plus the soft and optical-size axes, in one file. */
+  axes: ['SOFT', 'opsz'],
   variable: '--font-display',
   display: 'swap',
 })
 
-const sans = Figtree({
+const sans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',

@@ -147,12 +147,14 @@ export interface Copy {
     readonly bahanHilang: string
     readonly nilaiHilang: string
     readonly faktorHilang: string
-    /** Legend for the marker on an incomplete total. Visible text, not a
+    /** Legend for the chip mark on an incomplete total. Visible text, not a
         tooltip — a title attribute never appears on a touch screen. */
     readonly tandaBelumLengkap: string
     /** The same legend when every total on the plate is incomplete — said once
         for all of them rather than as a marker repeated on every tile. */
     readonly semuaBelumLengkap: string
+    /** Two words, where a sentence will not fit — the phone's plate bar. */
+    readonly belumLengkap: string
     /** How much of the dish the arithmetic could not reach. Strictly mass —
         the copy must never imply a share of the nutrient. */
     readonly massaDish: (takG: string, mentahG: string, persen: string) => string
@@ -315,7 +317,8 @@ const ID: Copy = {
     bahanHilang: 'Bahan tanpa data',
     nilaiHilang: 'Nilai gizi kosong',
     faktorHilang: 'Faktor pengolahan kosong',
-    tandaBelumLengkap: '† angka ini belum lengkap — yang kurang disebut di "Yang tidak terhitung" di bawah.',
+    tandaBelumLengkap: 'Angka bertanda ini belum lengkap — yang kurang disebut di "Yang tidak terhitung" di bawah.',
+    belumLengkap: 'belum lengkap',
     semuaBelumLengkap: 'Semua angka di atas belum lengkap — yang kurang disebut di "Yang tidak terhitung" di bawah.',
     massaDish: (takG, mentahG, persen) =>
       `${takG} g dari ${mentahG} g bahan mentah — ${persen} dari beratnya — tidak menyumbang apa pun ke angka mana pun, karena datanya tidak ada. Ini ukuran berat, bukan ukuran gizinya: ${persen} berat tidak berarti ${persen} gizinya.`,
@@ -479,7 +482,8 @@ const EN: Copy = {
     bahanHilang: 'Ingredients with no data',
     nilaiHilang: 'Missing nutrient values',
     faktorHilang: 'Missing cooking factors',
-    tandaBelumLengkap: '† this number is incomplete — what is missing is named under "What is not counted" below.',
+    tandaBelumLengkap: 'A marked number is incomplete — what is missing is named under "What is not counted" below.',
+    belumLengkap: 'incomplete',
     semuaBelumLengkap: 'Every number above is incomplete — what is missing is named under "What is not counted" below.',
     massaDish: (takG, mentahG, persen) =>
       `${takG} g of ${mentahG} g of raw ingredients — ${persen} of the weight — contributes nothing to any number here, because there is no data for it. That is a measure of weight, not of nutrition: ${persen} of the weight does not mean ${persen} of the nutrients.`,

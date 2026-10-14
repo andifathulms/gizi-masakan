@@ -156,31 +156,33 @@ dish + portion
 
 ## 9. Design direction
 
-The material world is **enamelware** — the cream *piring kaleng* with its dark rim, chipped at the edges, on every warung table in the country. Warm, utilitarian, unmistakably Indonesian, and it carries a data-dense layout without fighting it.
+The material world is **enamelware** — the glazed *piring kaleng* with its dark cobalt rim, chipped at the edges, on every warung table in the country. Warm, utilitarian, unmistakably Indonesian, and it carries a data-dense layout without fighting it.
 
-**Palette.** Enamel cream `#F2EFE6` as ground. Rim blue for structure, headings, and borders — the dark edge of the plate. Ink for text. **Terracotta reserved for values the user has edited and for stated estimates** — the honesty colour, so an adjusted recipe is visibly the user's rather than the app's. **Leaf green for adequacy fills.** Chip grey for gaps, missing data, and unadjusted nutrients — present but visibly incomplete.
+**Palette.** A glazed off-white enamel `#F7F5EF` as ground, with a brighter glaze `#FFFDF8` for the plate and other raised surfaces. Cobalt rim blue for structure, headings, borders and selection — the dark edge of the plate. Ink for text. **Terracotta reserved for values the user has edited and for stated estimates** — the honesty colour, so an adjusted recipe is visibly the user's rather than the app's. **Leaf green for adequacy fills.** Chip grey for gaps, missing data, and unadjusted nutrients — present but visibly incomplete. Three solid tints (rim, edited, adequate) carry selected, edited and adequacy backgrounds, and iron `#22201C` is the bare steel under a chipped edge, drawn only as the chip mark.
 
-Because colour is load-bearing here — chip grey *names a gap*, terracotta *names an estimate* — every ink value clears WCAG AA 4.5:1 on both grounds. The original hues were set by eye and four of them did not; they were darkened in place, keeping the enamelware character. Contrast is stated against enamel `#F2EFE6` and enamel-deep `#E7E2D4`:
+Because colour is load-bearing here — chip grey *names a gap*, terracotta *names an estimate* — every ink value clears WCAG AA 4.5:1 on every surface and tint. The palette was moved from a cream-and-slate set toward real cobalt enamelware in October 2026; the floor is asserted against `app/globals.css` itself by `tests/design/kontras.test.ts`, so a value that drifts below it fails the build's test run. Worst case across `enamel`, `piring`, `enamel-deep` and the three tints:
 
-| Token | Hex | vs enamel | vs enamel-deep |
-|---|---|---|---|
-| `ink` | `#211F1A` | 14.32 | 12.72 |
-| `ink-soft` | `#4A4841` | 7.96 | 7.07 |
-| `rim` | `#274863` | 8.33 | 7.40 |
-| `rim-soft` | `#41627E` | 5.58 | 4.96 |
-| `edited` (terracotta) | `#8F3D22` | 6.39 | 5.68 |
-| `adequate` (leaf) | `#3A6139` | 6.19 | 5.50 |
-| `chip` (grey) | `#5E5B54` | 5.89 | 5.23 |
+| Token | Hex | worst-case contrast |
+|---|---|---|
+| `ink` | `#1C1B17` | 13.97 |
+| `ink-soft` | `#4A4841` | 7.42 |
+| `rim` | `#1D4A72` | 7.49 |
+| `rim-soft` | `#3E6489` | 5.02 |
+| `edited` (terracotta) | `#9A3F1D` | 5.49 |
+| `adequate` (leaf) | `#2E6A3A` | 5.26 |
+| `chip` (grey) | `#5F5C55` | 5.41 |
 
 All values live as CSS custom properties in `app/globals.css` and reach components only through the semantic names in `tailwind.config.ts`. A raw hex in a component is a bug.
 
-**Type.** Two families, no more. **Zilla Slab** for display and dish names — a warm slab with a menu-board register. **Figtree** for prose and controls, and for numerals.
+**Markers carry shape as well as colour.** Colour alone is not a signal every reader receives, so each honesty colour has a second cue that survives greyscale: an estimate is terracotta with a dotted underline; an edit is terracotta, heavier, on the edited tint; a gap is hatched — the only pattern in the product — and marked with the chip glyph, a ring with a notch of bare iron. An incomplete dish is a chipped plate: the rim of its plate card carries the same notch. Every mark is named in text beside it; the mark never stands in for the words.
 
-Gram weights, nutrient values, and percentages change as the user edits and must not reflow — but that is what `font-variant-numeric: tabular-nums` is for, and Figtree supports it. It is set once on `html`. A third face was carried for a while to get the same effect and was dropped: it cost a font download for something the body face already did. One type scale (~1.25 from a 16px base), declared with the colour tokens; body copy never goes below 16px.
+**Type.** Two families, no more. **Fraunces** for display and dish names — variable, with its soft axis set so the serifs round toward a hand-painted menu board. **Plus Jakarta Sans** for prose and controls, and for numerals — drawn by Tokotype, an Indonesian foundry, for the city of Jakarta. Both are self-hosted through `next/font`.
 
-**Structure.** The plate sits at the top with the portion and the headline nutrients; the recipe strip runs full width beneath it, one row per ingredient, right-aligned numerals with the contribution bar extending from the gram weight. The rim motif is a real border on the plate card, not applied decoratively elsewhere.
+Gram weights, nutrient values, and percentages change as the user edits and must not reflow — but that is what `font-variant-numeric: tabular-nums` is for, and Plus Jakarta Sans supports it. It is set once on `html`. A third face was carried for a while to get the same effect and was dropped: it cost a font download for something the body face already did. One type scale (~1.25 from a 16px base), declared with the colour tokens; body copy never goes below 16px.
 
-**Motion.** One orchestrated moment: editing a gram weight, and every bar, total, and adequacy fill moving together. Nothing else animates.
+**Structure.** The plate and the recipe sit side by side on a wide screen: the plate on the left, sticky, with the portion switch and the headline nutrients — which are also the selector for the recipe's bars — and the recipe strip beside it, one row per ingredient, the contribution bar running from the gram weight. On a phone they stack, and a pinned bar keeps the selected total and its change from the authored recipe in view while the reader edits. The rim motif is a real border on the plate card, not applied decoratively elsewhere.
+
+**Motion.** One orchestrated moment: editing a gram weight, and every bar, total, and adequacy fill moving together. Nothing else animates. The layout's job is to keep that moment on screen.
 
 **Copy.** Indonesian first, in the vocabulary of a kitchen — *bahan*, *takaran*, *porsi*, *centong*, *potong sedang*. Estimates stated plainly: *"Angka ini dari resep di bawah. Ubah takarannya kalau resep Anda berbeda."*
 

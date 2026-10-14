@@ -22,6 +22,7 @@ import { PanelKekosongan } from '@/components/plate/PanelKekosongan'
 import { Kecukupan } from '@/components/adequacy/Kecukupan'
 import { JejakNutrien } from '@/components/trace/JejakNutrien'
 import { ResepTersimpan } from '@/components/simpan/ResepTersimpan'
+import { TandaChip } from '@/components/chrome/TandaChip'
 
 const table = loadFdcTable()
 const unmatched = { get: findUnmatched }
@@ -105,172 +106,180 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
           its widest content, which pushed a phone's page wider than its
           screen. */}
       <div className="grid grid-cols-[minmax(0,1fr)] gap-block lg:grid-cols-[minmax(0,23rem)_minmax(0,1fr)] lg:items-start">
-        <section
-          id="piring"
-          ref={piringRef}
-          className="plate-card scroll-mt-4 px-5 py-5 sm:px-6 lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto"
-        >
-          <p lang="id" className="text-xs capitalize text-ink-soft">
-            <Link href={`/${locale}/masakan/`} className="hover:text-rim hover:underline">
-              {copy.nav.masakan}
-            </Link>{' '}
-            › {recipe.kategori}
-          </p>
-          <h1 lang="id" className="mt-1 font-display text-2xl text-rim">
-            {trace.namaId}
-          </h1>
-          <p className="mt-1 text-sm text-ink-soft">
-            {recipe.porsi} {copy.plate.porsi}
-          </p>
-          <p className="mt-3 text-base text-ink-soft">{recipe.deskripsiId}</p>
-          <p className="mt-3 text-sm text-edited">{copy.plate.estimasi}</p>
+        {/* The sticky, scrollable wrapper is separate from the plate so the
+            chip notch on the rim is not clipped by the scroll container. */}
+        <div className="lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto lg:pt-1">
+          <section
+            id="piring"
+            ref={piringRef}
+            data-belum-lengkap={trace.lengkap ? undefined : ''}
+            className="plate-card scroll-mt-4 px-5 py-5 sm:px-6"
+          >
+            <p lang="id" className="text-xs capitalize text-ink-soft">
+              <Link href={`/${locale}/masakan/`} className="hover:text-rim hover:underline">
+                {copy.nav.masakan}
+              </Link>{' '}
+              › {recipe.kategori}
+            </p>
+            <h1 lang="id" className="mt-1 font-display text-2xl text-rim">
+              {trace.namaId}
+            </h1>
+            <p className="mt-1 text-sm text-ink-soft">
+              {recipe.porsi} {copy.plate.porsi}
+            </p>
+            <p className="mt-3 text-base text-ink-soft">{recipe.deskripsiId}</p>
+            <p className="mt-3 text-sm text-edited">{copy.plate.estimasi}</p>
 
-          {/* A fieldset with a legend, not a div with role="group": these are
-              two mutually exclusive options, which is what radios are, and the
-              legend gives the group the accessible name the bare role never
-              had. The radios are visually the same segmented control. */}
-          <fieldset className="mt-4">
-            <legend className="sr-only">{copy.plate.dasarPerhitungan}</legend>
-            <div className="inline-flex gap-1 rounded-lg border border-rim/30 p-1 text-sm">
-              {[true, false].map((perPorsi) => (
-                <label
-                  key={String(perPorsi)}
-                  className={`pilihan cursor-pointer rounded-md px-3 py-1.5 ${
-                    perPorsiView === perPorsi
-                      ? 'bg-rim font-medium text-enamel'
-                      : 'text-rim hover:bg-rim/10'
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="dasar-perhitungan"
-                    className="sr-only"
-                    checked={perPorsiView === perPorsi}
-                    onChange={() => setView({ perPorsiView: perPorsi })}
-                  />
-                  {perPorsi ? copy.plate.perPorsi : copy.plate.seluruhResep}
-                </label>
-              ))}
-            </div>
-          </fieldset>
-
-          {/* Headline nutrients, which are also the selector for the recipe
-              bars: tap Protein and the strip re-ranks by protein. Radios, like
-              the switch above, because exactly one is selected. Energy is
-              first in reading order and is styled exactly like the others —
-              invariant 13 forbids making it dominant. */}
-          <fieldset className="mt-4">
-            <legend className="text-sm text-ink-soft">{copy.plate.pilihNutrien}</legend>
-            <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-2">
-              {headlineTotals.map((total) => {
-                const id = total.nutrientId
-                const dipilih = nutrientId === id
-                return (
+            {/* A fieldset with a legend, not a div with role="group": these are
+                two mutually exclusive options, which is what radios are, and the
+                legend gives the group the accessible name the bare role never
+                had. The radios are visually the same segmented control. */}
+            <fieldset className="mt-4">
+              <legend className="sr-only">{copy.plate.dasarPerhitungan}</legend>
+              <div className="inline-flex gap-1 rounded-lg border border-rim/30 p-1 text-sm">
+                {[true, false].map((perPorsi) => (
                   <label
-                    key={id}
-                    className={`pilihan card-hover block cursor-pointer rounded-lg border px-3 py-2 ${
-                      dipilih
-                        ? 'border-rim bg-rim/10 shadow-[inset_0_0_0_1px_rgb(var(--rim))]'
-                        : 'border-rim/20 hover:border-rim/50'
+                    key={String(perPorsi)}
+                    className={`pilihan cursor-pointer rounded-md px-3 py-1.5 ${
+                      perPorsiView === perPorsi
+                        ? 'bg-rim font-medium text-enamel'
+                        : 'text-rim hover:bg-rim-tint'
                     }`}
                   >
                     <input
                       type="radio"
-                      name="nutrien-piring"
+                      name="dasar-perhitungan"
                       className="sr-only"
-                      checked={dipilih}
-                      onChange={() => setView({ nutrientId: id })}
+                      checked={perPorsiView === perPorsi}
+                      onChange={() => setView({ perPorsiView: perPorsi })}
                     />
-                    <span className="block text-sm text-ink-soft">{nutrientLabel(id, locale)}</span>
-                    <span className="block font-mono text-lg font-medium">
-                      <span className={edited ? 'text-edited' : undefined}>
-                        {formatNutrient(total.total * scale, id, locale)}
-                      </span>{' '}
-                      <span className="text-sm font-normal text-ink-soft">{unitLabel(id)}</span>
-                      {/* A real dagger, visible, with its meaning in text —
-                          never a title attribute, which a touch screen never
-                          shows. When every total is incomplete the legend
-                          below says so once, and the per-tile text stays for
-                          a screen reader. Invariant 2. */}
-                      {!total.lengkap && (
-                        <span className="ml-1 align-middle text-sm font-normal text-chip">
-                          {!semuaBelumLengkap && <span aria-hidden="true">†</span>}
-                          <span className="sr-only"> {copy.gaps.ringkasTidakLengkap}</span>
+                    {perPorsi ? copy.plate.perPorsi : copy.plate.seluruhResep}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            {/* Headline nutrients, which are also the selector for the recipe
+                bars: tap Protein and the strip re-ranks by protein. Radios, like
+                the switch above, because exactly one is selected. Energy is
+                first in reading order and is styled exactly like the others —
+                invariant 13 forbids making it dominant. */}
+            <fieldset className="mt-4">
+              <legend className="text-sm text-ink-soft">{copy.plate.pilihNutrien}</legend>
+              <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-2">
+                {headlineTotals.map((total) => {
+                  const id = total.nutrientId
+                  const dipilih = nutrientId === id
+                  return (
+                    <label
+                      key={id}
+                      className={`pilihan card-hover block cursor-pointer rounded-lg border px-3 py-2 ${
+                        dipilih
+                          ? 'border-rim bg-rim-tint shadow-[inset_0_0_0_1px_rgb(var(--rim))]'
+                          : 'border-rim/20 bg-piring hover:border-rim/50'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="nutrien-piring"
+                        className="sr-only"
+                        checked={dipilih}
+                        onChange={() => setView({ nutrientId: id })}
+                      />
+                      <span className="block text-sm text-ink-soft">{nutrientLabel(id, locale)}</span>
+                      <span className="block font-mono text-lg font-medium">
+                        <span className={edited ? 'tanda-diubah' : undefined}>
+                          {formatNutrient(total.total * scale, id, locale)}
+                        </span>{' '}
+                        <span className="text-sm font-normal text-ink-soft">{unitLabel(id)}</span>
+                        {/* The chip mark, visible, with its meaning in text —
+                            never a title attribute, which a touch screen never
+                            shows. When every total is incomplete the legend
+                            below says so once, and the per-tile text stays for
+                            a screen reader. Invariant 2. */}
+                        {!total.lengkap && (
+                          <span className="ml-1 text-sm font-normal">
+                            {!semuaBelumLengkap && <TandaChip />}
+                            <span className="sr-only"> {copy.gaps.ringkasTidakLengkap}</span>
+                          </span>
+                        )}
+                      </span>
+                      {/* PRD §2 turns on watching the number move. Once the
+                          reader stops moving it, the movement was gone: they saw
+                          where they landed and not how far. */}
+                      {edited && (
+                        <span className="mt-0.5 block text-xs text-ink-soft">
+                          {copy.plate.resepAsli}{' '}
+                          <span className="font-mono">
+                            {formatNutrient(asliFor(id) * scale, id, locale)}
+                          </span>{' '}
+                          ·{' '}
+                          <span className="font-mono">
+                            {formatDelta((total.total - asliFor(id)) * scale, id, locale)}
+                          </span>
                         </span>
                       )}
-                    </span>
-                    {/* PRD §2 turns on watching the number move. Once the
-                        reader stops moving it, the movement was gone: they saw
-                        where they landed and not how far. */}
-                    {edited && (
-                      <span className="mt-0.5 block text-xs text-ink-soft">
-                        {copy.plate.resepAsli}{' '}
-                        <span className="font-mono">
-                          {formatNutrient(asliFor(id) * scale, id, locale)}
-                        </span>{' '}
-                        ·{' '}
-                        <span className="font-mono">
-                          {formatDelta((total.total - asliFor(id)) * scale, id, locale)}
-                        </span>
-                      </span>
-                    )}
-                  </label>
-                )
-              })}
-            </div>
-          </fieldset>
+                    </label>
+                  )
+                })}
+              </div>
+            </fieldset>
 
-          {/* The legend is visible text, shown whenever an incomplete total is
-              on screen. The marker has to explain itself without a hover. */}
-          {adaBelumLengkap && (
-            <p className="mt-3 text-sm text-chip">
-              {semuaBelumLengkap ? copy.gaps.semuaBelumLengkap : copy.gaps.tandaBelumLengkap}
-            </p>
-          )}
+            {/* The legend is visible text, shown whenever an incomplete total is
+                on screen. The marker has to explain itself without a hover. */}
+            {adaBelumLengkap && (
+              <p className="mt-3 flex gap-2 text-sm text-chip">
+                <TandaChip className="mt-1" />
+                <span>
+                  {semuaBelumLengkap ? copy.gaps.semuaBelumLengkap : copy.gaps.tandaBelumLengkap}
+                </span>
+              </p>
+            )}
 
-          <dl className="mt-4 flex flex-wrap gap-x-6 gap-y-1 border-t border-rim/20 pt-3 text-sm">
-            <div className="flex gap-2">
-              <dt className="text-ink-soft">{copy.plate.beratMentah}</dt>
-              <dd className="font-mono">{formatGram(trace.massa.mentahG, locale)} g</dd>
-            </div>
-            <div className="flex gap-2">
-              <dt className="text-ink-soft">{copy.plate.beratMatang}</dt>
-              <dd className="font-mono">
-                {trace.massa.matangG === undefined ? (
-                  <span className="text-chip">{copy.plate.tidakDiketahui}</span>
-                ) : (
-                  `${formatGram(trace.massa.matangG, locale)} g`
-                )}
-              </dd>
-            </div>
-          </dl>
-          {/* States which of the two weights above the nutrition belongs to.
-              Rice nearly triples in the pan; without this the pair reads as if
-              the calories tripled with it. */}
-          <p className="mt-2 text-xs text-ink-soft">{copy.plate.dasarBerat}</p>
+            <dl className="mt-4 flex flex-wrap gap-x-6 gap-y-1 border-t border-rim/20 pt-3 text-sm">
+              <div className="flex gap-2">
+                <dt className="text-ink-soft">{copy.plate.beratMentah}</dt>
+                <dd className="font-mono">{formatGram(trace.massa.mentahG, locale)} g</dd>
+              </div>
+              <div className="flex gap-2">
+                <dt className="text-ink-soft">{copy.plate.beratMatang}</dt>
+                <dd className="font-mono">
+                  {trace.massa.matangG === undefined ? (
+                    <span className="text-chip">{copy.plate.tidakDiketahui}</span>
+                  ) : (
+                    `${formatGram(trace.massa.matangG, locale)} g`
+                  )}
+                </dd>
+              </div>
+            </dl>
+            {/* States which of the two weights above the nutrition belongs to.
+                Rice nearly triples in the pan; without this the pair reads as if
+                the calories tripled with it. */}
+            <p className="mt-2 text-xs text-ink-soft">{copy.plate.dasarBerat}</p>
 
-          <nav aria-label={copy.lompat.label} className="mt-4 border-t border-rim/20 pt-3">
-            <ul className="flex flex-wrap gap-2 text-xs">
-              {(
-                [
-                  ['resep', copy.lompat.resep],
-                  ['kekosongan', copy.lompat.kekosongan],
-                  ['kecukupan', copy.lompat.kecukupan],
-                  ['jejak', copy.lompat.jejak],
-                ] as const
-              ).map(([anchor, label]) => (
-                <li key={anchor}>
-                  <a
-                    href={`#${anchor}`}
-                    className="block rounded-full border border-rim/25 px-3 py-1 text-rim hover:border-rim hover:bg-rim/10"
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </section>
+            <nav aria-label={copy.lompat.label} className="mt-4 border-t border-rim/20 pt-3">
+              <ul className="flex flex-wrap gap-2 text-xs">
+                {(
+                  [
+                    ['resep', copy.lompat.resep],
+                    ['kekosongan', copy.lompat.kekosongan],
+                    ['kecukupan', copy.lompat.kecukupan],
+                    ['jejak', copy.lompat.jejak],
+                  ] as const
+                ).map(([anchor, label]) => (
+                  <li key={anchor}>
+                    <a
+                      href={`#${anchor}`}
+                      className="block rounded-full border border-rim/25 px-3 py-1 text-rim hover:border-rim hover:bg-rim-tint"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </section>
+        </div>
 
         <div className="flex min-w-0 flex-col gap-section">
           <div id="resep" className="scroll-mt-4">
@@ -376,11 +385,10 @@ export function Piring({ recipe, locale }: { recipe: Recipe; locale: Locale }) {
             <span className="block font-mono text-lg font-medium">
               {formatNutrient(selected.total * scale, nutrientId, locale)}{' '}
               <span className="text-sm font-normal">{unitLabel(nutrientId)}</span>
+              {/* Words, not the chip glyph: its chip-grey ring would not read
+                  on the rim fill. */}
               {!selected.lengkap && (
-                <span className="ml-1 text-sm font-normal">
-                  <span aria-hidden="true">†</span>
-                  <span className="sr-only"> {copy.gaps.ringkasTidakLengkap}</span>
-                </span>
+                <span className="ml-2 text-xs font-normal">{copy.gaps.belumLengkap}</span>
               )}
             </span>
           </span>
