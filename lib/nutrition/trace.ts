@@ -34,6 +34,9 @@ export interface RecipeBahan {
   /** Raw weight as authored. Editing this is what the recipe strip does. */
   readonly beratG: number
   readonly provenance: BeratProvenance
+  /** ISO date of the scale reading. Present exactly when provenance is
+      ditimbang — enforced by the recipe schema. */
+  readonly ditimbangPada?: string
   /** Absent means the ingredient goes in raw and is eaten raw. */
   readonly pengolahan?: Pengolahan
   readonly catatan?: string

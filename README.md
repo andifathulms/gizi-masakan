@@ -12,7 +12,7 @@
 [![deploy](https://github.com/andifathulms/gizi-masakan/actions/workflows/deploy.yml/badge.svg)](https://github.com/andifathulms/gizi-masakan/actions/workflows/deploy.yml)
 ![statis](https://img.shields.io/badge/statis-tanpa%20backend-274863)
 ![tanpa jaringan](https://img.shields.io/badge/jaringan%20saat%20dipakai-nol-274863)
-![uji](https://img.shields.io/badge/uji-344-3A6139)
+![uji](https://img.shields.io/badge/uji-362-3A6139)
 ![bukan pelacak](https://img.shields.io/badge/bukan-pelacak-8F3D22)
 
 </div>
@@ -98,11 +98,16 @@ pnpm dev
 pnpm build                  # data:validate, next build, lalu .nojekyll
 pnpm preview                # sajikan ./out di bawah basePath produksi
 
-pnpm test:run               # 344 uji
+pnpm test:run               # 362 uji
 pnpm test:conservation      # jumlah sumbangan, keseimbangan massa
 pnpm test:gaps              # penanganan nilai kosong, dua arah
 pnpm test:state             # URL, resep tersimpan, pencarian
 pnpm data:validate          # gerbang lisensi, id FDC, kutipan, rujukan resep
+
+pnpm timbang daftar         # yang belum ditimbang
+pnpm timbang resep gado-gado tempe 61                # catat hasil timbangan, bertanggal
+pnpm timbang urt centong-nasi --label "1 centong nasi" --en "1 rice scoop" \
+  --bahan nasi-putih --ulangan 152,148,151           # rata-rata tiga kali isi
 pnpm typecheck && pnpm lint
 
 # hanya untuk pengembangan dan CI terjadwal — tidak pernah bagian dari pnpm build

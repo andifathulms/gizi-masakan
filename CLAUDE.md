@@ -39,6 +39,9 @@ pnpm fdc:build              # filter to curated list, project nutrients, write b
 pnpm factors:fetch          # DEV/CI — download the two USDA public-domain factor tables
 pnpm factors:build          # transcribe them, derive rice/vegetable yields
 pnpm data:validate          # licence gate, FDC ids, citations, URT dates, recipe refs
+pnpm timbang daftar         # DEV — what is still unweighed
+pnpm timbang resep <id> <bahan> <g>     # DEV — record a scale reading on a recipe row, dated
+pnpm timbang urt <id> --label … --en … --bahan … --ulangan g1,g2,g3   # DEV — add a weighed takaran
 pnpm typecheck
 pnpm lint
 ```
@@ -177,7 +180,7 @@ The site states plainly that it is a personal project, that ingredient values ar
 
 ## Current state
 
-**M0 through M5 are in**: pipeline, engine, plate with inline recipe editing, ingredient browser, method page, AKG adequacy, URL state, dish search, local recipe saving. **40 recipes** across nasi, mi, berkuah, lauk, sayur, jajanan and minuman — M3's content target met. 71 ingredients, 344 tests, 28.9 KB of the 200 KB data budget.
+**M0 through M5 are in**: pipeline, engine, plate with inline recipe editing, ingredient browser, method page, AKG adequacy, URL state, dish search, local recipe saving. **40 recipes** across nasi, mi, berkuah, lauk, sayur, jajanan and minuman — M3's content target met. 71 ingredients, 362 tests, 28.9 KB of the 200 KB data budget.
 
 **The October 2026 redesign is in** (PRD §9): cobalt enamel palette with a dark "enamel biru" theme that follows the system setting, Fraunces + Plus Jakarta Sans, shape-coded honesty markers, a two-column dish view with a sticky plate and steppers, recipe-ring dish cards with `?kategori=`, and bottom tabs on phones. The nav says "Cara Hitung" but the route is still `/metode/` — keep it, shared links depend on it and a static export has no redirects.
 
@@ -187,4 +190,4 @@ Three things are deliberately incomplete, and each is stated in the product rath
 2. **The URT table is empty.** Invariant 9 forbids unmeasured entries, so portions show in grams. `data/urt/takaran.json` carries the measuring protocol and the list of takaran to weigh.
 3. **12 Indonesian ingredients have no source.** Recorded in `data/ingredients/unmatched.json`, still present in the recipes, named as gaps in every trace. **Do not resolve any of them from TKPI.** `kecap-manis` now bites hardest: it empties the sugar out of four dishes named after it, and **FDC SR Legacy has no sweet soy sauce at all** — only shoyu, tamari, hydrolysed-protein soy sauce and teriyaki sauce (checked against the 2018-04 `food.csv`). It stays a gap until a licensed source exists. `gula-merah` was curated in October 2026 from FDC "Sugars, brown" (168833) as a stated approximation, with a catatan; wedang jahe went from 16 to 111 kcal a glass.
 
-Next, in order of value, and all of it data rather than code — and the first two need a kitchen scale, not an editor: weigh the URT table; weigh the forty recipes. Weights come in through `data/urt/takaran.json` and each recipe row's `provenance: "ditimbang"` with its date; never fill either from estimation.
+Next, in order of value, and all of it data rather than code — and the first two need a kitchen scale, not an editor: weigh the URT table; weigh the forty recipes. Record them with `pnpm timbang` (scripts/timbang.ts): it dates every reading, averages the three URT fills the protocol asks for, refuses malformed input, and edits only the one row. A weighed recipe row must carry `ditimbangPada` — the schema refuses `ditimbang` without it. Never fill either from estimation.

@@ -21,6 +21,12 @@ Mengganti `"provenance": "perkiraan"` menjadi `"ditimbang"` hanya boleh
 dilakukan bersamaan dengan mengganti angkanya dengan hasil timbangan sungguhan,
 dan mencatat tanggalnya di `ditulisPada`.
 
+Mengganti satu baris dari perkiraan ke hasil timbangan dilakukan dengan
+`pnpm timbang resep <id-resep> <id-bahan> <gram>`. Perintah itu mengubah
+`beratG`, mengganti `provenance` jadi `"ditimbang"`, dan menulis
+`ditimbangPada` — skema menolak baris `ditimbang` tanpa tanggal. Angkanya harus
+datang dari timbangan, bukan dari kira-kira.
+
 ## Bahan yang sengaja dibiarkan kosong
 
 Beberapa resep memakai bahan yang tidak punya sumber terbuka — kangkung,

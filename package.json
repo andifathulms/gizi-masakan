@@ -17,6 +17,7 @@
     "factors:fetch": "tsx scripts/factors-pipeline.ts fetch",
     "factors:build": "tsx scripts/factors-pipeline.ts build",
     "data:validate": "tsx scripts/validate.ts",
+    "timbang": "tsx scripts/timbang.ts",
     "typecheck": "tsc --noEmit",
     "lint": "next lint"
   },

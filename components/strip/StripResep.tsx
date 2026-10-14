@@ -276,7 +276,9 @@ export function StripResep({
                     ? copy.strip.diedit
                     : isEstimate
                       ? copy.strip.perkiraan
-                      : copy.strip.ditimbang}
+                      : /* The date the reading was taken, shown where the weight
+                           is — invariant 8 says a measured value carries one. */
+                        `${copy.strip.ditimbang}${bahan.ditimbangPada ? ` ${bahan.ditimbangPada}` : ''}`}
                 </span>
               </div>
 

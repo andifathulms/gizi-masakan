@@ -65,15 +65,34 @@ const PengolahanSchema = z.object({
   retentionCode: z.string().min(1).optional(),
 })
 
-const BahanSchema = z.object({
-  ingredientId: IdSchema,
-  beratG: z.number().positive('gram weights are positive'),
-  // Not defaulted. A weight is either measured or stated as an estimate, and
-  // the UI colours the two differently (PRD §9).
-  provenance: z.enum(['ditimbang', 'perkiraan']),
-  pengolahan: PengolahanSchema.optional(),
-  catatan: z.string().optional(),
-})
+export const BahanSchema = z
+  .object({
+    ingredientId: IdSchema,
+    beratG: z.number().positive('gram weights are positive'),
+    // Not defaulted. A weight is either measured or stated as an estimate, and
+    // the UI colours the two differently (PRD §9).
+    provenance: z.enum(['ditimbang', 'perkiraan']),
+    /* When the scale reading was taken. Invariant 8: a measured value carries
+       a date. Required on a weighed row, forbidden on an estimate — a date on
+       an estimate would imply a weighing that never happened. */
+    ditimbangPada: DateSchema.optional(),
+    pengolahan: PengolahanSchema.optional(),
+    catatan: z.string().optional(),
+  })
+  .superRefine((bahan, ctx) => {
+    if (bahan.provenance === 'ditimbang' && bahan.ditimbangPada === undefined)
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['ditimbangPada'],
+        message: `"${bahan.ingredientId}" is marked ditimbang but has no ditimbangPada date (invariant 8).`,
+      })
+    if (bahan.provenance === 'perkiraan' && bahan.ditimbangPada !== undefined)
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['ditimbangPada'],
+        message: `"${bahan.ingredientId}" is an estimate but carries a weighing date.`,
+      })
+  })
 
 const SumberSchema = z.union([
   z.object({ type: z.literal('own-composition'), catatan: z.string().min(1) }),
