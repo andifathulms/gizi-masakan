@@ -186,8 +186,8 @@ export default function MetodePage({ params }: { params: { locale: string } }) {
             </p>
             <p>
               {en
-                ? `${unmatchedIngredients().length} Indonesian ingredients have no acceptable source at all — kangkung, lengkuas, kemiri, serai, terasi, gula merah, kecap manis and others. They stay in the recipes and are named as gaps rather than being approximated or deleted.`
-                : `${unmatchedIngredients().length} bahan Indonesia sama sekali belum punya sumber yang bisa dipakai — kangkung, lengkuas, kemiri, serai, terasi, gula merah, kecap manis, dan lainnya. Bahan itu tetap ada di resep dan disebut sebagai kekosongan, bukan didekati atau dihapus.`}
+                ? `${unmatchedIngredients().length} Indonesian ingredients have no acceptable source at all — kangkung, lengkuas, kemiri, serai, terasi, kecap manis and others. They stay in the recipes and are named as gaps rather than being approximated or deleted. Gula merah is the one exception made so far: FDC has no palm sugar, but its brown sugar carries the same sugar and some of the water and minerals, so it is used and labelled as an approximation rather than left out.`
+                : `${unmatchedIngredients().length} bahan Indonesia sama sekali belum punya sumber yang bisa dipakai — kangkung, lengkuas, kemiri, serai, terasi, kecap manis, dan lainnya. Bahan itu tetap ada di resep dan disebut sebagai kekosongan, bukan didekati atau dihapus. Gula merah satu-satunya pengecualian sejauh ini: FDC tidak punya gula aren, tapi gula cokelatnya membawa gula yang sama serta sebagian air dan mineralnya, jadi dipakai dan ditandai sebagai pendekatan, bukan dibiarkan kosong.`}
             </p>
           </Section>
 

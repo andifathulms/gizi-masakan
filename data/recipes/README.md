@@ -24,7 +24,7 @@ dan mencatat tanggalnya di `ditulisPada`.
 ## Bahan yang sengaja dibiarkan kosong
 
 Beberapa resep memakai bahan yang tidak punya sumber terbuka — kangkung,
-lengkuas, kemiri, serai, daun jeruk, terasi, gula merah, kecap manis. Bahan itu
+lengkuas, kemiri, serai, daun jeruk, terasi, kecap manis. Bahan itu
 **tetap ditulis di resep** meski tidak ada datanya, karena menghapusnya akan
 membuat angka dish-nya terlihat lengkap padahal kurang. Mesin hitung akan
 menyebut tiap bahan itu sebagai kekosongan di keluarannya.

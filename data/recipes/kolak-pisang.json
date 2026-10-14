@@ -2,7 +2,7 @@
   "id": "kolak-pisang",
   "namaId": "Kolak pisang",
   "nameEn": "Banana in coconut milk and palm sugar",
-  "deskripsiId": "Pisang direbus dalam santan dan gula merah. Angka gulanya kurang, karena gula merah belum punya sumber.",
+  "deskripsiId": "Pisang direbus dalam santan dan gula merah. Gula merahnya didekati dengan gula cokelat, jadi angka gulanya dihitung dari bahan yang mirip, bukan yang sama.",
   "kategori": "jajanan",
   "porsi": 4,
   "bahan": [
@@ -35,7 +35,7 @@
       "ingredientId": "gula-merah",
       "beratG": 100,
       "provenance": "perkiraan",
-      "catatan": "Gula merah belum punya sumber, dan untuk kolak itu berarti hampir seluruh gula tambahannya tidak terhitung. Ini kekosongan terbesar di resep ini."
+      "catatan": "Didekati dengan gula cokelat FDC — pendekatan, bukan padanan. Untuk kolak, bahan inilah yang paling menentukan angka gulanya, jadi di sinilah pendekatannya paling terasa."
     },
     {
       "ingredientId": "garam",

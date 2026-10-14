@@ -2,7 +2,7 @@
   "id": "wedang-jahe",
   "namaId": "Wedang jahe",
   "nameEn": "Hot ginger drink",
-  "deskripsiId": "Jahe digeprek dan direbus dengan gula merah. Angkanya hampir seluruhnya gula, dan gula merahnya belum punya sumber.",
+  "deskripsiId": "Jahe digeprek dan direbus dengan gula merah. Angkanya hampir seluruhnya gula, dan gula merahnya didekati dengan gula cokelat — sebanding, bukan persis.",
   "kategori": "minuman",
   "porsi": 2,
   "bahan": [
@@ -20,7 +20,7 @@
       "ingredientId": "gula-merah",
       "beratG": 50,
       "provenance": "perkiraan",
-      "catatan": "Gula merah belum punya sumber. Untuk minuman yang isinya jahe dan gula, artinya sebagian besar energinya tidak terhitung — angka di sini jauh lebih rendah daripada kenyataannya."
+      "catatan": "Didekati dengan gula cokelat FDC — pendekatan, bukan padanan. Untuk minuman yang isinya jahe dan gula, hampir seluruh energinya datang dari bahan ini, jadi pendekatannya menentukan hampir seluruh angkanya."
     },
     {
       "ingredientId": "serai",

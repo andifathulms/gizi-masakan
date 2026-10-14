@@ -75,6 +75,7 @@
 
     { "id": "garam", "namaId": "Garam", "nameEn": "Salt, table", "fdcId": 173468, "kategori": "bumbu", "catatan": "Entri FDC garam tanpa fortifikasi yodium. Garam konsumsi di Indonesia wajib beryodium." },
     { "id": "gula-pasir", "namaId": "Gula pasir", "nameEn": "Sugar, granulated", "fdcId": 169655, "kategori": "bumbu" },
+    { "id": "gula-merah", "namaId": "Gula merah", "nameEn": "Palm sugar (approximated by brown sugar)", "fdcId": 168833, "kategori": "bumbu", "catatan": "Pendekatan, bukan padanan. FDC tidak punya gula aren atau gula kelapa; entri ini gula cokelat tebu (gula pasir dengan molase). Energi dan gulanya mirip, dan berbeda dengan gula pasir ia ikut membawa air dan mineral — tapi gula merah biasanya lebih basah, dan kadar kalium dan besinya bisa jauh berbeda." },
     { "id": "asam-jawa", "namaId": "Asam jawa", "nameEn": "Tamarind, raw", "fdcId": 167763, "kategori": "bumbu" },
     { "id": "jeruk-nipis", "namaId": "Air jeruk nipis", "nameEn": "Lime juice, raw", "fdcId": 168156, "kategori": "bumbu" },
     { "id": "pisang", "namaId": "Pisang", "nameEn": "Banana, raw", "fdcId": 173944, "kategori": "buah" },

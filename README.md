@@ -12,7 +12,7 @@
 [![deploy](https://github.com/andifathulms/gizi-masakan/actions/workflows/deploy.yml/badge.svg)](https://github.com/andifathulms/gizi-masakan/actions/workflows/deploy.yml)
 ![statis](https://img.shields.io/badge/statis-tanpa%20backend-274863)
 ![tanpa jaringan](https://img.shields.io/badge/jaringan%20saat%20dipakai-nol-274863)
-![uji](https://img.shields.io/badge/uji-282-3A6139)
+![uji](https://img.shields.io/badge/uji-344-3A6139)
 ![bukan pelacak](https://img.shields.io/badge/bukan-pelacak-8F3D22)
 
 </div>
@@ -50,7 +50,7 @@ beratnya waktu ditanak, dan kalorinya tidak ikut naik.
 | | |
 |---|---|
 | Masakan | **40 resep** — nasi, mi, berkuah, lauk, sayur, jajanan, minuman |
-| Bahan | 70 entri USDA FoodData Central SR Legacy, dipetakan ke nama dapur Indonesia |
+| Bahan | 71 entri USDA FoodData Central SR Legacy, dipetakan ke nama dapur Indonesia |
 | Nutrien | 27, dengan nomor nutrien FDC sebagai id |
 | Faktor | Retensi USDA Release 6 (270 operasi), yield USDA (54 baris) + 9 turunan |
 | Cara masak | 17 kelompok, 73 operasi — bisa diganti, angkanya ikut berubah |
@@ -70,12 +70,14 @@ bisa disimpan ke perangkat — tidak ada yang keluar dari peramban.
   yang tersisa.
 - **Tabel URT masih kosong.** Invarian 9 melarang entri yang tidak diukur, jadi
   porsi ditampilkan dalam gram sampai ada yang benar-benar ditimbang.
-- **13 bahan Indonesia belum punya sumber** — kangkung, lengkuas, kemiri, serai,
-  terasi, gula merah, kecap manis, dan lainnya. Bahan itu tetap ada di resep dan
-  disebut sebagai kekosongan di keluaran, bukan dihapus atau didekati. Dua di
-  antaranya cukup besar sampai menggeser satu masakan penuh: `gula-merah`
-  membuat wedang jahe jadi 16 kkal segelas, dan `kecap-manis` mengosongkan gula
-  dari empat masakan yang justru dinamai dari kecapnya.
+- **12 bahan Indonesia belum punya sumber** — kangkung, lengkuas, kemiri, serai,
+  terasi, kecap manis, dan lainnya. Bahan itu tetap ada di resep dan disebut
+  sebagai kekosongan di keluaran, bukan dihapus atau didekati. Yang paling
+  terasa sekarang `kecap-manis`: ia mengosongkan gula dari empat masakan yang
+  justru dinamai dari kecapnya, dan FDC SR Legacy tidak punya kecap manis sama
+  sekali — hanya shoyu, tamari, dan saus teriyaki.
+- **`gula-merah` didekati dengan gula cokelat FDC** (168833), ditandai sebagai
+  pendekatan. Wedang jahe yang tadinya 16 kkal segelas sekarang 111 kkal.
 
 ## Yang paling penting dari semuanya
 
@@ -96,7 +98,7 @@ pnpm dev
 pnpm build                  # data:validate, next build, lalu .nojekyll
 pnpm preview                # sajikan ./out di bawah basePath produksi
 
-pnpm test:run               # 282 uji
+pnpm test:run               # 344 uji
 pnpm test:conservation      # jumlah sumbangan, keseimbangan massa
 pnpm test:gaps              # penanganan nilai kosong, dua arah
 pnpm test:state             # URL, resep tersimpan, pencarian
